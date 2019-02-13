@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/PranjalGupta2199/student-utility-portal/issues"
   },
-  "homepage": "https://github.com/PranjalGupta2199/student-utility-portal#readme"
+  "homepage": "https://github.com/PranjalGupta2199/student-utility-portal#readme",
+  "dependencies": {
+    "googleapis": "^27.0.0"
+  }
 }
