@@ -1,0 +1,559 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ch",
+				"children_x"
+			],
+			[
+				"fla",
+				"flag1"
+			],
+			[
+				"chi",
+				"children_y"
+			],
+			[
+				"j",
+				"j-1"
+			],
+			[
+				"ma",
+				"max_cnt"
+			],
+			[
+				"pr",
+				"printf\tprintf …"
+			],
+			[
+				"crt",
+				"crt2"
+			],
+			[
+				"ne",
+				"next"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"o",
+				"onClick"
+			],
+			[
+				"han",
+				"handlePassword"
+			],
+			[
+				"handle",
+				"handleLogin"
+			],
+			[
+				"handl",
+				"handleLogin"
+			],
+			[
+				"Log",
+				"Login"
+			],
+			[
+				"font",
+				"font-style\tproperty"
+			],
+			[
+				"i",
+				"italic\tfont-style"
+			],
+			[
+				"bac",
+				"background-color\tproperty"
+			],
+			[
+				"M",
+				"MyInfo"
+			],
+			[
+				"d",
+				"div"
+			],
+			[
+				"li",
+				"link\tTag"
+			],
+			[
+				"n-",
+				"n-j-1"
+			],
+			[
+				"re",
+				"reverse"
+			],
+			[
+				"do",
+				"double"
+			],
+			[
+				"dest",
+				"dest_add"
+			],
+			[
+				"sort",
+				"sort_dir"
+			],
+			[
+				"sor",
+				"sort_dir"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"pow",
+				"pow2"
+			],
+			[
+				"roo",
+				"roots"
+			],
+			[
+				"max",
+				"maxd"
+			],
+			[
+				"si",
+				"sibling"
+			],
+			[
+				"hash",
+				"hashed"
+			],
+			[
+				"is",
+				"isNotBridge"
+			],
+			[
+				"Hotel",
+				"Hotelid"
+			],
+			[
+				"hotel_",
+				"hotel_id"
+			],
+			[
+				"hotel",
+				"hotelid"
+			],
+			[
+				"City",
+				"CityAndHotels"
+			],
+			[
+				"hote",
+				"hotel_id"
+			],
+			[
+				"cance",
+				"cancelWaiting"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"HOTE",
+				"HOTEL_NAME"
+			],
+			[
+				"HO",
+				"HOTEL_NAME"
+			],
+			[
+				"USERNAME",
+				"username"
+			],
+			[
+				"h",
+				"hotelid"
+			],
+			[
+				"conn",
+				"connectDatabase"
+			],
+			[
+				"cre",
+				"createStatement"
+			],
+			[
+				"final",
+				"finalDate"
+			],
+			[
+				"to",
+				"toString"
+			],
+			[
+				"CHECK_",
+				"CHECK_OUT"
+			],
+			[
+				"print",
+				"println"
+			],
+			[
+				"s",
+				"stdlib.h\tstandard header"
+			],
+			[
+				"n",
+				"NULL"
+			],
+			[
+				"init",
+				"init1"
+			],
+			[
+				"std",
+				"stdio.h\tstandard header"
+			],
+			[
+				"vo",
+				"vonom"
+			],
+			[
+				"spd",
+				"spdr"
+			],
+			[
+				"v",
+				"vonom"
+			],
+			[
+				"tf_ad",
+				"tf_adhar_number"
+			],
+			[
+				"b_",
+				"b_reset"
+			],
+			[
+				"l_d",
+				"l_dont_match"
+			],
+			[
+				"se",
+				"setText"
+			],
+			[
+				"action",
+				"actionPerformed"
+			],
+			[
+				"Acti",
+				"ActionEvent"
+			],
+			[
+				"acti",
+				"actionPerformed"
+			],
+			[
+				"add",
+				"addActionListener"
+			],
+			[
+				"ad",
+				"addActionListener"
+			],
+			[
+				"set",
+				"setText"
+			],
+			[
+				"Login",
+				"LoginForm"
+			],
+			[
+				"Ch",
+				"Chutiya"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 192.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q1.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q4.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q2.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q5.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/ujjwal's DSA-Assignments-master/Question-4.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q3.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q6.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q9.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q8.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 3/Q7.c",
+		"/media/prakhar/New Volume/Studies/React Projects/project/package.json",
+		"/home/prakhar/Desktop/App.js",
+		"/home/prakhar/One more try/LoginForm.js",
+		"/home/prakhar/One more try/App.js",
+		"/home/prakhar/One more try/index.js",
+		"/home/prakhar/One more try/index.html",
+		"/home/prakhar/One more try/style.css",
+		"/media/prakhar/New Volume/Studies/React Projects/project/src/App.js",
+		"/home/prakhar/reactApp/to_do_app/src/App.js",
+		"/home/prakhar/reactApp/to_do_app/src/index.html",
+		"/home/prakhar/reactApp/to_do_app/src/components/Footer.js",
+		"/home/prakhar/reactApp/to_do_app/src/components/Header.js",
+		"/home/prakhar/reactApp/to_do_app/src/components/MainContent.js",
+		"/media/prakhar/New Volume/Studies/logic_assignment_2/p.cpp",
+		"/home/prakhar/reactApp/to_do_app/src/components/HelloWorld.js",
+		"/home/prakhar/reactApp/to_do_app/src/components/MyInfo.js",
+		"/home/prakhar/reactApp/se_project/src/components/MyInfo.js",
+		"/home/prakhar/reactApp/se_project/src/index.html",
+		"/home/prakhar/reactApp/se_project/src/components/HelloWorld.js",
+		"/home/prakhar/reactApp/se_project/src/components/MainContent.js",
+		"/home/prakhar/reactApp/se_project/src/components/Footer.js",
+		"/home/prakhar/reactApp/se_project/src/components/Header.js",
+		"/home/prakhar/reactApp/se_project/src/App.js",
+		"/home/prakhar/reactApp/se_project/src/index.js",
+		"/home/prakhar/reactApp/se_project/src/MyInfo.js",
+		"/home/prakhar/reactApp/se_project/public/index.html",
+		"/home/prakhar/reactApp/se_project/src/serviceWorker.js",
+		"/home/prakhar/reactApp/se_project/src/logo.svg",
+		"/home/prakhar/reactApp/se_project/src/App.test.js",
+		"/home/prakhar/reactApp/se_project/src/App.css",
+		"/home/prakhar/reactApp/se_project/src/index.css",
+		"/home/prakhar/reactApp/se_project/public/manifest.json",
+		"/home/prakhar/Desktop/untitled.html",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/q6.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/q1.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/q4.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/ujjwal's DSA-Assignments-master/Question-2.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/q2.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/q7.c",
+		"/media/prakhar/New Volume/Studies/2-2/DSA/Assignments/assignment 1/ujjwal's DSA-Assignments-master/Question-3.c",
+		"/media/prakhar/New Volume/Studies/CC/codes/New folder/output.txt",
+		"/media/prakhar/New Volume/Studies/CC/codes/New folder/input.txt",
+		"/media/prakhar/New Volume/Studies/CC/codes/New folder/t.cpp",
+		"/home/prakhar/Desktop/test.py",
+		"/home/prakhar/Desktop/pie.py",
+		"/media/prakhar/New Volume/test.py",
+		"/media/prakhar/New Volume/Studies/CC/codes/library.cpp",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/Q_6.c",
+		"/media/prakhar/New Volume/Studies/CC/codes/template.cpp",
+		"/media/prakhar/New Volume/Studies/CC/codes/New folder/kiler",
+		"/media/prakhar/New Volume/Studies/CC/codes/luckynumbers.cpp",
+		"/media/prakhar/New Volume/Studies/CC/codes/New folder/a.cpp",
+		"/media/prakhar/New Volume/Studies/CC/codes/texts/template.rtf",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/output.txt",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/input.txt",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/q1.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/q3.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/practice.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/q2.2.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/q2.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/q2.1.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 3/temp.c",
+		"/home/prakhar/github-backup/OOP-project/Swing-GUI/JavaApplication1/src/DatabaseConnection.java",
+		"/media/prakhar/SATYAM MANI/IN/DatabaseConnection.java",
+		"/media/prakhar/New Volume/Studies/2-1/Bhagwad Geeta/DatabaseConnection.java",
+		"/media/prakhar/SATYAM MANI/OOP-project/Swing-GUI/JavaApplication1/src/DatabaseConnection.java",
+		"/home/prakhar/github-backup/OOP-project/Database/DatabaseConnection.java",
+		"/home/prakhar/Desktop/DatabaseConnection.java",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Discrete-structures-assignment-2-master/question-3.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Discrete-structures-assignment-2-master/question-2.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/Q_5.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/Q_3.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/Q_2.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/Q_4.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/Q_1.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/input.txt",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/output.txt",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Assignment 2/Q_1",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Discrete-structures-assignment-2-master/question-1.c",
+		"/media/prakhar/New Volume/Studies/2-1/Disco/Discrete-structures-assignment-2-master/question-6.c",
+		"/media/prakhar/New Volume/Studies/2-1/Logic In CS/logic_assignment_2/Q_1.cpp",
+		"/media/prakhar/New Volume/Studies/2-1/Logic In CS/logic_assignment_2/infix.h",
+		"/media/prakhar/New Volume/Studies/2-1/Logic In CS/logic_assignment_2/postfix.h",
+		"/media/prakhar/New Volume/Studies/2-1/Logic In CS/Assignment 2/infix.h",
+		"/home/prakhar/java1/Master.java",
+		"/home/prakhar/java1/Starter.java",
+		"/home/prakhar/learning/gui.java",
+		"/home/prakhar/java1/SignUpForm.java",
+		"/home/prakhar/java1/LoginForm.java",
+		"/home/prakhar/java1/copy.java",
+		"/home/prakhar/java1/Abc.java",
+		"/home/prakhar/java1/p1.java"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"i-1",
+			"i",
+			"i-1",
+			"j-1",
+			"-1",
+			"i-1",
+			"i",
+			"n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "App.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 110.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
