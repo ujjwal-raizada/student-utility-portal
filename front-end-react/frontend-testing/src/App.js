@@ -14,7 +14,7 @@ class App extends React.Component {
 					<Route exact path="/" component={LoginForm} />
 					<Route path="/Signup" component={Signup} />
 					<Route path="/ForgotPassword" component={ForgotPassword} />
-					<Route path="/Profile" component={Profile} />
+					<Route path="/Profile/:Username" component={Profile} />
 					<Route path="/Test" component={Test} />
 					<Route component={NotFound} />
 				</Switch>

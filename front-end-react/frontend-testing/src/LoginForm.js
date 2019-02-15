@@ -4,10 +4,11 @@ class LoginForm extends Component {
 	constructor() {
 		super()
 		this.state = {
-			userName: "",
+			userame: "",
 			password: "",
 			placeholder: "",
-			users: []
+			users: [] ,
+			error: {}
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleLogin = this.handleLogin.bind(this)
@@ -41,7 +42,7 @@ class LoginForm extends Component {
 	handleLogin() {
 		const user = {
 			
-			    "email": this.state.userName,
+			    "email": this.state.userame,
 			    "password": this.state.password
 			
 		}
@@ -51,15 +52,19 @@ class LoginForm extends Component {
 
 		axios.post('https://reqres.in/api/login', user)
       	.then(res => {
-	        console.log(res);
-	        this.setState({
-					placeholder: res.data['token']
-				 })
-				})      	
-      		//this.props.history.push(`/Profile`)	
-      	// if(this.checkLogin(user,1)) {
-      	// }
-        
+    		this.props.history.push(`/Profile/${this.state.userame}`)
+	   //      this.setState({
+				// 	// placeholder: res.data['token'] ,
+				// 	// error: res
+				//  })
+				// })
+			})
+		.catch(error => {
+			this.setState({
+				error: error ,
+				placeholder: error.response.data.error
+			})
+		})   
 	}
 	checkLogin(user,index) {
 			if(user.email === user.password && user.email !== "") {
@@ -93,7 +98,7 @@ class LoginForm extends Component {
 				<p className="text-danger">{this.state.placeholder}</p>
 				<input 
 				className = "well well-sm"
-					name = "userName"
+					name = "userame"
 					type = "text" 
 					placeholder = "User Name" 
 					onChange = {this.handleChange}
