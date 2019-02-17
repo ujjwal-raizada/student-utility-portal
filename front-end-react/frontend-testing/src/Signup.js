@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from "react" 
+import Header from './Header'
 
 class Signup extends Component {
 	
@@ -8,7 +9,7 @@ class Signup extends Component {
 			Accepted: false ,
 			Gender: "" ,
 			Fruit: "lime"
-		}
+	}
 
 	handleChange = (event) => {
     const target = event.target;
@@ -27,6 +28,7 @@ class Signup extends Component {
 	render() {
 		return (
 			<Fragment>
+				<Header />
 				<form>
 
 					<div>
