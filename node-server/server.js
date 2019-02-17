@@ -68,16 +68,18 @@ app.post('/login', (req, res) => {
         res_data['message'] = 'username already exists'
         console.log("failed Signup attempt")
     }
-    else if (username != '' || password != '') {
+    else if (username == '' || password == '') {
+
+        res_data['status'] = 'failure'
+        res_data['message'] = 'Invalid Data'
+        console.log("failed Signup attempt")
+
+    }
+    else {
         user_list[username] = password;
         res_data['status'] = 'success'
         res_data['message'] = 'user created'
         console.log("successful Signup attempt")
-    }
-    else {
-        res_data['status'] = 'failure'
-        res_data['message'] = 'Invalid Data'
-        console.log("failed Signup attempt")
     }
 
     res.json(res_data)
