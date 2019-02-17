@@ -6,6 +6,8 @@ import NotFound from "./NotFound"
 import ForgotPassword from "./ForgotPassword"
 import Profile from "./Profile"
 import Test from "./Test"
+import Notice from "./Notice"
+
 class App extends React.Component {
 	render() {
 		return (
@@ -16,6 +18,7 @@ class App extends React.Component {
 					<Route path="/ForgotPassword" component={ForgotPassword} />
 					<Route path="/Profile/:Username" component={Profile} />
 					<Route path="/Test" component={Test} />
+					<Route path="/Notice" component={Notice} />
 					<Route component={NotFound} />
 				</Switch>
 			</BrowserRouter>

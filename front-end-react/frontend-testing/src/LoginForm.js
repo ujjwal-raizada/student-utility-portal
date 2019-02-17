@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from "react"
 import axios from "axios"
+import Header from './Header'
 class LoginForm extends Component {
 	constructor() {
 		super()
@@ -17,22 +18,6 @@ class LoginForm extends Component {
 		this.handleSignup = this.handleSignup.bind(this)
 
 	}
- 
-	componentDidMount() {
-		fetch("https://reqres.in/api/users?page=2")
-			.then((res) => res.json())
-			.then(result => {
-				this.setState({
-					users: result.data,
-					placeholder: result.total_pages
-				})
-			},
-			(error) => {
-				this.setState({
-					placeholder: "error"
-				})
-			})		
-		}
 	
 	handleChange(event) {
 		this.setState({
@@ -81,9 +66,6 @@ class LoginForm extends Component {
 			}
 		}
 	handlePassword() {
-		this.setState({
-			placeholder:"Bhaag BC!!"
-		})
 		this.props.history.push(`/ForgotPassword`)
 	}
 
@@ -93,6 +75,7 @@ class LoginForm extends Component {
 	render() {
 		return (
 			<Fragment >
+			<Header />
 			<div className="text-center">
 				<h1 >Login Page</h1>
 				<p className="text-danger">{this.state.placeholder}</p>
@@ -104,7 +87,6 @@ class LoginForm extends Component {
 					onChange = {this.handleChange}
 				/>
 				<br/>
-				<br/>
 				<input className = "well well-sm"
 					name = "password" 
 					type = "text" 
@@ -113,10 +95,10 @@ class LoginForm extends Component {
 				/>
 				<br/>
 				<button 
-					className = "btn btn-danger" onClick = {this.handleLogin}>Login 
+					className = "btn btn-primary" onClick = {this.handleLogin}>Login 
 				</button>
 				<button 
-					className = "btn btn-danger" onClick = {this.handleSignup}>Signup
+					className = "btn btn-success" onClick = {this.handleSignup}>Signup
 				</button>
 
 				<br/>
