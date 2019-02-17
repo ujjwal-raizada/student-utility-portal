@@ -1,12 +1,14 @@
-import React, {Component} from "react"
+import React, {Component, Fragment} from "react"
 import Header from './Header'
+
 class NotFound extends Component {
+	
 	render() {
 		return (
-			<React.Fragment>
+			<Fragment>
 			<Header />
 			<h3 className="text-danger text-center">Error 404!!!</h3>
-			</React.Fragment>
+			</Fragment>
 		)
 	}
 }

@@ -1,24 +1,26 @@
 import React from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
-import LoginForm from "./LoginForm"
-import Signup from "./Signup"
-import NotFound from "./NotFound"
-import ForgotPassword from "./ForgotPassword"
-import Profile from "./Profile"
-import Test from "./Test"
-import Notice from "./Notice"
+import Login from "./Components/Login"
+import Signup from "./Components/Signup"
+import NotFound from "./Components/NotFound"
+import ForgotPassword from "./Components/ForgotPassword"
+import Profile from "./Components/Profile"
+import Test from "./Components/Test"
+import Notice from "./Components/Notice"
+import ContactUs from "./Components/ContactUs"
 
 class App extends React.Component {
 	render() {
 		return (
 			<BrowserRouter>
 				<Switch>
-					<Route exact path="/" component={LoginForm} />
-					<Route path="/Signup" component={Signup} />
-					<Route path="/ForgotPassword" component={ForgotPassword} />
-					<Route path="/Profile/:Username" component={Profile} />
-					<Route path="/Test" component={Test} />
-					<Route path="/Notice" component={Notice} />
+					<Route exact path="/" component={Login} />
+					<Route path="/signup" component={Signup} />
+					<Route path="/forgotpassword" component={ForgotPassword} />
+					<Route path="/profile/:username" component={Profile} />
+					<Route path="/test" component={Test} />
+					<Route path="/notice" component={Notice} />
+					<Route path="/contactus" component={ContactUs} />
 					<Route component={NotFound} />
 				</Switch>
 			</BrowserRouter>

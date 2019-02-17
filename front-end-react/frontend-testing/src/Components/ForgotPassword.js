@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, {Component, Fragment} from "react"
 import Header from './Header'
 
 class ForgotPassword extends Component {
@@ -15,7 +15,7 @@ class ForgotPassword extends Component {
 
 	render() {
 		return (
-			<React.Fragment>
+			<Fragment>
 			<Header />
 			<form class="form-horizontal" action="/action_page.php">
 		    <div class="form-group">
@@ -38,7 +38,7 @@ class ForgotPassword extends Component {
 		      </div>
 		    </div>
 		  </form>
-			</React.Fragment>
+			</Fragment>
 		)
 	}
 }
