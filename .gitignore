@@ -1,3 +1,4 @@
 email/credentials.json
+email/token.json
 email/node_modules/*
 node-server/node_modules/*
