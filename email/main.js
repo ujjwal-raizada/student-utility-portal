@@ -5,6 +5,7 @@
 const fileSystem = require('fs');
 const {google} = require('googleapis');
 const readline = require('readline');
+const base64 = require('base-64');
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
 const TOKEN_PATH = 'token.json';
@@ -80,7 +81,7 @@ function getNewToken(oAuth2Client, callback) {
 * @param {String} emailBody Email message to be sent.
 */
 function createEmail(userID = 'me', receiverID, subject, emailBody){
-    var message = ["Content-Type: text/plain; charset=\"UTF-8\"\n",
+    var message = ["Content-Type: text/html; charset=\"UTF-8\"\n",
         "MIME-Version: 1.0\n",
         "Content-Transfer-Encoding: 7bit\n",
         "to: ", receiverID, "\n",
@@ -89,7 +90,7 @@ function createEmail(userID = 'me', receiverID, subject, emailBody){
         emailBody
     ].join('');
 
-    message = new Buffer(message).toString("base64").replace(/\+/g, '-').replace(/\//g, '_');
+    message = base64.encode(message).replace(/\+/g, '-').replace(/\//g, '_');
     return message;
 }
 
@@ -102,7 +103,7 @@ function createEmail(userID = 'me', receiverID, subject, emailBody){
  * @param  {String} email RFC 5322 formatted String.
  * @param  {Function} callback Function to call when the request is complete.
  */
-function sendEmail(OAuth2Client, userId ='me' , receiverID, subjec, emailBody) {
+function sendEmail(OAuth2Client, userId ='me' , receiverID, subject, emailBody) {
   let message = createEmail(userId, receiverID, subject, emailBody);
   const gmail = google.gmail({version: 'v1',OAuth2Client});
   var request = gmail.users.messages.send({
