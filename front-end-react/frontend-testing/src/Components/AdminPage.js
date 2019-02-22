@@ -5,6 +5,8 @@ import Header from './Header'
 class AdminPage extends Component {
 
 	state = {
+			heading: '',
+			notice: '',
 			username: '' ,
 			password: '' ,
 			tag1: false ,
@@ -12,8 +14,6 @@ class AdminPage extends Component {
 			tag3: false ,
 			tag4: false ,
 			tag5: false ,
-			Gender: '' ,
-			Fruit: '' ,
 			placeholder: ''
 	}
 
@@ -39,7 +39,7 @@ class AdminPage extends Component {
 					placeholder: 'Submitting...'
 				})
 
-		axios.post('http://localhost:8080/signup', user)
+		axios.post('http://localhost:8080/admin/notice', user)
       	.then(res => {
       		const status = res.data.status
       		const message = res.data.message
@@ -70,13 +70,15 @@ class AdminPage extends Component {
 				<h1 >Post Notice</h1>
 				<p className="text-danger">{this.state.placeholder}</p>
 				<form>
-
+				
 					<div>
 						<input 
 							type="text"
 							style={{width: '600px'}} 
-							name="test" 
+							name="heading" 
 							placeholder="Heading"
+							value={this.state.heading}
+							onChange={this.handleChange}
 						/>
 						<br/>
 						<br/>
@@ -85,8 +87,11 @@ class AdminPage extends Component {
 					<div>
 						<textarea
 							style={{height: '200px' , width: '600px'}} 
-							name="Notice"
-							placeholder='Notice' />
+							name="notice"
+							placeholder='Notice'
+							value={this.state.notice}
+							onChange={this.handleChange}
+							/>
 						<br/>
 					</div>				
 
@@ -96,51 +101,60 @@ class AdminPage extends Component {
 								type="checkbox" 
 								name="tag1" 
 								checked={this.state.tag1} 
-								onChange={this.handleChange} />
+								onChange={this.handleChange} 
+								/>
 							tag1
 						</label>
 						<br/>
 					</div>
+
 					<div>
 						<label>
 							<input 
 								type="checkbox" 
 								name="tag2" 
 								checked={this.state.tag2} 
-								onChange={this.handleChange} />
+								onChange={this.handleChange} 
+								/>
 							tag2
 						</label>
 						<br/>
 					</div>
+
 					<div>
 						<label>
 							<input 
 								type="checkbox" 
 								name="tag3" 
 								checked={this.state.tag3} 
-								onChange={this.handleChange} />
+								onChange={this.handleChange} 
+								/>
 							tag3
 						</label>
 						<br/>
 					</div>
+
 					<div>
 						<label>
 							<input 
 								type="checkbox" 
 								name="tag4" 
 								checked={this.state.tag4} 
-								onChange={this.handleChange} />
+								onChange={this.handleChange} 
+								/>
 							tag4
 						</label>
 						<br/>
 					</div>
+
 					<div>
 						<label>
 							<input 
 								type="checkbox" 
 								name="tag5" 
 								checked={this.state.tag5} 
-								onChange={this.handleChange} />
+								onChange={this.handleChange} 
+								/>
 							tag5
 						</label>
 						<br/>
@@ -171,6 +185,7 @@ class AdminPage extends Component {
 						</label>
 						<br/>
 					</div>
+
 					<div>
 						<input 
 							type="submit" 
@@ -178,6 +193,7 @@ class AdminPage extends Component {
 							onClick={this.handleSubmit}/>
 						<br/>							
 					</div>
+
 				</form>
 
 			</Fragment>				
