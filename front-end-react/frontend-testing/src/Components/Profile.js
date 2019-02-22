@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from "react"
 import Test from "./Test"
 import Login from "./Login"
+import Header from "./Header"
 import axios from "axios"
 
 class Profile extends Component {	
@@ -10,11 +11,12 @@ class Profile extends Component {
 	render() {
 
 		return (
-			<div>
+			<Fragment>
+				<Header page="Profile"/>
 				<h3 className="text-prime text-center"> Welcome!!</h3>
 				<button onClick={this.handleClick}>Signout</button>
-			</div>
-		)
+			</Fragment>
+		)	
 	}
 }
 export default Profile

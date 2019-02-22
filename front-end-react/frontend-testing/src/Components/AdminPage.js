@@ -66,7 +66,7 @@ class AdminPage extends Component {
 	render() {
 		return (
 			<Fragment>
-				<Header />
+				<Header page="AdminPage" />
 				<h1 >Post Notice</h1>
 				<p className="text-danger">{this.state.placeholder}</p>
 				<form>

@@ -64,7 +64,7 @@ class Signup extends Component {
 	render() {
 		return (
 			<Fragment>
-				<Header />
+				<Header page="Signup" />
 				<h1 >Signup</h1>
 				<p className="text-danger">{this.state.placeholder}</p>
 				<form>
