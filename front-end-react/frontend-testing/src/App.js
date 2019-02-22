@@ -7,6 +7,7 @@ import ForgotPassword from "./Components/ForgotPassword"
 import Profile from "./Components/Profile"
 import Test from "./Components/Test"
 import Notice from "./Components/Notice"
+import AdminPage from "./Components/AdminPage"
 import ContactUs from "./Components/ContactUs"
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
 					<Route path="/test" component={Test} />
 					<Route path="/notice" component={Notice} />
 					<Route path="/contactus" component={ContactUs} />
+					<Route path="/admin" component={AdminPage} />
 					<Route component={NotFound} />
 				</Switch>
 			</BrowserRouter>

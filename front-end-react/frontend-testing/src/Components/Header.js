@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from "react"
+import {Link} from "react-router-dom"
 
 
 class Header extends Component {
@@ -16,7 +17,7 @@ class Header extends Component {
 					<a className="navbar-brand" href="./">Student Portal</a>
 					</div>
 					<ul className = "nav navbar-nav">
-						<li className = {this.state.Home}> <a href="./">Home</a> </li>
+						<li className = {this.state.Home}> <Link to={`./`}>Home</Link> </li>
 						<li ><a href="./notice">Notices</a></li>
 						<li className = {this.state.Login} ><a href="./">Login</a></li>
 						<li><a href="./signup">Signup</a></li>
