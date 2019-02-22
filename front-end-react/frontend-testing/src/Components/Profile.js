@@ -1,11 +1,12 @@
 import React, {Component, Fragment} from "react"
 import Test from "./Test"
+import Login from "./Login"
 import axios from "axios"
 
 class Profile extends Component {	
 		
-	handleClick = () => {this.props.history.push(`/`)}
-
+	// handleClick = () => {this.props.history.push(`/`)}
+	handleClick = () => <Login/>
 	render() {
 
 		return (

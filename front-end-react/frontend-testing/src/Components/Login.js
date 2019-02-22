@@ -82,7 +82,7 @@ class Login extends Component {
 						<input 
 							className = "well well-sm"
 							name = "password" 
-							type = "text" 
+							type = "password" 
 							placeholder = "Password" 
 							onChange = {this.handleChange}
 						/>
