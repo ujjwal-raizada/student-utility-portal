@@ -7,7 +7,7 @@ class Notice extends Component {
 
 		return (
 			<Fragment>
-				<Header />
+				<Header page="Notice"/>
 				<h3 className="text text-center"> Notices </h3>
 			</Fragment>
 		)

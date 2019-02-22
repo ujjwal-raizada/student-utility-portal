@@ -7,7 +7,7 @@ class ContactUs extends Component {
 
 		return (
 			<Fragment>
-				<Header />
+				<Header page='ContactUs'/>
 				<h3 className="text text-center"> Contact Us </h3>
 				<pre>
 				Ujjwal Raizada (Scrum Master)<br/>
