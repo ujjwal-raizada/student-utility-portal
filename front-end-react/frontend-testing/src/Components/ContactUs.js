@@ -1,6 +1,12 @@
 import React, {Component, Fragment} from "react"
 import Header from './Header'
 
+const divStyle = {
+  	margin: '40px',
+	border: '5px solid pink',
+	padding: '15px'
+};
+
 class ContactUs extends Component {
 
 	render() {
@@ -8,14 +14,16 @@ class ContactUs extends Component {
 		return (
 			<Fragment>
 				<Header page='ContactUs'/>
-				<h3 className="text text-center"> Contact Us </h3>
-				<pre>
-				Ujjwal Raizada (Scrum Master)<br/>
-				Satyam Mani (Product Owner)<br/>
-				Daksh Yashlaha (Developer)<br/>
-				Prakhar Goenka (Developer)<br/>
-				Pranjal Gupta (Developer)<br/>
-				</pre>
+				<div style = {{marginTop: '60px'}}>	
+					<h3 className="text text-center"> Contact Us </h3>
+					<div style = {divStyle}>
+					<h3>Ujjwal Raizada (Scrum Master)</h3>
+					<h3>Satyam Mani (Product Owner)</h3>
+					<h3>Daksh Yashlaha (Developer)</h3>
+					<h3>Prakhar Goenka (Developer)</h3>
+					<h3>Pranjal Gupta (Developer)</h3>
+					</div>
+				</div>
 			</Fragment>
 		)
 	}

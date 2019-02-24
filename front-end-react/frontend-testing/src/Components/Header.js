@@ -23,7 +23,7 @@ class Header extends Component {
 
 		return(
 
-			<nav className="navbar navbar-inverse" navbar-fixed-top>
+			<nav className="navbar navbar-inverse navbar-fixed-top ">
 
 			    <div className="container-fluid">
 

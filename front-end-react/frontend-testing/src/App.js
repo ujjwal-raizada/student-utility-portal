@@ -9,6 +9,7 @@ import Test from "./Components/Test"
 import Notice from "./Components/Notice"
 import AdminPage from "./Components/AdminPage"
 import ContactUs from "./Components/ContactUs"
+import Homepage from "./Components/Homepage"
 
 class App extends React.Component {
 	render() {
@@ -20,7 +21,7 @@ class App extends React.Component {
 					<Route path="/forgotpassword" component={ForgotPassword} />
 					<Route path="/profile/:username" component={Profile} />
 					<Route path="/test" component={Test} />
-					<Route path="/notice" component={Notice} />
+					<Route path="/notice" component={Homepage} />
 					<Route path="/contactus" component={ContactUs} />
 					<Route path="/admin" component={AdminPage} />
 					<Route component={NotFound} />
