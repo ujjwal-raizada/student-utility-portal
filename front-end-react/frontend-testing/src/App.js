@@ -1,4 +1,4 @@
-import React from "react"
+ import React from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import Login from "./Components/Login"
 import Signup from "./Components/Signup"
@@ -16,8 +16,9 @@ class App extends React.Component {
 		return (
 			<BrowserRouter>
 				<Switch>
-					<Route exact path="/" component={Login} />
+					<Route exact path="/" component={Homepage } />
 					<Route path="/signup" component={Signup} />
+					<Route path="/login" component={Login} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
 					<Route path="/profile/:username" component={Profile} />
 					<Route path="/test" component={Test} />
