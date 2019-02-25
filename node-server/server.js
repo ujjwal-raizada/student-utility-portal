@@ -13,16 +13,14 @@ app.use(express.json())
 
 // Fake users
 var user_list = {}
-user_list['ujjwalrox'] = 'ujjwal'
-user_list['prakhar'] = 'goenka'
-user_list['satyam'] = 'mani'
-user_list['ujjwal'] = 'raizada'
+var notice_list = []
+var user_type = {}  // admin, normal
 
 
 app.post('/login', (req, res) => {
 
     const username = req.body.username
-    const password = req.body.password
+    const password = req.body.password 
 
     console.log(req.body)
 
@@ -56,6 +54,7 @@ app.post('/login', (req, res) => {
 
     const username = req.body.username
     const password = req.body.password
+    const type = req.body.type
 
     console.log(req.body)
 
@@ -76,11 +75,50 @@ app.post('/login', (req, res) => {
 
     }
     else {
-        user_list[username] = password;
+        user_list[username] = password
+        user_type[username] = type
         res_data['status'] = 'success'
         res_data['message'] = 'user created'
         console.log("successful Signup attempt")
     }
+
+    res.json(res_data)
+
+  })
+
+  app.post('/create', (req, res) => {
+
+    const username = req.body.username
+    const title = req.body.title
+    const text = req.body.text
+
+    console.log(req.body)
+
+    res_data = {
+        'username': username,
+    }
+
+    if (user_type[username] == 'admin') {
+        res_data['status'] = 'success';
+        var date = new Date();
+        var post = [
+            date,
+            {
+                'title': title,
+                'text': text,
+                'username': username
+            }
+        ]
+        notice_list.push(post)
+        res_data['post'] = post
+        console.log(post)
+
+    }
+    else {
+        res_data['status'] = 'failure'
+        console.log("User not authorized to create noticed.")
+    }
+
 
     res.json(res_data)
 
