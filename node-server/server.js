@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const fs = require('fs')
 
 const app = express()
 app.use(cors())
@@ -11,10 +12,34 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.json())
 
-// Fake users
-var user_list = {}
-var notice_list = []
-var user_type = {}  // admin, normal
+// Loading data from Database
+let rawdata1 = fs.readFileSync('database/user_list.json')  
+let user_list = JSON.parse(rawdata1)
+console.log(user_list)
+
+let rawdata2 = fs.readFileSync('database/notice_list.json')
+let notice_list = JSON.parse(rawdata2)
+console.log(notice_list)
+
+let rawdata3 = fs.readFileSync('database/user_type.json') 
+let user_type = JSON.parse(rawdata3)
+console.log(user_type)
+
+function commit_database() {
+    
+    var data
+    data = JSON.stringify(user_type);
+    fs.writeFileSync('database/user_type.json', data);
+
+    data = JSON.stringify(user_list);
+    fs.writeFileSync('database/user_list.json', data);
+
+    data = JSON.stringify(notice_list);
+    fs.writeFileSync('database/notice_list.json', data);
+
+    console.log("Saving operation finished");
+
+}
 
 
 app.post('/login', (req, res) => {
@@ -82,6 +107,7 @@ app.post('/login', (req, res) => {
         console.log("successful Signup attempt")
     }
 
+    commit_database()
     res.json(res_data)
 
   })
@@ -116,10 +142,10 @@ app.post('/login', (req, res) => {
     }
     else {
         res_data['status'] = 'failure'
-        console.log("User not authorized to create noticed.")
+        console.log("User not authorized to create notices.")
     }
 
-
+    commit_database()
     res.json(res_data)
 
   })
