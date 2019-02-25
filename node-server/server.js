@@ -124,6 +124,18 @@ app.post('/login', (req, res) => {
 
   })
 
+  app.get('/notices', (req, res) => {
+
+    res_data = {}
+
+    notice_list.sort(function(a, b){return b[0] - a[0]});
+    res_data['notices'] = notice_list
+
+
+    res.json(res_data)
+
+  })
+
   app.listen(8080, '0.0.0.0', function (err) {
     if (err) {
       throw err
