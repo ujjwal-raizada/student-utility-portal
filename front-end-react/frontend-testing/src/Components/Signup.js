@@ -7,10 +7,7 @@ class Signup extends Component {
 	state = {
 			username: '' ,
 			password: '' ,
-			Accepted: false ,
-			Gender: '' ,
-			Fruit: '' ,
-			placeholder: ''
+			type: 'normal' ,
 	}
 
 	handleChange = (event) => {
@@ -25,12 +22,7 @@ class Signup extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault()
-		const user = {
-			
-			    'username': this.state.username,
-			    'password': this.state.password
-			
-		}
+		const user = this.state
 
 		this.setState({
 					placeholder: 'Submitting...'
@@ -81,91 +73,50 @@ class Signup extends Component {
 								/>
 							</label>
 							<br/>
+							<br/>
 						</div>
 
 						<div>
 							<label>
 								Password:  
 								<input 
-									type="text" 
+									type="password" 
 									name="password" 
 									value={this.state.password} 
 									onChange={this.handleChange}
 								/>
 							</label>
 							<br/>
-						</div>
-
-						<div>
-							<textarea name="Description" />
-							<br/>
-						</div>
-
-						<div>
-							<input 
-								type="text" 
-								name="test" 
-								placeholder="Placeholder"
-							/>
-							<br/>
-							<br/>
-						</div>
-
-						<div>
-							<select 
-								value={this.state.Fruit}
-			                    onChange={this.handleChange}
-			                    name="Fruit" 
-		                    >
-								<option value="grapefruit">Grapefruit</option>
-								<option value="lime">Lime</option>
-								<option value="coconut">Coconut</option>
-								<option value="mango">Mango</option>
-							</select>
-							<br/>
-							<br/>
-						</div>
-
-						<h4>Gender:</h4>
-						<div>
-							<label>							
-								<input 
-									type="radio" 
-									name="Gender" 
-									value="Male" 
-									checked={this.state.Gender === "Male"} 
-									onChange={this.handleChange} 
-								/>
-								Male
-							</label>
-							<br/>
-						</div>
-
-						<div>
-							<label>							
-								<input 
-									type="radio" 
-									name="Gender" 
-									value="Female" 
-									checked={this.state.Gender === "Female"} 
-									onChange={this.handleChange} 
-								/>
-								Female
-							</label>
 							<br/>
 						</div>
 
 						<div>
 							<label>
-								Accepted:
-								<input 
-									type="checkbox" 
-									name="Accepted" 
-									checked={this.state.Accepted} 
-									onChange={this.handleChange} />
+								User Type:
+								<select 
+									value={this.state.type}
+                  onChange={this.handleChange}
+                  name="type" 
+                	>
+									<option value="normal">Student</option>
+									<option value="admin">Administration</option>
+									<option value="admin">Faculty</option>
+									<option value="admin">Club</option>
+									<option value="admin">Admin</option>
+								</select>
 							</label>
 							<br/>
-						</div>
+							<br/>
+						</div>	
+
+						<div>
+							<label>
+								Description:<br/>
+								<textarea name="Description" />
+								<br/>
+							</label>
+							<br/>
+						</div>											
 
 						<div>
 							<input 
