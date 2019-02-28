@@ -53,7 +53,7 @@ function commit_database() {
 app.post('/login', (req, res) => {
 
     const username = req.body.username
-    const password = req.body.password 
+    const password = req.body.password
 
     console.log(req.body)
     write_log(`Request: ${JSON.stringify(req.body)}`)
@@ -66,6 +66,7 @@ app.post('/login', (req, res) => {
         res_data = {
             'status': 'success',
             'username': username,
+            'type': user_type[username],
             'message': `Successful login of ${username}`
         }
 
