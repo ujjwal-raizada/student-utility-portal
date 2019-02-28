@@ -1,0 +1,50 @@
+Request: {"username":"ujjwalrox","password":"ujjwal","type":"admin"}
+failed signup attempt.
+Request: {"username":"ujjwalroxx","password":"ujjwalx","type":"admin"}
+failed signup attempt.
+Request: {"username":"ujjwalrox2","password":"ujjwal2","type":"normal"}
+failed signup attempt.
+Request: {"username":"ujjwalrox","title":"hello!","text":"World!"}
+Post Created: hello!: World! -by ujjwalrox
+Request: {"username":"ujjwalroxx","title":"hello ujjwalroxx!","text":"World!"}
+Post Created: hello ujjwalroxx!: World! -by ujjwalroxx
+Request: {"username":"ujjwalrox","password":"ujjwal","type":"admin"}
+failed signup attempt.
+failed signup attempt.
+Request: {"username":"ujjwalroxx","password":"ujjwalx","type":"admin"}
+Request: {"username":"ujjwalrox2","password":"ujjwal2","type":"normal"}
+failed signup attempt.
+Request: {"username":"ujjwalrox","title":"hello!","text":"World!"}
+Post Created: hello!: World! -by ujjwalrox
+Request: {"username":"ujjwalroxx","title":"hello ujjwalroxx!","text":"World!"}
+Post Created: hello ujjwalroxx!: World! -by ujjwalroxx
+Request: {"username":"ujjwalrox","password":"ujjwal","type":"admin"}
+failed signup attempt.
+Request: {"username":"ujjwalroxx","password":"ujjwalx","type":"admin"}
+failed signup attempt.
+Request: {"username":"ujjwalrox2","password":"ujjwal2","type":"normal"}
+failed signup attempt.
+Post Created: hello!: World! -by ujjwalrox
+Request: {"username":"ujjwalrox","title":"hello!","text":"World!"}
+Request: {"username":"ujjwalroxx","title":"hello ujjwalroxx!","text":"World!"}
+Post Created: hello ujjwalroxx!: World! -by ujjwalroxx
+Request: {"username":"ujjwalrox","password":"ujjwal","type":"admin"}
+
+failed signup attempt.
+
+Request: {"username":"ujjwalroxx","password":"ujjwalx","type":"admin"}
+
+failed signup attempt.
+
+Request: {"username":"ujjwalrox2","password":"ujjwal2","type":"normal"}
+
+failed signup attempt.
+
+Request: {"username":"ujjwalrox","title":"hello!","text":"World!"}
+
+Post Created: hello!: World! -by ujjwalrox
+
+Request: {"username":"ujjwalroxx","title":"hello ujjwalroxx!","text":"World!"}
+
+Post Created: hello ujjwalroxx!: World! -by ujjwalroxx
+

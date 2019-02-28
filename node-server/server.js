@@ -25,6 +25,14 @@ let rawdata3 = fs.readFileSync('database/user_type.json')
 let user_type = JSON.parse(rawdata3)
 console.log(user_type)
 
+function write_log(text) {
+
+    fs.appendFile('server_log.txt', text + '\n\n', (err) => {  
+        if (err) throw err;
+    });
+
+}
+
 function commit_database() {
     
     var data
@@ -48,10 +56,12 @@ app.post('/login', (req, res) => {
     const password = req.body.password 
 
     console.log(req.body)
+    write_log(`Request: ${JSON.stringify(req.body)}`)
 
     if (user_list[username] == password ) {
 
         console.log(`Successful login attempt: ${username}`)
+        write_log(`Successful login attempt: ${username}`)
 
         res_data = {
             'status': 'success',
@@ -63,6 +73,7 @@ app.post('/login', (req, res) => {
     }
     else {
         console.log(`Failed login attempt: ${username}`)
+        write_log(`Failed login attempt: ${username}`)
 
         res_data = {
             'status': 'failure',
@@ -82,6 +93,7 @@ app.post('/login', (req, res) => {
     const type = req.body.type
 
     console.log(req.body)
+    write_log(`Request: ${JSON.stringify(req.body)}`)
 
     res_data = {
         'username': username,
@@ -91,12 +103,14 @@ app.post('/login', (req, res) => {
         res_data['status'] = 'failure'
         res_data['message'] = 'username already exists'
         console.log("failed Signup attempt")
+        write_log("failed signup attempt.")
     }
     else if (username == '' || password == '') {
 
         res_data['status'] = 'failure'
         res_data['message'] = 'Invalid Data'
         console.log("failed Signup attempt")
+        write_log("failed signup attempt.")
 
     }
     else {
@@ -105,6 +119,7 @@ app.post('/login', (req, res) => {
         res_data['status'] = 'success'
         res_data['message'] = 'user created'
         console.log("successful Signup attempt")
+        write_log("Successful signup attempt.")
     }
 
     commit_database()
@@ -119,6 +134,7 @@ app.post('/login', (req, res) => {
     const text = req.body.text
 
     console.log(req.body)
+    write_log(`Request: ${JSON.stringify(req.body)}`)
 
     res_data = {
         'username': username,
@@ -138,11 +154,13 @@ app.post('/login', (req, res) => {
         notice_list.push(post)
         res_data['post'] = post
         console.log(post)
+        write_log(`Post Created: ${title}: ${text} -by ${username}`)
 
     }
     else {
         res_data['status'] = 'failure'
         console.log("User not authorized to create notices.")
+        write_log("User not authorized to create notices.")
     }
 
     commit_database()
@@ -161,6 +179,39 @@ app.post('/login', (req, res) => {
     res.json(res_data)
 
   })
+
+  app.get('/logs', (req, res) => {
+
+    let log_text = fs.readFileSync('server_log.txt')
+    let response = `
+    <script>
+        var textarea = document.getElementById('ta');
+        textarea.scrollTop = textarea.scrollHeight;
+    </script>
+    <h3> Server Logs </h3>
+    <div align = "center">
+        <textarea id = 'ta' readonly width = "100%" placeholder="noticeboard" cols="150" rows="40">
+            ${log_text}
+        </textarea>
+    </div>
+    `
+    res.send(response)
+  })
+
+  app.get('/', (req, res) => {
+
+    let response = `
+    <h3>Student Utility Portal </h3>
+    
+    This is REST API Backend
+    <br>
+    <a href "/logs/">logs</a> <br>
+    <a href "/notices/">notices</a>
+    `
+
+    res.send(response)
+  })
+
 
   app.listen(8080, '0.0.0.0', function (err) {
     if (err) {
