@@ -36,7 +36,7 @@ class Signup extends Component {
 					placeholder: 'Submitting...'
 				})
 
-		axios.post('http://localhost:8080/signup', user)
+		axios.post('https://damp-fjord-85414.herokuapp.com/signup', user)
       	.then(res => {
       		const status = res.data.status
       		const message = res.data.message
