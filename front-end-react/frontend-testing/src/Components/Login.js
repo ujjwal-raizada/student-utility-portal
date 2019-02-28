@@ -29,7 +29,7 @@ class Login extends Component {
 				placeholder: "Logging in..."
 		})
 
-		axios.post('http://localhost:8080/login', user)
+		axios.post('https://damp-fjord-85414.herokuapp.com/login', user)
 
       	.then(res => {
 
