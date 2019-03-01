@@ -37,12 +37,12 @@ class Header extends Component {
 							<Link to={`/`}> Home </Link> 
 						</li>
 
-						<li className = {this.state.Notice}> 
+						{/*}<li className = {this.state.Notice}> 
 							<Link to={`/notice`}> Notices </Link>
-						</li>
+						</li>{*/}
 
 						<li className = {this.state.Login} > 
-							<Link to={`/`}> Login </Link>
+							<Link to={`/Login`}> Login </Link>
 						</li>
 
 						<li className = {this.state.Signup}>

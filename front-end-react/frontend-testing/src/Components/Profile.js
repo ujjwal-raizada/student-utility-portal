@@ -6,8 +6,8 @@ import axios from "axios"
 
 class Profile extends Component {	
 		
-	// handleClick = () => {this.props.history.push(`/`)}
-	handleClick = () => <Login/>
+	handleClick = () => {this.props.history.push(`/`)}
+	//handleClick = () => <Login/>
 	render() {
 
 		return (
