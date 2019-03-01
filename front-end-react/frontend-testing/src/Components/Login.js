@@ -5,7 +5,7 @@ import Header from './Header'
 class Login extends Component {
 		
 	state = {
-		userame: "",
+		username: "",
 		password: "",
 		placeholder: "",
 		error: {}
@@ -21,7 +21,7 @@ class Login extends Component {
 	handleLogin = () => {		
 		
 		const user = {			
-		    "username": this.state.userame ,
+		    "username": this.state.username ,
 		    "password": this.state.password			
 		}
 
@@ -32,7 +32,7 @@ class Login extends Component {
 		axios.post('https://damp-fjord-85414.herokuapp.com/login', user)
 
       	.then(res => {
-
+      		console.log(res)
       		const status = res.data.status
 
       		if(status === 'success') {
@@ -73,7 +73,7 @@ class Login extends Component {
 						<p className="text-danger">{this.state.placeholder}</p>
 						<input 
 							className = "well well-sm"
-							name = "userame"
+							name = "username"
 							type = "text" 
 							placeholder = "User Name" 
 							onChange = {this.handleChange}
