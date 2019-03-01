@@ -9,9 +9,9 @@ class Piece extends Component {
 	render() {
 		return(
 			<div className = "Piece" style = {divStyle}>
-				<h1 align = "center">{this.props.data.name}</h1>
-				<h6 align = "center">{this.props.data.hair_color}</h6>
-				<h6 align = "center">{this.props.data.eye_color}</h6>
+				<h3 align = "center">{this.props.data[1].title}</h3>
+				<h5 align = "center">{this.props.data[1].text}</h5>
+				<h6 align = "right">-{this.props.data[1].username}</h6>
 			</div>
 		)
 	}
