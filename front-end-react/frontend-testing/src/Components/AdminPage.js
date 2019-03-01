@@ -1,55 +1,89 @@
 import React, {Component, Fragment} from "react" 
 import axios from "axios"
-import Header from './Header'
+import Header from "./Header"
 
 class AdminPage extends Component {
 
 	state = {
-			heading: '',
-			notice: '',
-			username: '' ,
-			password: '' ,
+			title: ``,
+			text: ``,
+			username: `` ,
+			password: `` ,
 			tag1: false ,
 			tag2: false ,
 			tag3: false ,
 			tag4: false ,
 			tag5: false ,
-			placeholder: ''
+			placeholder: ``,
+			status: `failure`,
+			type: `normal`,
+			error: ``
 	}
 
 	handleChange = (event) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+	    const target = event.target;
+	    const value = target.type === `checkbox` ? target.checked : target.value;
+	    const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
-  }
-	handleSubmit = (event) => {
-		event.preventDefault()
-		const user = {
-			
-			    'username': this.state.username,
-			    'password': this.state.password
-			
+	    this.setState({
+	      [name]: value
+	    });
+  	}
+
+  	/*handleLogin = () => {	
+
+  		this.setState({
+				placeholder: "Logging in..."
+		})	
+		
+		const user = {			
+		    "username": this.state.username ,
+		    "password": this.state.password			
 		}
 
-		this.setState({
-					placeholder: 'Submitting...'
-				})
+		axios.post('https://damp-fjord-85414.herokuapp.com/login', user)
 
-		axios.post('http://localhost:8080/admin/notice', user)
       	.then(res => {
+      		console.log(res)
+      		const data = res.data
+      		this.setState({
+      			status: data.status,
+      			type: data.type
+      		})
+      		console.log(data.status)
+      		console.log(this.state.status)
+		})
+
+		.catch(error => {
+
+			console.log(error)
+
+			this.setState({
+				error: error ,
+				placeholder: error.message
+			})
+		})   
+	}
+	*/
+	
+	postNotice = () => {
+
+		this.setState({
+					placeholder: `Submitting...`
+		})
+		const data = this.state
+
+		
+		axios.post(`https://damp-fjord-85414.herokuapp.com/create`, data)
+      	.then(res => {
+      		console.log(res.data)
       		const status = res.data.status
       		const message = res.data.message
-      		if(status === 'success') {      			
-  				this.setState({
-      				placeholder: message
-      			})
+      		if(status === `success`) {      			
+  				alert(`Notice Submitted Successfully!`)
     			this.props.history.push(`/profile/${this.state.username}`)      			
       		}
-      		else if(status === 'failure') {
+      		else if(status === `failure`) {
       			this.setState({
       				placeholder: message
       			})
@@ -61,13 +95,66 @@ class AdminPage extends Component {
 				error: error ,
 				placeholder: error.message
 			})
-		})   
+		}) 
 	}
+
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.setState({
+				placeholder: "Logging in..."
+		})	
+		
+		const user = {			
+		    "username": this.state.username ,
+		    "password": this.state.password			
+		}
+
+		axios.post('https://damp-fjord-85414.herokuapp.com/login', user)
+
+      	.then(res => {
+      		console.log(res)
+      		const data = res.data
+      		this.setState({
+      			status: data.status,
+      			type: data.type
+      		})
+      		console.log(data.status)
+      		console.log(this.state.status)
+      		if(this.state.status === `failure`) {
+				console.log(this.state.status)
+				this.setState({
+	      				placeholder: `Failed login of ${this.state.username}`
+	  			})	
+			}
+			else if(this.state.type === `normal`) {
+				this.setState({
+	      				placeholder: `${this.state.username} is not an admin`
+	  			})
+			}
+			else if(this.state.type === `admin`) {
+				this.postNotice()
+			}
+
+		})
+
+		.catch(error => {
+
+			console.log(error)
+
+			this.setState({
+				error: error ,
+				placeholder: error.message
+			})
+		})   
+
+		
+	}
+		  
 	render() {
 		return (
 			<Fragment>
 				<Header page="AdminPage" />
-				<div style = {{marginTop: '60px'}}>
+				<div style = {{marginTop: `60px`}}>
 					<h1 >Post Notice</h1>
 					<p className="text-danger">{this.state.placeholder}</p>
 					<form>
@@ -75,10 +162,10 @@ class AdminPage extends Component {
 						<div>
 							<input 
 								type="text"
-								style={{width: '600px'}} 
-								name="heading" 
-								placeholder="Heading"
-								value={this.state.heading}
+								style={{width: `600px`}} 
+								name="title" 
+								placeholder="Title"
+								value={this.state.title}
 								onChange={this.handleChange}
 							/>
 							<br/>
@@ -87,10 +174,10 @@ class AdminPage extends Component {
 
 						<div>
 							<textarea
-								style={{height: '200px' , width: '600px'}} 
-								name="notice"
-								placeholder='Notice'
-								value={this.state.notice}
+								style={{height: `200px` , width: `600px`}} 
+								name="text"
+								placeholder="Text"
+								value={this.state.text}
 								onChange={this.handleChange}
 								/>
 							<br/>
