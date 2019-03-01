@@ -22,13 +22,13 @@ class Signup extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault()
-		const user = this.state
+		const data = this.state
 
 		this.setState({
 					placeholder: 'Submitting...'
 				})
 
-		axios.post('https://damp-fjord-85414.herokuapp.com/signup', user)
+		axios.post('https://damp-fjord-85414.herokuapp.com/signup', data)
       	.then(res => {
       		const status = res.data.status
       		const message = res.data.message
@@ -99,9 +99,6 @@ class Signup extends Component {
                   name="type" 
                 	>
 									<option value="normal">Student</option>
-									<option value="admin">Administration</option>
-									<option value="admin">Faculty</option>
-									<option value="admin">Club</option>
 									<option value="admin">Admin</option>
 								</select>
 							</label>
