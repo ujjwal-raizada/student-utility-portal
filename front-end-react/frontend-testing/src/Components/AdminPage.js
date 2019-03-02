@@ -154,7 +154,7 @@ class AdminPage extends Component {
 		return (
 			<Fragment>
 				<Header page="AdminPage" />
-				<div style = {{marginTop: `60px`}}>
+				<div className="text-center" style = {{marginTop: `60px`}}>
 					<h1 >Post Notice</h1>
 					<p className="text-danger">{this.state.placeholder}</p>
 					<form>
@@ -163,6 +163,7 @@ class AdminPage extends Component {
 							<input 
 								type="text"
 								style={{width: `600px`}} 
+								className = "well well-sm"
 								name="title" 
 								placeholder="Title"
 								value={this.state.title}
@@ -174,7 +175,8 @@ class AdminPage extends Component {
 
 						<div>
 							<textarea
-								style={{height: `200px` , width: `600px`}} 
+								style={{height: `200px` , width: `600px`}}
+								className = "well well-sm" 
 								name="text"
 								placeholder="Text"
 								value={this.state.text}
@@ -184,7 +186,8 @@ class AdminPage extends Component {
 						</div>				
 
 						<div>
-							<label>
+
+							<label style={{width:100}}>
 								<input 
 									type="checkbox" 
 									name="tag1" 
@@ -193,11 +196,8 @@ class AdminPage extends Component {
 									/>
 								tag1
 							</label>
-							<br/>
-						</div>
 
-						<div>
-							<label>
+							<label style={{width:100}}>
 								<input 
 									type="checkbox" 
 									name="tag2" 
@@ -206,11 +206,8 @@ class AdminPage extends Component {
 									/>
 								tag2
 							</label>
-							<br/>
-						</div>
 
-						<div>
-							<label>
+							<label style={{width:100}}>
 								<input 
 									type="checkbox" 
 									name="tag3" 
@@ -219,11 +216,8 @@ class AdminPage extends Component {
 									/>
 								tag3
 							</label>
-							<br/>
-						</div>
 
-						<div>
-							<label>
+							<label style={{width:100}}>
 								<input 
 									type="checkbox" 
 									name="tag4" 
@@ -232,11 +226,8 @@ class AdminPage extends Component {
 									/>
 								tag4
 							</label>
-							<br/>
-						</div>
-
-						<div>
-							<label>
+							
+							<label style={{width:100}}>
 								<input 
 									type="checkbox" 
 									name="tag5" 
@@ -245,45 +236,63 @@ class AdminPage extends Component {
 									/>
 								tag5
 							</label>
-							<br/>
-						</div>
 
+							<br/>
+							<br/>
+
+						</div>
+						
 						<div>
+
 							<label>
 								Username:  
 								<input 
-									type="text" 
+									type="text"
+									className = "well well-sm" 
 									name="username" 
 									value={this.state.username}
 									onChange={this.handleChange}
 								/>
 							</label>
+
 							<br/>
+
 						</div>
 
 						<div>
+
 							<label>
 								Password:  
 								<input 
 									type="password" 
+									className = "well well-sm"
 									name="password" 
 									value={this.state.password} 
 									onChange={this.handleChange}
 								/>
 							</label>
+
 							<br/>
+
 						</div>
 
 						<div>
+
 							<input 
 								type="submit" 
+								className = "btn btn-primary" 
 								name="Submit" 
-								onClick={this.handleSubmit}/>
-							<br/>							
+								onClick={this.handleSubmit}
+								/>
+
+							<br/>					
+
 						</div>
 
 					</form>
+
 				</div>
+				
 			</Fragment>				
  		)
 	}

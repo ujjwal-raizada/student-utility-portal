@@ -15,7 +15,7 @@ class ContactUs extends Component {
 			<Fragment>
 				<Header page='ContactUs'/>
 				<div style = {{marginTop: '60px'}}>	
-					<h3 className="text text-center"> Contact Us </h3>
+					<h1 className="text text-center"> Contact Us </h1>
 					<div style = {divStyle}>
 					<h3>Ujjwal Raizada (Scrum Master)</h3>
 					<h3>Satyam Mani (Product Owner)</h3>

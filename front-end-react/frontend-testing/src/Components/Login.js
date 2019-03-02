@@ -67,7 +67,7 @@ class Login extends Component {
 	render() {
 		return (
 			<Fragment >
-				<Header page='Header'/ >
+				<Header page='Login'/ >
 					<div className="text-center" style = {{marginTop: '60px'}}>
 						<h1 >Login</h1>
 						<p className="text-danger">{this.state.placeholder}</p>
