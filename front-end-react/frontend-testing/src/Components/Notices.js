@@ -1,20 +1,23 @@
 import React, {Component, Fragment} from "react"
 import Header from './Header'
-import Piece from './Piece'
-import json_data from './json_data'
+import NoticeData from './NoticeData'
 import Sidebar from './Sidebar'
 import axios from 'axios'
 
 class Notices extends Component {
 	state = {
-		notice_data : []
+		notice_data : [],
+		loading: true,
+		error: '',
+		placeholder: ''
 	}
 
 	componentDidMount() {
 		axios.get(`https://damp-fjord-85414.herokuapp.com/notices`)
-		.then(res => {
+		.then(res => {			
 			console.log(res)
 			this.setState({
+				loading: false,
 				notice_data:res.data.notices
 			})
 		})
@@ -29,13 +32,15 @@ class Notices extends Component {
 	}
 	render() {		
 		const display_data = this.state.notice_data.map((item,index) => (
-			<Piece key = {index} data = {item} />
+			<NoticeData key = {index} data = {item} />
 			))
 
 		return (
 			<Fragment>
 				<Header />
 				<div className="container-fluid" style = {{marginTop:'60px'}}>
+					<h1 className="text-center">Notices</h1>
+					<h4 className="text-danger">{this.state.loading?`loading...`:this.state.placeholder}</h4>
 				  <div className="col">
 				    <div className="col-sm-8">
 				      {display_data}
