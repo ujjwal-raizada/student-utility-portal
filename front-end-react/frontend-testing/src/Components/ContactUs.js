@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react"
 import Header from './Header'
 
 const divStyle = {
-  	margin: '40px',
+	margin: '40px',
 	border: '5px solid pink',
 	padding: '15px'
 };
