@@ -17,7 +17,6 @@ class ForgotPassword extends Component {
 		return (
 			<Fragment>
 			<Header />
-			<div div style = {{marginTop: '60px'}}>
 				<form class="form-horizontal" action="/action_page.php">
 			    <div class="form-group">
 			      <label class="control-label col-sm-4" for="email">Email:</label>
@@ -39,7 +38,6 @@ class ForgotPassword extends Component {
 			      </div>
 			    </div>
 			  </form>
-		  	</div>
 			</Fragment>
 		)
 	}
