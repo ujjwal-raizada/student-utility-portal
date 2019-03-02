@@ -28,5 +28,12 @@ studentSchema.virtual('fullName').
         
     });
 
-var Student = mongoose.model('Student', studentSchema);
-modules.export = Student;
+
+//Virtual for student's URL
+studentSchema
+.virtual('url')
+.get(function () {
+    return '/user/student/' + this._id;
+});
+
+module.exports = mongoose.model('Student', studentSchema);

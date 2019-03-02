@@ -20,5 +20,11 @@ var ClubSchema = new Schema({
 
 });
 
-var Club = mongoose.model('Club', ClubSchema);
-modules.export = Club;
+//Virtual for club's URL
+ClubSchema
+.virtual('url')
+.get(function () {
+    return '/user/club/' + this._id;
+});
+
+module.exports = mongoose.model('Club', ClubSchema);
