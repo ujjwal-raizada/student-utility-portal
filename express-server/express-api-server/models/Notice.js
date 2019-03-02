@@ -25,3 +25,4 @@ var noticeSchema = new Schema({
 noticeSchema.plugin(timestamp);
 
 var Notice = mongoose.model('Notice', noticeSchema);
+modules.export = Faculty;

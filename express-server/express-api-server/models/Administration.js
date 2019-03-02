@@ -21,3 +21,4 @@ var administrationSchema = new Schema({
 }); 
 
 var Administration = mongoose.model('Administration', administrationSchema);
+modules.export = Administration;

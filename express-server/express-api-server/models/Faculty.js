@@ -29,3 +29,4 @@ facultySchema.virtual('fullName').
     });
 
 var Faculty = mongoose.model("Faculty", facultySchema);
+modules.export = Faculty;
