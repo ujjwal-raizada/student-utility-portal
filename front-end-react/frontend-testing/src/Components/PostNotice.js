@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react"
 import axios from "axios"
 import Header from "./Header"
 
-class AdminPage extends Component {
+class PostNotice extends Component {
 
 	state = {
 			title: ``,
@@ -81,7 +81,7 @@ class AdminPage extends Component {
       		const message = res.data.message
       		if(status === `success`) {      			
   				alert(`Notice Submitted Successfully!`)
-    			this.props.history.push(`/profile/${this.state.username}`)      			
+    			this.props.history.push(`/postnotice}`)      			
       		}
       		else if(status === `failure`) {
       			this.setState({
@@ -128,10 +128,10 @@ class AdminPage extends Component {
 			}
 			else if(this.state.type === `normal`) {
 				this.setState({
-	      				placeholder: `${this.state.username} is not an admin`
+	      				placeholder: `${this.state.username} is not an official's username`
 	  			})
 			}
-			else if(this.state.type === `admin`) {
+			else if(this.state.type === `official`) {
 				this.postNotice()
 			}
 
@@ -153,8 +153,8 @@ class AdminPage extends Component {
 	render() {
 		return (
 			<Fragment>
-				<Header page="AdminPage" />
-				<div className="text-center" style = {{marginTop: `60px`}}>
+				<Header />
+				<div className="text-center" >
 					<h1 >Post Notice</h1>
 					<p className="text-danger">{this.state.placeholder}</p>
 					<form>
@@ -292,9 +292,9 @@ class AdminPage extends Component {
 					</form>
 
 				</div>
-				
+
 			</Fragment>				
  		)
 	}
 }
-export default AdminPage
+export default PostNotice

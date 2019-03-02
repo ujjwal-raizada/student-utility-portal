@@ -30,13 +30,13 @@ class Signup extends Component {
 
 		axios.post('https://damp-fjord-85414.herokuapp.com/signup', data)
       	.then(res => {
-      		const status = res.data.status
-      		const message = res.data.message
+      		const {status, message} = res.data
       		if(status === 'success') {      			
   				this.setState({
       				placeholder: message
       			})
-    			this.props.history.push(`/profile/${this.state.username}`)      			
+  				const {type,username} = this.state
+    			this.props.history.push(`/profile/${type}/${username}`)      			
       		}
       		else if(status === 'failure') {
       			this.setState({
@@ -57,7 +57,7 @@ class Signup extends Component {
 		return (
 			<Fragment>
 				<Header page="Signup" />
-					<div className="text-center" style = {{marginTop: '60px'}}>
+					<div className="text-center">
 						<h1 >Signup</h1>
 						<p className="text-danger">{this.state.placeholder}</p>
 
@@ -102,7 +102,7 @@ class Signup extends Component {
 	                  name="type" 
 	                	>
 										<option value="normal">Student</option>
-										<option value="admin">Admin</option>
+										<option value="official">Official Source</option>
 									</select>
 								</label>
 								<br/>

@@ -6,8 +6,7 @@ import NotFound from "./Components/NotFound"
 import ForgotPassword from "./Components/ForgotPassword"
 import Profile from "./Components/Profile"
 import Test from "./Components/Test"
-import Notices from "./Components/Notices"
-import AdminPage from "./Components/AdminPage"
+import PostNotice from "./Components/PostNotice"
 import ContactUs from "./Components/ContactUs"
 import Homepage from "./Components/Homepage"
 
@@ -20,11 +19,11 @@ class App extends React.Component {
 					<Route path="/signup" component={Signup} />
 					<Route path="/login" component={Login} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
-					<Route path="/profile/:username" component={Profile} />
+					<Route path="/profile/:type/:username" component={Profile} />
 					<Route path="/test" component={Test} />
 					<Route path="/notice" component={Homepage} />
 					<Route path="/contactus" component={ContactUs} />
-					<Route path="/admin" component={AdminPage} />
+					<Route path="/postnotice" component={PostNotice} />
 					<Route component={NotFound} />
 				</Switch>
 			</BrowserRouter>

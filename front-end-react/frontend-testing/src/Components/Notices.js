@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from "react"
-import Header from './Header'
 import NoticeData from './NoticeData'
 import Sidebar from './Sidebar'
 import axios from 'axios'
@@ -37,8 +36,7 @@ class Notices extends Component {
 
 		return (
 			<Fragment>
-				<Header />
-				<div className="container-fluid" style = {{marginTop:'60px'}}>
+				<div className="container-fluid">
 					<h1 className="text-center">Notices</h1>
 					<h4 className="text-danger">{this.state.loading?`loading...`:this.state.placeholder}</h4>
 				  <div className="col">

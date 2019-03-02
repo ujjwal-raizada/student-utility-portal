@@ -33,15 +33,15 @@ class Login extends Component {
 
       	.then(res => {
       		console.log(res)
-      		const status = res.data.status
+      		const {type,username,status} = res.data
 
       		if(status === 'success') {
-    			this.props.history.push(`/Profile/${this.state.userame}`)      			
+    			this.props.history.push(`/Profile/${type}/${username}`)      			
       		}
 
       		else if(status === 'failure') {
       			this.setState({
-      				placeholder: `Failed login of ${user.username}`
+      				placeholder: `Failed login of ${username}`
       			})
       		}
 		})
@@ -68,7 +68,7 @@ class Login extends Component {
 		return (
 			<Fragment >
 				<Header page='Login'/ >
-					<div className="text-center" style = {{marginTop: '60px'}}>
+					<div className="text-center">
 						<h1 >Login</h1>
 						<p className="text-danger">{this.state.placeholder}</p>
 						<input 

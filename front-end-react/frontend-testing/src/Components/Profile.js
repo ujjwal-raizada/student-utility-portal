@@ -1,20 +1,44 @@
 import React, {Component, Fragment} from "react"
-import Test from "./Test"
-import Login from "./Login"
+import Notices from "./Notices"
 import Header from "./Header"
-import axios from "axios"
 
 class Profile extends Component {	
-		
-	handleClick = () => {this.props.history.push(`/`)}
-	//handleClick = () => <Login/>
+	state = {
+		username: ``,
+		type: ``
+	} 
+
+	componentDidMount() {
+		const {username,type} = this.props.match.params
+		this.setState({
+			username: username,
+			type: type
+		})
+	}
+
+	handleSignout = () => {this.props.history.push(`/`)}
+	handlePost = () => {this.props.history.push(`/postnotice`)}
+
 	render() {
 
 		return (
+
 			<Fragment>
+
 				<Header page="Profile"/>
+
 				<h3 className="text-prime text-center"> Welcome!!</h3>
-				<button onClick={this.handleClick}>Signout</button>
+
+				<div>
+
+						<button onClick={this.handleSignout}>Signout </button>
+
+						{this.state.type==='official' && <button onClick={this.handlePost}>Post Notice </button>}
+
+				</div>
+
+				<Notices />
+					
 			</Fragment>
 		)	
 	}

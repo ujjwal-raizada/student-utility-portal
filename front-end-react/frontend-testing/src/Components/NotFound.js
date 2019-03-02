@@ -6,8 +6,8 @@ class NotFound extends Component {
 	render() {
 		return (
 			<Fragment>
-			<Header />
-			<h3 className="text-danger text-center">Error 404!!!</h3>
+				<Header />
+				<h3 className="text-danger text-center">Error 404!!!</h3>
 			</Fragment>
 		)
 	}
