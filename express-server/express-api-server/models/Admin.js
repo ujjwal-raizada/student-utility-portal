@@ -19,5 +19,11 @@ var adminSchema = new Schema({
     },
 });
 
-var admin = mongoose.model('Admin', adminSchema);
-modules.export = Admin;
+//Virtual for admin's URL
+adminSchema
+.virtual('url')
+.get(function () {
+    return '/user/admin/' + this._id;
+});
+
+module.exports = mongoose.model('Admin', adminSchema);

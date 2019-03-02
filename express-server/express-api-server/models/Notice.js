@@ -24,5 +24,12 @@ var noticeSchema = new Schema({
 
 noticeSchema.plugin(timestamp);
 
-var Notice = mongoose.model('Notice', noticeSchema);
-modules.export = Faculty;
+//Virtual for notice's URL
+noticeSchema
+.virtual('url')
+.get(function () {
+    return '/user/notice/' + this._id;
+});
+
+module.exports = mongoose.model('Notice', noticeSchema);
+
