@@ -29,3 +29,4 @@ studentSchema.virtual('fullName').
     });
 
 var Student = mongoose.model('Student', studentSchema);
+modules.export = Student;
