@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var facultySchema = new Schema({
-    name: {
+    username: {
         first: String,
         last: String,
     },
