@@ -4,8 +4,6 @@ Software Engineering Project (IS F341)<br>
 
 * Frontend (ReactJS): [Frontend Link](https://sup-react.herokuapp.com/)
 * Backend (NodeJS + Express): [Backend Link](https://damp-fjord-85414.herokuapp.com/)
-<br>
-<br>
 * Server Logs: [Server Logs link](https://damp-fjord-85414.herokuapp.com/logs)
 
 
