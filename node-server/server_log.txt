@@ -48,3 +48,71 @@ Request: {"username":"ujjwalroxx","title":"hello ujjwalroxx!","text":"World!"}
 
 Post Created: hello ujjwalroxx!: World! -by ujjwalroxx
 
+Request: {"username":"Crux-Bphc","password":"Crux","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"SWD","password":"SWD","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"TD","password":"TD","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"CSA","password":"CSA","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"Narasimha-Bolloju","password":"Narasimha-Bolloju","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"ARC-Bphc","password":"ARC","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"DesignersAnonymous","password":"da","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"StudentUnion","password":"suc","type":"official"}
+
+Successful signup attempt.
+
+Request: {"username":"UjjwalRaizada","password":"ujjwal","type":"normal"}
+
+Successful signup attempt.
+
+Request: {"username":"PrakharGoenka","password":"prakhar","type":"normal"}
+
+Successful signup attempt.
+
+Request: {"username":"SatyamMani","password":"satyam","type":"normal"}
+
+Successful signup attempt.
+
+Request: {"username":"PranjalGupta","password":"pranjal","type":"normal"}
+
+Successful signup attempt.
+
+Successful signup attempt.
+
+Request: {"username":"DakshYashlaha","password":"daksh","type":"normal"}
+
+Request: {"username":"Crux-Bphc","title":"Crux OOP With Python Workshop","text":"\nWe are back with our series of Python workshops.\nThis session will cover the fundamentals of using the Object-Oriented approach to programming, in the easy to learn environment of Python.\nYou will gain the ability to understand one of the fundamental principles of programming that is used in nearly all the code that runs our world.\nThe OOP concepts will enable you to transform the barely useful code that you've written in CS F111 to real-life applications that you see and run everyday.\n"}
+
+User not authorized to create notices.
+
+Request: {"username":"DesignersAnonymous","title":"DA UI/UX Workshop","text":"\nHey guys!\nHope the semester is going well so far :3\nF1 Studioz in association with DA is bringing you a series of UI/UX workshops.\nUI is User Interface for website and apps and UX is User Experience. It's an upcoming field in India and is a very beneficial skill to have.\n\nWe'll be starting out with basic concepts of designing and then going into the deeper topics.\nF1 Studioz will also be offering internship opportunities to a few people by the end of the series of workshops.\nParticipants will also get a chance to visit their office in Hyderabad after one of the sessions!\n"}
+
+User not authorized to create notices.
+
+Request: {"username":"StudentUnion","title":"IND Vs. AUS Match screening","text":"\nSUC brings to you the screening of 2nd Innings of the first ODI International Match of series between INDIA and AUSTRALIA\n\nCome in numbers and show the country our support!!\n#BLEEDBLUE\n#KANGAROOSFORDINNER\n\nWhen: Today, 2nd March 2019\nWhere: NESCAFE LAWNS\nTime : 6pm \n"}
+
+User not authorized to create notices.
+
+Request: {"username":"SWD","title":"Microsoft Codess internship","text":"\n|| Microsoft Codess ||\nCodess is back. This is a great opportunity for 2nd year and 3rd year females(graduating in 2021 or 2022) to join the community of female coders and get mentored by Microsoft professionals.\nAlso, there are fair chances of landing a SUMMER INTERNSHIP with Microsoft.\nDon't miss the opportunity and register here asap: https://aka.ms/CodessRegister\n"}
+
+User not authorized to create notices.
+

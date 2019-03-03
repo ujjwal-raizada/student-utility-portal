@@ -220,6 +220,6 @@ app.post('/login', (req, res) => {
     }
   
     console.log('Starting development server under secure firewall')
-    console.log('Server started on port 3000')
+    console.log(`Server started on port 5000 ${process.env.PORT || 5000}`)
     console.log('accepting requests GET/POST:')
   })
