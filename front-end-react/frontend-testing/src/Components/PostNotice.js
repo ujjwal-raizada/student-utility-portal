@@ -81,7 +81,8 @@ class PostNotice extends Component {
       		const message = res.data.message
       		if(status === `success`) {      			
   				alert(`Notice Submitted Successfully!`)
-    			this.props.history.push(`/postnotice}`)      			
+  				const url = `/profile/official/${this.state.username}`
+    			this.props.history.push(url)      			
       		}
       		else if(status === `failure`) {
       			this.setState({
