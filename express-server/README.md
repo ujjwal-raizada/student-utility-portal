@@ -7,3 +7,7 @@ In Dev Mode <br>
 ```
 SET DEBUG=express-api-server:* & npm run devstart
 ```
+### MacOS or Linux: <br>
+```
+DEBUG=express-api-server:* & npm run devstart
+```
