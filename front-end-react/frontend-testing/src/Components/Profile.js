@@ -1,23 +1,50 @@
 import React, {Component, Fragment} from "react"
 import Notices from "./Notices"
 import Header from "./Header"
+import Login from "./Login"
 
 class Profile extends Component {	
 	state = {
 		username: ``,
-		type: ``
+		type: ``,
+		valid: false
 	} 
 
 	componentDidMount() {
-		const {username,type} = this.props.match.params
-		this.setState({
+		const username = sessionStorage.getItem(`username`)
+		const type = sessionStorage.getItem(`type`)
+		const user_input = this.props.match.params.username
+		if(username === user_input) {
+			this.setState({
 			username: username,
-			type: type
-		})
+			type: type,
+			valid: true,
+			})
+		}
+		else {
+			this.redirect()
+		}
+		
 	}
 
-	handleSignout = () => {this.props.history.push(`/`)}
-	handlePost = () => {this.props.history.push(`/postnotice`)}
+	redirect = () => {
+		const username = sessionStorage.getItem(`username`)
+		const type = sessionStorage.getItem(`type`)	
+		if(username === ``) {
+			this.props.history.push(`/login`)
+		}
+		else {
+			this.props.history.push(`/Profile/${type}/${username}`)
+		}
+	}
+	handleSignout = () => {
+
+		sessionStorage.setItem(`username`,``)
+		sessionStorage.setItem(`type`,``)
+		this.props.history.push(`/`)
+	}
+
+	handlePost = () => {this.props.history.push(`/postnotice/${this.state.username}`)}
 
 	render() {
 
@@ -31,14 +58,14 @@ class Profile extends Component {
 
 				<div>
 
-						<button onClick={this.handleSignout}>Signout </button>
+					<button onClick={this.handleSignout}>Signout </button>
 
-						{this.state.type==='official' && <button onClick={this.handlePost}>Post Notice </button>}
+					{this.state.type==='official' && <button onClick={this.handlePost}>Post Notice </button>}
 
 				</div>
 
 				<Notices />
-					
+				
 			</Fragment>
 		)	
 	}

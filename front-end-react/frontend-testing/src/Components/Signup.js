@@ -10,14 +10,19 @@ class Signup extends Component {
 			type: 'normal' ,
 	}
 
-	handleChange = (event) => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+	componentDidMount() {
+		sessionStorage.setItem(`username`,``)
+		sessionStorage.setItem(`type`,``)
+	}
 
-    this.setState({
-      [name]: value
-    });
+	handleChange = (event) => {
+	    const target = event.target;
+	    const value = target.type === 'checkbox' ? target.checked : target.value;
+	    const name = target.name;
+
+	    this.setState({
+	      [name]: value
+	    });
   }
 
 	handleSubmit = (event) => {
@@ -36,6 +41,8 @@ class Signup extends Component {
       				placeholder: message
       			})
   				const {type,username} = this.state
+  				sessionStorage.setItem(`username`,username)
+    			sessionStorage.setItem(`type`,type)
     			this.props.history.push(`/profile/${type}/${username}`)      			
       		}
       		else if(status === 'failure') {

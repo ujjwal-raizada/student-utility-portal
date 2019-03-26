@@ -10,7 +10,10 @@ class Login extends Component {
 		placeholder: "",
 		error: {}
 	}	
-	
+	componentDidMount() {
+		sessionStorage.setItem(`username`,``)
+		sessionStorage.setItem(`type`,``)
+	}
 	handleChange = (event) => {
 
 		this.setState({
@@ -36,6 +39,8 @@ class Login extends Component {
       		const {type,username,status} = res.data
 
       		if(status === 'success') {
+      			sessionStorage.setItem(`username`,username)
+      			sessionStorage.setItem(`type`,type)
     			this.props.history.push(`/Profile/${type}/${username}`)      			
       		}
 
