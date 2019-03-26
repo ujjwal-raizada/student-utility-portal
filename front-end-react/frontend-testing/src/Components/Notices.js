@@ -32,7 +32,7 @@ class Notices extends Component {
 	render() {		
 		const display_data = this.state.notice_data.map((item,index) => (
 			<NoticeData key = {index} data = {item} />
-			))
+		))
 
 		return (
 			<Fragment>

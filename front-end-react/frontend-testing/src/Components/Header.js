@@ -13,8 +13,20 @@ class Header extends Component {
 	}
 
 	componentDidMount() {
+		this.updateState()	
+	}
+	
+
+	updateState = () => {
+		const username = sessionStorage.getItem(username)
+		const type = sessionStorage.getItem(type)
+		const LoggedIn = username === null ? false : true
 		this.setState({
-			[this.props.page]: "active"
+			page:this.props.page,
+			[this.state.page]: true,
+			LoggedIn: LoggedIn,
+			Type: type,
+			Username: username
 		})
 	}
 

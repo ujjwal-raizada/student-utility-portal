@@ -19,7 +19,33 @@ class PostNotice extends Component {
 			type: `normal`,
 			error: ``
 	}
+	componentDidMount() {
+		const username = sessionStorage.getItem(`username`)
+		const type = sessionStorage.getItem(`type`)
+		const user_input = this.props.match.params.username
+		if(username === user_input && type === `official`) {
+			this.setState({
+			username: username,
+			type: type,
+			valid: true,
+			})
+		}
+		else {
+			this.redirect()
+		}
+		
+	}
 
+	redirect = () => {
+		const username = sessionStorage.getItem(`username`)
+		const type = sessionStorage.getItem(`type`)
+		if(username === ``) {
+			this.props.history.push(`/login`)
+		}
+		else {
+			this.props.history.push(`/Profile/${type}/${username}`)
+		}	
+	}
 	handleChange = (event) => {
 	    const target = event.target;
 	    const value = target.type === `checkbox` ? target.checked : target.value;
@@ -28,44 +54,7 @@ class PostNotice extends Component {
 	    this.setState({
 	      [name]: value
 	    });
-  	}
-
-  	/*handleLogin = () => {	
-
-  		this.setState({
-				placeholder: "Logging in..."
-		})	
-		
-		const user = {			
-		    "username": this.state.username ,
-		    "password": this.state.password			
-		}
-
-		axios.post('https://damp-fjord-85414.herokuapp.com/login', user)
-
-      	.then(res => {
-      		console.log(res)
-      		const data = res.data
-      		this.setState({
-      			status: data.status,
-      			type: data.type
-      		})
-      		console.log(data.status)
-      		console.log(this.state.status)
-		})
-
-		.catch(error => {
-
-			console.log(error)
-
-			this.setState({
-				error: error ,
-				placeholder: error.message
-			})
-		})   
-	}
-	*/
-	
+  	}	
 	postNotice = () => {
 
 		this.setState({
@@ -100,34 +89,16 @@ class PostNotice extends Component {
 	}
 
 	handleSubmit = (event) => {
-		event.preventDefault()
+		event.preventDefault()		
+		const username = sessionStorage.getItem(username)
+		const type = sessionStorage.getItem(type)
 		this.setState({
-				placeholder: "Logging in..."
-		})	
+			username: username,
+			type: type
+		})
 		
-		const user = {			
-		    "username": this.state.username ,
-		    "password": this.state.password			
-		}
-
-		axios.post('https://damp-fjord-85414.herokuapp.com/login', user)
-
-      	.then(res => {
-      		console.log(res)
-      		const data = res.data
-      		this.setState({
-      			status: data.status,
-      			type: data.type
-      		})
-      		console.log(data.status)
-      		console.log(this.state.status)
-      		if(this.state.status === `failure`) {
-				console.log(this.state.status)
-				this.setState({
-	      				placeholder: `Failed login of ${this.state.username}`
-	  			})	
-			}
-			else if(this.state.type === `normal`) {
+      	.then(res => {      		
+      		if(this.state.type === `normal`) {
 				this.setState({
 	      				placeholder: `${this.state.username} is not an official's username`
 	  			})
@@ -241,41 +212,8 @@ class PostNotice extends Component {
 							<br/>
 							<br/>
 
-						</div>
-						
-						<div>
-
-							<label>
-								Username:  
-								<input 
-									type="text"
-									className = "well well-sm" 
-									name="username" 
-									value={this.state.username}
-									onChange={this.handleChange}
-								/>
-							</label>
-
-							<br/>
-
-						</div>
-
-						<div>
-
-							<label>
-								Password:  
-								<input 
-									type="password" 
-									className = "well well-sm"
-									name="password" 
-									value={this.state.password} 
-									onChange={this.handleChange}
-								/>
-							</label>
-
-							<br/>
-
-						</div>
+						</div>					
+		
 
 						<div>
 

@@ -23,7 +23,7 @@ class App extends React.Component {
 					<Route path="/test" component={Test} />
 					<Route path="/notice" component={Homepage} />
 					<Route path="/contactus" component={ContactUs} />
-					<Route path="/postnotice" component={PostNotice} />
+					<Route path="/:postnotice/:username" component={PostNotice} />
 					<Route component={NotFound} />
 				</Switch>
 			</BrowserRouter>
