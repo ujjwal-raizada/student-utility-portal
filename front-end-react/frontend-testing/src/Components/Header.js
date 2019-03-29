@@ -6,16 +6,15 @@ class Header extends Component {
 	state = {
 
 		Home: false, 
-	  	Profile: false,
-	  	Notice: false,
-	  	ContactUs: false,
-	  	PostNotice: false,
-	  	Login: false,
-	  	Signup: false,
-	  	loggedin: false,
-	  	type: `normal`,
-	  	username: `user`,
-	  	page: ``
+  	Profile: false,
+  	ContactUs: false,
+  	PostNotice: false,
+  	Login: false,
+  	Signup: false,
+  	loggedin: false,
+  	type: ``,
+  	username: ``,
+  	page: ``
 	}
 
 	componentDidMount() {
@@ -34,6 +33,12 @@ class Header extends Component {
 			type: type,
 			username: username
 		})
+	}
+
+	handleSignout = () => {
+
+		localStorage.setItem(`username`,``)
+		localStorage.setItem(`type`,``)
 	}
 
 	render() {
@@ -69,8 +74,14 @@ class Header extends Component {
 		)
 
 		const post_notice = (
-			<li className = {this.state.Notice}>
+			<li className = {this.state.PostNotice}>
 				<Link to={`/postnotice/${this.state.username}`}> Post Notice</Link>
+			</li>
+		)
+
+		const signout = (
+			<li >
+				<Link to={`/login`} onClick = {this.handleSignout} > Signout </Link>
 			</li>
 		)
 
@@ -116,9 +127,9 @@ class Header extends Component {
 								{this.state.loggedin === false  && login}					
 								{this.state.loggedin === true && profile}
 								{this.state.loggedin === false && signup}
-								{contact_us}
 								{this.state.type === `official` && post_notice}
-								
+								{contact_us}
+								{this.state.loggedin === true && signout}
 
 							</ul>
 
