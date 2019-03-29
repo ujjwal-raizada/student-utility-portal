@@ -35,13 +35,6 @@ class Profile extends Component {
 			this.props.history.push(`/Profile/${type}/${username}`)
 		}
 	}
-	handleSignout = () => {
-
-		localStorage.setItem(`username`,``)
-		localStorage.setItem(`type`,``)
-		this.props.history.push(`/login`)
-	}
-
 
 	render() {
 
@@ -52,12 +45,6 @@ class Profile extends Component {
 				<Header page="Profile"/>
 
 				<h3 className="text-prime text-center"> Welcome!!</h3>
-
-				<div>
-
-					<button onClick={this.handleSignout}>Signout </button>
-
-				</div>
 
 				<Notices />
 				
