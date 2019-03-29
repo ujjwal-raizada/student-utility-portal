@@ -11,8 +11,8 @@ class Signup extends Component {
 	}
 
 	componentDidMount() {
-		sessionStorage.setItem(`username`,``)
-		sessionStorage.setItem(`type`,``)
+		localStorage.setItem(`username`,``)
+		localStorage.setItem(`type`,``)
 	}
 
 	handleChange = (event) => {
@@ -41,8 +41,8 @@ class Signup extends Component {
       				placeholder: message
       			})
   				const {type,username} = this.state
-  				sessionStorage.setItem(`username`,username)
-    			sessionStorage.setItem(`type`,type)
+  				localStorage.setItem(`username`,username)
+    			localStorage.setItem(`type`,type)
     			this.props.history.push(`/profile/${type}/${username}`)      			
       		}
       		else if(status === 'failure') {
