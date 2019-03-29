@@ -6,7 +6,7 @@ class Homepage extends Component {
 
 		return (
 			<Fragment>
-				<Header page={`Home`}/>
+				<Header page='Home'/>
 				<Notices/>	
 			</Fragment>
 		)

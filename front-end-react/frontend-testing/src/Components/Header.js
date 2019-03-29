@@ -1,44 +1,46 @@
-import React, {Component, Fragment} from "react"
-import {Link} from "react-router-dom"
-
+import React, {Component, Fragment} from 'react'
+import {Link} from 'react-router-dom'
 
 class Header extends Component {
 	
 	state = {
 
-			Home: false, 
+		Home: false, 
 	  	Profile: false,
 	  	Notice: false,
 	  	ContactUs: false,
-	  	LoggedIn: false,
-	  	Type: "normal",
-	  	Username: "",
+	  	PostNotice: false,
+	  	Login: false,
+	  	Signup: false,
+	  	loggedin: false,
+	  	type: `normal`,
+	  	username: `user`,
 	  	page: ``
 	}
 
 	componentDidMount() {
-		this.updateState()	
+		this.updateState()
 	}
 	
 
 	updateState = () => {
-		const username = sessionStorage.getItem(username)
-		const type = sessionStorage.getItem(type)
-		const LoggedIn = username === null ? false : true
+		const username = localStorage .getItem(`username`)
+		const type = localStorage .getItem(`type`)
+		const loggedin = username === `` ? false : true
 		this.setState({
 			page:this.props.page,
 			[this.state.page]: true,
-			LoggedIn: LoggedIn,
-			Type: type,
-			Username: username
+			loggedin: loggedin,
+			type: type,
+			username: username
 		})
 	}
 
 	render() {
-		const {username,type,LoggedIn} = this.state
+		const {username,type,loggedin} = this.state
 		const brand = (
-			<div className= "navbar-header" >
-				<Link className="navbar-brand" to="/">	Student Portal </Link>
+			<div className= 'navbar-header' >
+				<Link className='navbar-brand' to='/'>	Student Portal </Link>
 			</div>
 		)
 
@@ -62,53 +64,35 @@ class Header extends Component {
 
 		const profile = (
 			<li className = {this.state.Profile}>
-				<Link to={`/Profile/${sessionStorage.getItem(type)}/${sessionStorage.getItem(username)}`}> Profile </Link>
+				<Link to={`/Profile/${localStorage.getItem(`type`)}/${localStorage .getItem(`username`)}`}> Profile </Link>
 			</li>
 		)
 
 		const post_notice = (
 			<li className = {this.state.Notice}>
-				<Link to={`/postnotice`}> Post Notice</Link>
+				<Link to={`/postnotice/${this.state.username}`}> Post Notice</Link>
 			</li>
 		)
-		return(
-			<Fragment>
-				<div style = {{marginBottom: '60px'}} >
-					<nav className="navbar navbar-inverse navbar-fixed-top ">
 
-					    <div className="container-fluid">
-					    	{brand}
-							
+		const search_bar = (
+			<form className='navbar-form navbar-right' action='/action_page.php'>
 
-							<ul className = "nav navbar-nav">
-
-								{this.state.LoggedIn === false  && login}					
-								{this.state.LoggedIn === true && profile}
-								{signup}
-								{contact_us}
-								{this.state.type === `official` && post_notice}
-								
-
-							</ul>
-
-							<form className="navbar-form navbar-right" action="/action_page.php">
-
-								<div  className="input-group pull-right">
+								<div  className='input-group pull-right'>
 
 									<input 
-										type="text" 
-									   	className="form-control" 
-								  	 	placeholder="Search" 
-									   	name="search" 
+										type='text' 
+									   	className='form-control' 
+								  	 	placeholder='Search' 
+									   	name='search' 
 								   		/>
 
-									    <div className="input-group-btn">
+									    <div className='input-group-btn'>
 
 									     	<button 
-									     		className="btn btn-default" 
-									     		type="submit"
+									     		className='btn btn-default' 
+									     		type='submit'
 								     			>
-									        	<i className="glyphicon glyphicon-search"></i>
+									        	<i className='glyphicon glyphicon-search'></i>
 									        </button>
 
 									    </div>
@@ -116,6 +100,29 @@ class Header extends Component {
 								</div>
 
 							</form>
+		)
+
+		return(
+			<Fragment>
+				<div style = {{marginBottom: '60px'}} >
+					<nav className='navbar navbar-inverse navbar-fixed-top '>
+
+					    <div className='container-fluid'>
+					    	{brand}
+							
+
+							<ul className = 'nav navbar-nav'>
+
+								{this.state.loggedin === false  && login}					
+								{this.state.loggedin === true && profile}
+								{this.state.loggedin === false && signup}
+								{contact_us}
+								{this.state.type === `official` && post_notice}
+								
+
+							</ul>
+
+							{this.state.page === `Profile` && search_bar}
 							
 					    </div>
 

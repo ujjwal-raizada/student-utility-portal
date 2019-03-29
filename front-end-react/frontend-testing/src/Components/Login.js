@@ -1,35 +1,47 @@
-import React, {Component, Fragment} from "react"
-import axios from "axios"
+import React, {Component, Fragment} from 'react'
+import axios from 'axios'
 import Header from './Header'
+
+const ColoredLine = ({ color }) => (
+    <hr
+        style={{
+            color: color,
+            backgroundColor: color,
+            height: 1
+        }}
+    />
+);
+
 
 class Login extends Component {
 		
 	state = {
-		username: "",
-		password: "",
-		placeholder: "",
+		username: '',
+		password: '',
+		placeholder: '',
 		error: {}
-	}	
-	componentDidMount() {
-		sessionStorage.setItem(`username`,``)
-		sessionStorage.setItem(`type`,``)
 	}
-	handleChange = (event) => {
 
+	componentDidMount() {
+		localStorage.setItem(`username`,``)
+		localStorage.setItem(`type`,``)
+	}
+
+	handleChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value
 		})
 	}
 
-	handleLogin = () => {		
-		
+	handleLogin = (event) => {		
+		event.preventDefault();
 		const user = {			
-		    "username": this.state.username ,
-		    "password": this.state.password			
+		    'username': this.state.username ,
+		    'password': this.state.password			
 		}
 
 		this.setState({
-				placeholder: "Logging in..."
+				placeholder: 'Logging in...'
 		})
 
 		axios.post('https://damp-fjord-85414.herokuapp.com/login', user)
@@ -39,17 +51,17 @@ class Login extends Component {
       		const {type,username,status} = res.data
 
       		if(status === 'success') {
-      			sessionStorage.setItem(`username`,username)
-      			sessionStorage.setItem(`type`,type)
-    			this.props.history.push(`/Profile/${type}/${username}`)      			
+      			localStorage.setItem(`username`,username)
+      			localStorage.setItem(`type`,type)
+    				this.props.history.push(`/Profile/${type}/${username}`)
       		}
 
       		else if(status === 'failure') {
       			this.setState({
-      				placeholder: `Failed login of ${username}`
+    					placeholder: `Failed login of ${username}`
       			})
       		}
-		})
+				})
 
 		.catch(error => {
 
@@ -69,50 +81,63 @@ class Login extends Component {
 	handleSignup = () => {		
 		this.props.history.push(`/signup`)
 	}
+
 	render() {
 		return (
-			<Fragment >
-				<Header page='Login'/ >
-					<div className="text-center">
-						<h1 >Login</h1>
-						<p className="text-danger">{this.state.placeholder}</p>
-						<input 
-							className = "well well-sm"
-							name = "username"
-							type = "text" 
-							placeholder = "User Name" 
-							onChange = {this.handleChange}
-						/>
-						<br/>
-						<input 
-							className = "well well-sm"
-							name = "password" 
-							type = "password" 
-							placeholder = "Password" 
-							onChange = {this.handleChange}
-						/>
-						<br/>
-						<button 
-							className = "btn btn-primary" 
-							onClick = {this.handleLogin}>
-							Login 
-						</button>
-						<button 
-							className = "btn btn-success" 
-							onClick = {this.handleSignup}>
-							Signup
-						</button>
+			<div className = "well well-sm">
+			<Header page ='login'/>
+			<div>
+				<h2 align = "center" > Login </h2><br/>
+				<h4 align = "center" className="text-danger"> {this.state.placeholder} </h4>
+				<form class="form-horizontal" action = {this.handleLogin}>
+			    <div class="form-group">
+			      <label class="control-label col-sm-4" for="email">Username</label>
+			      <div class="col-sm-4">
+			        <input 
+			        	type="email" 
+			        	class="form-control" 
+			        	id="email" 
+			        	value ={this.state.username} 
+			        	name="username"  
+			        	placeholder = "Enter Email" 
+			        	onChange = {this.handleChange}
+			        	/>
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      <label class="control-label col-sm-4" for="pwd">Password</label>
+			      <div class="col-sm-4">
+			        <input 
+			        	type="password" 
+			        	class="form-control" 
+			        	id="password" 
+			        	value ={this.state.password} 
+			        	name="password"  
+			        	placeholder = "Enter password" 
+			        	onChange = {this.handleChange}
+			        	/>
+			      </div>
+			    </div>
+			    <div class="form-group">        
+			      <div class="col-sm-offset-5 col-sm-4">
+			        <button onClick = {this.handleLogin} className="btn btn-primary col-sm-5">Login</button>
+			      </div>
+			    </div>
+			    <ColoredLine color="black" />
+			    <div class="form-group">        
+			      <div class="col-sm-offset-4 col-sm-4">
+			      <span><h5 class="col-sm col-sm-4"> Don't have account?</h5>
+			        <button onClick = {this.handleSignup} className="btn btn-success col-sm-4">Sign Up</button><br/>
+			        <br/>
+					<h5 class="col-sm col-sm-4"> Forgot Password?</h5>
+			        <button onClick = {this.handlePassword} className="btn btn-danger col-sm-4">Reset</button>
+			        </span>
+			      </div>
+			    </div>
+			  </form>
+			  </div>
 
-						<br/>
-						<br/>
-
-						<button 
-							className = "btn btn-danger" 
-							onClick = {this.handlePassword}>
-							Forgot Password
-						</button>
-					</div>
-			</Fragment>
+			</div>
 		)
 	}
 }
