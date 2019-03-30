@@ -12,18 +12,12 @@ var adminSchema = new Schema({
         minlength: [ 6, 'Password should contain atleast 6 characters'],
         maxlength: [20, 'Password can contain a maximum of 20 characters'],
     },
-    emailID: {
-        type: String,
-        required: [true, 'Correct BITSmail ID required'],
-        unique: true,
-    },
 });
 
 //Virtual for admin's URL
-adminSchema
-.virtual('url')
-.get(function () {
-    return '/user/admin/' + this._id;
-});
+adminSchema.virtual('url')
+    .get(function () {
+        return '/user/admin/' + this._id;
+    });
 
 module.exports = mongoose.model('Admin', adminSchema);
