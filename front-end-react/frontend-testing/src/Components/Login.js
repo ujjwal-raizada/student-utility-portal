@@ -18,7 +18,8 @@ class Login extends Component {
 	state = {
 		username: '',
 		password: '',
-		placeholder: '',
+		placeholder: 'Login',
+		placeholder2: '',
 		error: {}
 	}
 
@@ -58,7 +59,7 @@ class Login extends Component {
 
       		else if(status === 'failure') {
       			this.setState({
-    					placeholder: `Failed login of ${username}`
+    					placeholder2: `Failed login of ${username}`
       			})
       		}
 				})
@@ -84,11 +85,10 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div className = "well well-sm">
+			<div className = "jumbotron">
 			<Header page ='login'/>
 			<div>
 				<h2 align = "center" > Login </h2><br/>
-				<h4 align = "center" className="text-danger"> {this.state.placeholder} </h4>
 				<form class="form-horizontal" action = {this.handleLogin}>
 			    <div class="form-group">
 			      <label class="control-label col-sm-4" for="email">Username</label>
@@ -120,7 +120,7 @@ class Login extends Component {
 			    </div>
 			    <div class="form-group">        
 			      <div class="col-sm-offset-5 col-sm-4">
-			        <button onClick = {this.handleLogin} className="btn btn-primary col-sm-5">Login</button>
+			        <button onClick = {this.handleLogin} className="btn btn-primary col-sm-5">{this.state.placeholder}</button>
 			      </div>
 			    </div>
 			    <ColoredLine color="black" />
@@ -132,6 +132,9 @@ class Login extends Component {
 					<h5 class="col-sm col-sm-4"> Forgot Password?</h5>
 			        <button onClick = {this.handlePassword} className="btn btn-danger col-sm-4">Reset</button>
 			        </span>
+			        <br/>
+			        <br/>
+			        <h4 align = "center" className="text-danger"> {this.state.placeholder2} </h4>
 			      </div>
 			    </div>
 			  </form>
