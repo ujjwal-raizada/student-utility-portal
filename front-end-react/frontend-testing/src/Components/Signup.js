@@ -1,12 +1,15 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Header from "./Header";
+import { Form, Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
 
 class Signup extends Component {
 	state = {
 		username: "",
 		password: "",
-		type: "normal"
+		type: "normal",
+		placeholder: "",
+		submitting: false
 	};
 
 	componentDidMount() {
@@ -30,7 +33,7 @@ class Signup extends Component {
 		const data = this.state;
 
 		this.setState({
-			placeholder: "Submitting..."
+			submitting: true
 		});
 
 		axios
@@ -39,7 +42,8 @@ class Signup extends Component {
 				const { status, message } = res.data;
 				if (status === "success") {
 					this.setState({
-						placeholder: message
+						placeholder: message,
+						submitting: false
 					});
 					const { type, username } = this.state;
 					localStorage.setItem(`username`, username);
@@ -47,7 +51,8 @@ class Signup extends Component {
 					this.props.history.push(`/profile/${type}/${username}`);
 				} else if (status === "failure") {
 					this.setState({
-						placeholder: message
+						placeholder: message,
+						submitting: false
 					});
 				}
 			})
@@ -55,94 +60,111 @@ class Signup extends Component {
 				console.log(error);
 				this.setState({
 					error: error,
-					placeholder: error.message
+					placeholder: error.message,
+					submitting: false
 				});
 			});
 	};
 
 	render() {
 		return (
-			<Fragment>
+			<div>
 				<Header page="Signup" />
-				<div className="text-center">
-					<h1>Signup</h1>
-					<p className="text-danger">{this.state.placeholder}</p>
+				<Jumbotron>
+					<div className="container">
+						<div className="row">
+							<div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+								<div className="card card-signup my-5">
+									<div className="card-body">
+										<h5 className="card-title text-center">
+											Sign Up
+										</h5>
+										<h6 className="text-danger text-center">
+											{this.state.placeholder}
+										</h6>
+										<form className="form-signup">
+											<div className="form-label-group">
+												<label for="inputEmail">
+													Email address
+												</label>
+												<input
+													type="email"
+													id="inputEmail"
+													className="form-control"
+													placeholder="Email address"
+													name="username"
+													value={this.state.username}
+													onChange={this.handleChange}
+												/>
+												<br />
+											</div>
+											<div className="form-label-group">
+												<label for="inputPassword">
+													Password
+												</label>
+												<input
+													type="password"
+													id="inputPassword"
+													className="form-control"
+													placeholder="Password"
+													name="password"
+													value={this.state.password}
+													onChange={this.handleChange}
+												/>
+												<br />
+											</div>
 
-					<form>
-						<div>
-							<label>
-								Username:
-								<input
-									className="well well-sm"
-									type="text"
-									name="username"
-									value={this.state.username}
-									onChange={this.handleChange}
-								/>
-							</label>
-							<br />
-							<br />
-						</div>
+											<div className="form-group">
+												<label for="userType">
+													User Type
+												</label>
+												<select
+													className="form-control"
+													value={this.state.type}
+													onChange={this.handleChange}
+													name="type"
+												>
+													<option value="normal">
+														Student
+													</option>
+													<option value="official">
+														Official Source
+													</option>
+												</select>
+											</div>
 
-						<div>
-							<label>
-								Password:
-								<input
-									className="well well-sm"
-									type="password"
-									name="password"
-									value={this.state.password}
-									onChange={this.handleChange}
-								/>
-							</label>
-							<br />
-							<br />
-						</div>
+											<div className="form-label-group">
+												<label for="inputDescription">
+													Description
+													<br />
+												</label>
+												<textarea
+													class="form-control"
+													rows="5"
+													name="Description"
+												/>
+												<br />
+											</div>
 
-						<div>
-							<label>
-								User Type:
-								<select
-									value={this.state.type}
-									onChange={this.handleChange}
-									name="type"
-								>
-									<option value="normal">Student</option>
-									<option value="official">
-										Official Source
-									</option>
-								</select>
-							</label>
-							<br />
-							<br />
+											<div>
+												<button
+													className="btn btn-lg btn-primary btn-block text-uppercase"
+													type="submit"
+													onClick={this.handleSubmit}
+												>
+													{this.state.submitting
+														? "Submitting.."
+														: "Submit"}
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
-
-						<div>
-							<label>
-								Description:
-								<br />
-								<textarea
-									className="well well-sm"
-									style={{ height: `100px`, width: `300px` }}
-									name="Description"
-								/>
-								<br />
-							</label>
-							<br />
-						</div>
-
-						<div>
-							<input
-								className="btn btn-primary"
-								type="submit"
-								name="Submit"
-								onClick={this.handleSubmit}
-							/>
-							<br />
-						</div>
-					</form>
-				</div>
-			</Fragment>
+					</div>
+				</Jumbotron>
+			</div>
 		);
 	}
 }
