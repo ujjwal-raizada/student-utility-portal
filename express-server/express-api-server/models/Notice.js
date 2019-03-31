@@ -1,5 +1,4 @@
 var mongoose = require('mongoose')
-var timestamp = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 var noticeSchema = new Schema({
@@ -34,9 +33,13 @@ var noticeSchema = new Schema({
         type: Date,
         default: null,
     },
+
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
-noticeSchema.plugin(timestamp);
 
 //Virtual for notice's URL
 noticeSchema.virtual('url')
