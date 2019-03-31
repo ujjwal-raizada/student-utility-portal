@@ -20,7 +20,7 @@ var noticeSchema = new Schema({
         required: false,
     },
     source:{
-        type: [String],
+        type: String,
         required: true,
     },
     isEvent: {
