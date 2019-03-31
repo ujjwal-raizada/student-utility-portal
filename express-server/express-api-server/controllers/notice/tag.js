@@ -10,15 +10,20 @@ exports.get_tags = function(req, res) {
         'Tag': function(callback) {
             Tag.find()
             .exec(callback);
+            console.log('tags fetched')
         },
 
     
     }, function(err, result) {
         if(err) throw err;
-        res_data = {}
 
-        console.log(result.Tag);
-        res.json(res_data);
+        tags_list = []
+        for (x in result.Tag) {
+            tags_list.push(result.Tag[x]['name'])
+        }
+
+        console.log(tags_list);
+        res.json(tags_list);
     });
 };
 
