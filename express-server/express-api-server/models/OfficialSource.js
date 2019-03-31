@@ -5,10 +5,17 @@ var OfficialSourceSchema = new Schema({
     name: {
         type: String,
         unique: true,
+        required: true,
     },
     username: {
         // username is nothing but email
         type: String,
+        validate:{
+            validator: function(v){
+                return /[a-z]*\@hyderabad\.bits\-pilani.ac.in/.test(v);
+            },
+            message: props => `${props.value} is not a valid BITSmail ID!`
+        },
         required: [true, 'Correct BITSmail ID required'],
         unique: true,
     },
@@ -28,3 +35,5 @@ var OfficialSourceSchema = new Schema({
         default: null,
     },    
 });
+
+module.exports = mongoose.model('OfficialSource', OfficialSourceSchema);
