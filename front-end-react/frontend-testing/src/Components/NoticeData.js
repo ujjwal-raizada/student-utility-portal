@@ -1,21 +1,24 @@
 import React, { Component, Fragment } from "react";
+import "./Stylesheets/NoticeData-stylesheet.css";
 
 const divStyle = {
 	margin: "40px",
-	border: "5px solid pink"
+	borderStyle: "rounded"
 };
 
 class NoticeData extends Component {
 	render() {
 		const { title, text, username } = this.props.data[1];
 		return (
-			<Fragment>
-				<div className="NoticeData" style={divStyle}>
-					<h3 align="center">{title}</h3>
-					<h5 align="center">{text}</h5>
-					<h6 align="right">-{username}</h6>
+			<div>
+				<div className="cont">
+					<h4 align="center">{title}</h4>
+					<hr className="my-4" />
+					<pre>{text}</pre>
+					<hr className="my-4" />
+					<h6 align="center">-{username}</h6>
 				</div>
-			</Fragment>
+			</div>
 		);
 	}
 }

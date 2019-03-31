@@ -1,39 +1,21 @@
-import React from 'react';
+import React from "react";
+import "./Stylesheets/Sidebar.css";
 
 export default props => {
-  return (
-    <div>
-      <ul>
-	      <li><a className="menu-item" href="/">
-	      	Admin Notices
-	      	</a>
-	      </li>
-
-	      <li><a className="menu-item" href="/">
-	        Club Notices
-	      </a>
-	      </li>
-
-	      <li><a className="menu-item" href="/">
-	        Department Notices
-	      </a>
-	      </li>
-
-	      <li><a className="menu-item" href="/">
-	        Faculty Notices
-	      </a>
-	      </li>
-
-	      <li><a className="menu-item" href="/">
-	        Workshops
-	      </a>
-	      </li>
-
-	      <li> <a className="menu-item" href="/">
-	        Seminars
-	       </a>
-	      </li>
-      </ul>
-    </div>
-  );
+	return (
+		<div className="fixed">
+			<div className="card">
+				<img
+					src="https://i.ytimg.com/vi/ImO-vBmL4gk/hqdefault.jpg"
+					alt="Avatar"
+				/>
+				<div className="container">
+					<h4>
+						<b>Jane Doe</b>
+					</h4>
+					<p>Interior Designer</p>
+				</div>
+			</div>
+		</div>
+	);
 };

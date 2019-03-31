@@ -63,7 +63,7 @@ class Header extends Component {
 					`type`
 				)}/${localStorage.getItem(`username`)}`}
 			>
-				Profile
+				{this.state.username}
 			</Nav.Link>
 		);
 
