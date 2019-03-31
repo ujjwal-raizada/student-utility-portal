@@ -1,0 +1,34 @@
+import React, { Component, Fragment } from "react";
+import { Image, Button, Container, Row, Col } from "react-bootstrap";
+
+const divStyle = {
+	margin: "40px",
+	border: "5px solid pink"
+};
+
+class NoticeData extends Component {
+	render() {
+		const { title, text, username } = this.props.data[1];
+		return (
+			<div className="container-fluid" style={divStyle}>
+				<Container>
+					<Row>
+						<Col xs={2}>
+							<Image src="holder.js/171x180" roundedCircle />
+						</Col>
+						<Col md={8}>
+							<h3 align="center">{title}</h3>
+							<h5 align="center">{text}</h5>
+							<h6 align="right">-{username}</h6>
+						</Col>
+						<Col xs={2}>
+							<Button variant="primary">Primary</Button>
+						</Col>
+					</Row>
+				</Container>
+			</div>
+		);
+	}
+}
+
+export default NoticeData;

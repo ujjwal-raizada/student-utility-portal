@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import DateTimePicker from "react-datetime-picker";
+import { Form, Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
 import Header from "./Header";
 
 class PostNotice extends Component {
@@ -48,8 +49,7 @@ class PostNotice extends Component {
 
 	handleChange = event => {
 		const target = event.target;
-		const value =
-			target.type === "checkbox" ? target.checked : target.value;
+		const value = target.type === "checkbox" ? target.checked : target.value;
 		const name = target.name;
 
 		this.setState({
@@ -101,141 +101,153 @@ class PostNotice extends Component {
 
 	render() {
 		return (
-			<Fragment>
-				<Header />
-				<div className="text-center">
-					<h1>Post Notice</h1>
-					<p className="text-danger">{this.state.placeholder}</p>
-					<form>
-						<div>
-							<input
-								type="text"
-								style={{ width: "600px" }}
-								className="well well-sm"
-								name="title"
-								placeholder="Title"
-								value={this.state.title}
-								onChange={this.handleChange}
-							/>
-							<br />
-							<br />
+			<div>
+				<Header page="PostNotice" />
+				<Jumbotron>
+					<div className="container">
+						<div className="row">
+							<div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+								<div className="card card-postNotice my-5">
+									<div className="card-body">
+										<h5 className="card-title text-center">Post Notice</h5>
+										<h6 className="text-danger text-center">
+											{this.state.placeholder}
+										</h6>
+										<form className="form-postNotice">
+											<div className="form-label-group">
+												<label for="inputEmail">Title</label>
+												<input
+													type="text"
+													className="form-control"
+													name="title"
+													placeholder="Title"
+													value={this.state.title}
+													onChange={this.handleChange}
+												/>
+												<br />
+											</div>
+
+											<div className="form-label-group">
+												<label for="inputDescription">
+													Description
+													<br />
+												</label>
+												<textarea
+													class="form-control"
+													rows="5"
+													name="text"
+													placeholder="Text"
+													value={this.state.text}
+													onChange={this.handleChange}
+												/>
+												<br />
+											</div>
+
+											<div className="form-label-group">
+												<label for="inputEmail">URL</label>
+												<input
+													type="text"
+													className="form-control"
+													name="url"
+													placeholder="URL"
+													value={this.state.url}
+													onChange={this.handleChange}
+												/>
+												<br />
+											</div>
+
+											<div>
+												<label style={{ width: 100 }}>
+													Is an Event :
+													<input
+														type="checkbox"
+														name="is_event"
+														checked={this.state.is_event}
+														onChange={this.handleChange}
+													/>
+												</label>
+												<br />
+												<label>Starts At:</label>
+												<DateTimePicker
+													value={this.state.date}
+													onChange={this.handleChangeDate}
+													disabled={!this.state.is_event}
+												/>
+											</div>
+
+											<div>
+												<label style={{ width: 100 }}>
+													<input
+														type="checkbox"
+														name="tag1"
+														checked={this.state.tag1}
+														onChange={this.handleChange}
+													/>
+													tag1
+												</label>
+
+												<label style={{ width: 100 }}>
+													<input
+														type="checkbox"
+														name="tag2"
+														checked={this.state.tag2}
+														onChange={this.handleChange}
+													/>
+													tag2
+												</label>
+
+												<label style={{ width: 100 }}>
+													<input
+														type="checkbox"
+														name="tag3"
+														checked={this.state.tag3}
+														onChange={this.handleChange}
+													/>
+													tag3
+												</label>
+
+												<label style={{ width: 100 }}>
+													<input
+														type="checkbox"
+														name="tag4"
+														checked={this.state.tag4}
+														onChange={this.handleChange}
+													/>
+													tag4
+												</label>
+
+												<label style={{ width: 100 }}>
+													<input
+														type="checkbox"
+														name="tag5"
+														checked={this.state.tag5}
+														onChange={this.handleChange}
+													/>
+													tag5
+												</label>
+
+												<br />
+												<br />
+											</div>
+
+											<div>
+												<input
+													type="submit"
+													className="btn btn-primary"
+													name="Submit"
+													onClick={this.handleSubmit}
+												/>
+
+												<br />
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
-
-						<div>
-							<textarea
-								style={{ height: "200px", width: "600px" }}
-								className="well well-sm"
-								name="text"
-								placeholder="Text"
-								value={this.state.text}
-								onChange={this.handleChange}
-							/>
-							<br />
-						</div>
-
-						<div>
-							<input
-								type="text"
-								style={{ width: "600px" }}
-								className="well well-sm"
-								name="url"
-								placeholder="Url"
-								value={this.state.url}
-								onChange={this.handleChange}
-							/>
-							<br />
-							<br />
-						</div>
-
-						<div>
-							<label style={{ width: 100 }}>
-								Is an Event :
-								<input
-									type="checkbox"
-									name="is_event"
-									checked={this.state.is_event}
-									onChange={this.handleChange}
-								/>
-							</label>
-							<br />
-							<label>
-								Starts At:
-								<DateTimePicker
-									value={this.state.date}
-									onChange={this.handleChangeDate}
-									disabled={!this.state.is_event}
-								/>
-							</label>
-						</div>
-
-						<div>
-							<label style={{ width: 100 }}>
-								<input
-									type="checkbox"
-									name="tag1"
-									checked={this.state.tag1}
-									onChange={this.handleChange}
-								/>
-								tag1
-							</label>
-
-							<label style={{ width: 100 }}>
-								<input
-									type="checkbox"
-									name="tag2"
-									checked={this.state.tag2}
-									onChange={this.handleChange}
-								/>
-								tag2
-							</label>
-
-							<label style={{ width: 100 }}>
-								<input
-									type="checkbox"
-									name="tag3"
-									checked={this.state.tag3}
-									onChange={this.handleChange}
-								/>
-								tag3
-							</label>
-
-							<label style={{ width: 100 }}>
-								<input
-									type="checkbox"
-									name="tag4"
-									checked={this.state.tag4}
-									onChange={this.handleChange}
-								/>
-								tag4
-							</label>
-
-							<label style={{ width: 100 }}>
-								<input
-									type="checkbox"
-									name="tag5"
-									checked={this.state.tag5}
-									onChange={this.handleChange}
-								/>
-								tag5
-							</label>
-
-							<br />
-							<br />
-						</div>
-
-						<div>
-							<input
-								type="submit"
-								className="btn btn-primary"
-								name="Submit"
-								onClick={this.handleSubmit}
-							/>
-
-							<br />
-						</div>
-					</form>
-				</div>
-			</Fragment>
+					</div>
+				</Jumbotron>
+			</div>
 		);
 	}
 }
