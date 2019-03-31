@@ -6,6 +6,6 @@ var signup_controller = require('../controllers/signupController.js');
 
 //SIGNUP ROUTES//
 
-router.post('/', signup_controller.create_account);
+router.get('/', signup_controller);
 
 module.exports = router;

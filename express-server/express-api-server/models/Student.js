@@ -5,11 +5,12 @@ var studentSchema = new Schema({
     name: {
         first: String,
         last: String,
+        required: false,
     },
     username: {
         // username is nothing but email
         type: String,
-        unique: true,
+        //unique: true,
         validate:{
             validator: function(v){
                 return /f201\d{5}\@hyderabad\.bits\-pilani.ac.in/.test(v);
@@ -22,6 +23,7 @@ var studentSchema = new Schema({
         type: String,
         minlength: [ 6, 'Password should contain atleast 6 characters'],
         maxlength: [20, 'Password can contain a maximum of 20 characters'],
+        required: true,
     },
     subscription:{
         // contains list of Notice_objectID(s) in hexstrings 

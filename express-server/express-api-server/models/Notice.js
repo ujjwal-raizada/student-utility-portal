@@ -3,15 +3,6 @@ var timestamp = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 var noticeSchema = new Schema({
-    author: {
-        type: String,
-        required: true,
-    },
-    id: {
-        type: Number,
-        required: true,
-        unique: true,
-    },
     title: {
         type: String,
         required: true,
@@ -20,16 +11,32 @@ var noticeSchema = new Schema({
         type: String,
         required: true,
     },
+    imageURL: {
+        type: String, 
+        required: false,
+        default: null,
+    },
+    tags: {
+        type: [String],
+        required: false,
+    },
+    source:{
+        type: [String],
+        required: true,
+    },
+    isEvent: {
+        type: Boolean,
+        default: false,
+        required: true,
+    },
 });
 
 noticeSchema.plugin(timestamp);
 
 //Virtual for notice's URL
-noticeSchema
-.virtual('url')
-.get(function () {
-    return '/user/notice/' + this._id;
-});
+noticeSchema.virtual('url')
+    .get(function () {
+        return '/user/notice/' + this._id;
+    });
 
 module.exports = mongoose.model('Notice', noticeSchema);
-
