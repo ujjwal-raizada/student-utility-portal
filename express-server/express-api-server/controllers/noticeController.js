@@ -1,8 +1,6 @@
 var Admin = require('../models/Admin.js');
-var Administration = require('../models/Administration.js');
-var Club = require('../models/Club.js');
-var Faculty = require('../models/Faculty.js');
 var Student = require('../models/Student.js');
+var OfficialSource = require('../models/OfficialSource.js');
 
 //Get list of all notices
 exports.get_notice_list = function(req, res) {

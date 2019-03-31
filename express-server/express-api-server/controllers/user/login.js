@@ -12,92 +12,60 @@ validate_login = function(req, res) {
     
     async.parallel({
         'Admin': function(callback) {
-            Admin.find({'username': username},'password')
+            Admin.findOne({'username': username},'password')
             .exec(callback);
         },
         'OfficialSource' : function(callback){
-            OfficialSource.find({'username' : username}, 'password')
+            OfficialSource.findOne({'username' : username}, 'password')
             .exec(callback);
         },
         'Student': function(callback) {
-            Student.find({'username' : username}, 'password')
+            Student.findOne({'username' : username}, 'password')
             .exec(callback);
         },
     
     }, function(err, result) {
-        if(err){
-            return next(err);
+        if(err) throw err;
+        res_data = {
+            'status' : 'success',
+            'username' : username,
+            'message' : `Successful login of ${username}`
         }
-
-        if(result.admin[0]!=null){
-            if(result.admin[0].password == password){
-                console.log('Successful Login : Admin ' + username);
-                res_data = {
-                    'status' : 'success',
-                    'username' : username,
-                    'type' : 'admin',
-                    'message' : `Successful login of ${username}`
-                }
+        if (result.Admin != null){
+            if (result.Admin.password == password){
+                res_data['type'] = 'admin';
             }
             else{
-                console.log("Invalid Password for " + username);
-                res_data = {
-                    'status' : 'failure',
-                    'username' : username,
-                    'message' : 'Invalid Password'
-                }
+                res_data['status'] = 'failure';
+                res_data['message'] = 'Invalid Password';
             }
         }
 
-        else if(result.administration[0]!=null){
-            if(result.administration[0].password == password){
-                console.log('Successful Login: Administration ' + username);
-                res_data = {
-                    'status' : 'success',
-                    'username' : username,
-                    'type' : 'administration',
-                    'message' : `Successful login of ${username}`
-                }
+        else if (result.OfficialSource != null){
+            if (result.OfficialSource.password == password){
+                res_data['type'] = 'OfficialSource';
             }
             else{
-                console.log("Invalid Password for " + username);
-                res_data = {
-                    'status' : 'failure',
-                    'username' : username,
-                    'message' : 'Invalid Password'
-                }
+                res_data['status'] = 'failure';
+                res_data['message'] = 'Invalid Password';                
             }
         }
 
-        else if(results.student[0]!=null){
-            if(results.student[0].password == password){
-                console.log('Successful Login: Student ' + username);
-                res_data = {
-                    'status' : 'success',
-                    'username' : username,
-                    'type' : 'student',
-                    'message' : `Successful login of ${username}`
-                }
+        else if (result.Student != null) {
+            if (result.Student.password == password) {
+               res_data['type'] = 'Student';                
             }
             else{
-                console.log("Invalid Password for " + username);
-                res_data = {
-                    'status' : 'failure',
-                    'username' : username,
-                    'message' : 'Invalid Password'
-                }
+                res_data['status'] = 'failure';
+                res_data['message'] = 'Invalid Password';                  
             }
         }
 
         else {
             console.log('Failed login attempt : ' + username + ' does not exist');
-            res_data = {
-                'status' : 'failure',
-                'username' : username,
-                'message' : `failed login of ${username}`
-            }
+            res_data['message'] = `Failed login of ${username}`;
         }
-
+        console.log(res_data['status'] + ' ' + res_data['message']); 
         res.json(res_data);
     });
 };
