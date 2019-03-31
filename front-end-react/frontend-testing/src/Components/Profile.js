@@ -37,9 +37,6 @@ class Profile extends Component {
 		return (
 			<Fragment>
 				<Header page="Profile" />
-
-				<h3 className="text-prime text-center"> Welcome!!</h3>
-
 				<Notices />
 			</Fragment>
 		);

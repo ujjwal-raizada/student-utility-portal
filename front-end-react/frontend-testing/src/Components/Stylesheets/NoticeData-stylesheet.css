@@ -1,0 +1,19 @@
+.cont {
+	border: 2px mediumseagreen;
+	border-radius: 5px;
+	background-color: lightgrey;
+	background-color: hsla(0, 100%, 70%, 0.3);
+	margin: 50px;
+	padding: 10px;
+}
+pre {
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word;
+	max-width: ;
+}
+h3 {
+	margin-top: 5px;
+}

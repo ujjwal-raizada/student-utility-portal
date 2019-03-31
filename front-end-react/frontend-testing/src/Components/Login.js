@@ -62,14 +62,8 @@ class Login extends Component {
 					});
 				}
 			})
-
 			.catch(error => {
 				console.log(error);
-
-				this.setState({
-					error: error,
-					placeholder: error.message
-				});
 			});
 	};
 
@@ -83,7 +77,7 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div>
+			<Fragment>
 				<Header page="login" />
 				<Jumbotron>
 					<div className="container">
@@ -92,7 +86,7 @@ class Login extends Component {
 								<div className="card card-signin my-5">
 									<div className="card-body">
 										<h5 className="card-title text-center">
-											Sign In
+											Log In
 										</h5>
 										<form className="form-signin">
 											<div className="form-label-group">
@@ -137,7 +131,7 @@ class Login extends Component {
 												</label>
 											</div>
 											<button
-												className="btn btn-lg btn-primary btn-block text-uppercase"
+												className="btn btn-lg btn-primary btn-block"
 												type="submit"
 												onClick={this.handleLogin}
 											>
@@ -166,8 +160,9 @@ class Login extends Component {
 							</div>
 						</div>
 					</div>
+					<br />
 				</Jumbotron>
-			</div>
+			</Fragment>
 		);
 	}
 }
