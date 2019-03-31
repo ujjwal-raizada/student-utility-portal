@@ -9,8 +9,14 @@ var studentSchema = new Schema({
     username: {
         // username is nothing but email
         type: String,
-        required: [true, 'Correct BITSmail ID required'],
         unique: true,
+        validate:{
+            validator: function(v){
+                return /f201\d{5}\@hyderabad\.bits\-pilani.ac.in/.test(v);
+            },
+            message: props => `${props.value} is not a valid BITSmail ID!`
+        },
+        required: [true, 'Correct BITSmail ID required'],
     },
     password: {
         type: String,
