@@ -29,6 +29,11 @@ var noticeSchema = new Schema({
         default: false,
         required: true,
     },
+
+    eventDateTime: {
+        type: Date,
+        default: null,
+    },
 });
 
 noticeSchema.plugin(timestamp);
@@ -36,7 +41,7 @@ noticeSchema.plugin(timestamp);
 //Virtual for notice's URL
 noticeSchema.virtual('url')
     .get(function () {
-        return '/user/notice/' + this._id;
+        return '/notice/id/' + this._id;
     });
 
 module.exports = mongoose.model('Notice', noticeSchema);
