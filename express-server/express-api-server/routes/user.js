@@ -1,19 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+var path = '../controllers/user/'
 
-var signupController = require('../controllers/user/signup');
-var loginController = require('../controllers/user/login');
+var signupController = require(path + '/signup');
+var loginController = require(path + '/login');
+var profileController = require(path + '/profile');
 
 /* GET users listing. */
-router.get('/profile', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
+router.get('/profile', profileController);
 router.post('/signup', signupController);
 router.post('/login', loginController);
-router.get('/logout', function(req, res, next){
-    res.send('Logout response');
-});
 
 module.exports = router;
