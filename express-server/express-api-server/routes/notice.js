@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //Require Controller Modules
-var tag_controller = require('../controllers/notice/tag.js');
+var tag_controller = require('../controllers/notice/tagController.js');
 var notice_controller = require('../controllers/notice/noticeController.js');
 
 //NOTICE ROUTES//
