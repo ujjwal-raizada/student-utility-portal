@@ -10,11 +10,14 @@ var signupRouter = require('./routes/signup');
 var loginRouter = require('./routes/login');
 var noticeRouter = require('./routes/notice');
 
+var userRoutes = require('./routes/userRoutes');
+var passportSetup = require('./config/passport-setup')
+
 var app = express();
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'enter-key-here';
+var mongoDB = 'mongodb+srv://tufty-123:D%40Sunny%40%40%40995970%21@cluster0-g3lgr.mongodb.net/student_utility_portal?retryWrites=true';
 mongoose.connect(mongoDB, {useNewUrlParser: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
@@ -35,6 +38,7 @@ app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/notice', noticeRouter);
+app.use('/user', userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
