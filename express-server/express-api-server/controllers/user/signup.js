@@ -22,10 +22,8 @@ create_account = function(req, res) {
         },
     
     }, function(err, result) {
-        if(err){
-            next (err);
-        }
-       res_data = {
+        if(err) next(err);
+        res_data = {
             'username' : username,
             'status' : 'success',
             'message' : 'user created',
@@ -37,13 +35,13 @@ create_account = function(req, res) {
                 }
                 if(type == 'Official Source'){
                     OfficialSource.create(user_data, function(err, instance) {
-                        if(err) throw err;
+                        if(err) next(err);
                     });
                 }
 
                 else if(type == 'Student'){
                     Student.create(user_data, function(err, instance) {
-                        if(err) throw err;
+                        if(err) next(err);
                     });
                 }
 

@@ -25,7 +25,7 @@ validate_login = function(req, res) {
         },
     
     }, function(err, result) {
-        if(err) throw err;
+        if(err) next(err);
         res_data = {
             'status' : 'success',
             'username' : username,
