@@ -1,4 +1,3 @@
-var Admin = require('../../models/Admin');
 var Student = require('../../models/Student');
 var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
@@ -11,10 +10,6 @@ validate_login = function(req, res) {
     console.log('Validating Login : User : ' + username + ' Password : ' + password);
     
     async.parallel({
-        'Admin': function(callback) {
-            Admin.findOne({'username': username},'password')
-            .exec(callback);
-        },
         'OfficialSource' : function(callback){
             OfficialSource.findOne({'username' : username}, 'password')
             .exec(callback);
@@ -31,17 +26,7 @@ validate_login = function(req, res) {
             'username' : username,
             'message' : `Successful login of ${username}`
         }
-        if (result.Admin != null){
-            if (result.Admin.password == password){
-                res_data['type'] = 'admin';
-            }
-            else{
-                res_data['status'] = 'failure';
-                res_data['message'] = 'Invalid Password';
-            }
-        }
-
-        else if (result.OfficialSource != null){
+        if (result.OfficialSource != null){
             if (result.OfficialSource.password == password){
                 res_data['type'] = 'OfficialSource';
             }
