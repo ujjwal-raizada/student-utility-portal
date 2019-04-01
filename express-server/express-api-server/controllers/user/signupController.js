@@ -1,4 +1,3 @@
-var Admin = require('../../models/Admin');
 var Student = require('../../models/Student');
 var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
