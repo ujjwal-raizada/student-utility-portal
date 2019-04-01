@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Header from "./Header";
-import { Form, Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
 
 const ColoredLine = ({ color }) => (
 	<hr
@@ -17,9 +16,9 @@ class Login extends Component {
 	state = {
 		username: "",
 		password: "",
-		placeholder: "Login",
-		placeholder2: "",
-		error: {}
+		placeholder: "",
+		error: {},
+		logging_in: false
 	};
 
 	componentDidMount() {
@@ -41,7 +40,7 @@ class Login extends Component {
 		};
 
 		this.setState({
-			placeholder: "Logging in..."
+			logging_in: true
 		});
 
 		axios
@@ -54,11 +53,12 @@ class Login extends Component {
 				if (status === "success") {
 					localStorage.setItem(`username`, username);
 					localStorage.setItem(`type`, type);
+					this.setState({ logging_in: false });
 					this.props.history.push(`/Profile/${type}/${username}`);
 				} else if (status === "failure") {
 					this.setState({
-						placeholder2: `Failed login of ${username}`,
-						placeholder: `Login`
+						placeholder: `Login failed`,
+						logging_in: false
 					});
 				}
 			})
@@ -77,92 +77,93 @@ class Login extends Component {
 
 	render() {
 		return (
-			<Fragment>
+			<div className="bg-light">
 				<Header page="login" />
-				<Jumbotron>
-					<div className="container">
-						<div className="row">
-							<div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
-								<div className="card card-signin my-5">
-									<div className="card-body">
-										<h5 className="card-title text-center">
-											Log In
-										</h5>
-										<form className="form-signin">
-											<div className="form-label-group">
-												<label for="inputEmail">
-													Email address
-												</label>
-												<input
-													type="email"
-													id="inputEmail"
-													className="form-control"
-													placeholder="Email address"
-													name="username"
-													value={this.state.username}
-													onChange={this.handleChange}
-												/>
-											</div>
-											<label for="inputPassword">
-												Password
+				<div className="container">
+					<div className="row">
+						<div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+							<div className="card card-signin my-5">
+								<div className="card-body">
+									<h5 className="card-title text-center">
+										Log In
+									</h5>
+									<form className="form-signin">
+										<div className="form-label-group">
+											<label for="inputEmail">
+												Email address
 											</label>
-											<div className="form-label-group">
-												<input
-													type="password"
-													id="inputPassword"
-													className="form-control"
-													placeholder="Password"
-													name="password"
-													value={this.state.password}
-													onChange={this.handleChange}
-												/>
-											</div>
-											<div className="custom-control custom-checkbox mb-3">
-												<input
-													type="checkbox"
-													className="custom-control-input"
-													id="customCheck1"
-												/>
-												<label
-													className="custom-control-label"
-													for="customCheck1"
-												>
-													Remember password
-												</label>
-											</div>
-											<button
-												className="btn btn-lg btn-primary btn-block"
-												type="submit"
-												onClick={this.handleLogin}
+											<input
+												type="email"
+												className="form-control"
+												placeholder="Email address"
+												name="username"
+												value={this.state.username}
+												onChange={this.handleChange}
+											/>
+										</div>
+										<label for="inputPassword">
+											Password
+										</label>
+										<div className="form-label-group">
+											<input
+												type="password"
+												className="form-control"
+												placeholder="Password"
+												name="password"
+												value={this.state.password}
+												onChange={this.handleChange}
+											/>
+										</div>
+										<div className="col text-center">
+											{this.state.placeholder}
+										</div>
+										<div className="custom-control custom-checkbox mb-3">
+											<input
+												type="checkbox"
+												className="custom-control-input"
+												checked="true"
+											/>
+
+											<label
+												className="custom-control-label"
+												for="customCheck1"
 											>
-												{this.state.placeholder}
+												Remember Me
+											</label>
+										</div>
+										<button
+											className="btn btn-lg btn-primary btn-block"
+											type="submit"
+											onClick={this.handleLogin}
+										>
+											{this.state.logging_in
+												? "Logging in"
+												: "Log in"}
+										</button>
+										<br />
+										<div className="col text-center">
+											Forgot Password? &nbsp;&nbsp;
+											<a href="/forgotpassword">
+												Reset here{" "}
+											</a>
+										</div>
+										<hr className="my-4" />
+										<div className="col text-center">
+											<button
+												className="btn btn-success"
+												type="submit"
+												onClick={this.handleSignup}
+											>
+												Sign Up
 											</button>
-											<br />
-											<div className="col text-center">
-												Forgot Password? &nbsp;&nbsp;
-												<a href="/forgotpassword">
-													Reset here{" "}
-												</a>
-											</div>
-											<hr className="my-4" />
-											<div className="col text-center">
-												<button
-													className="btn btn-success"
-													type="submit"
-													onClick={this.handleSignup}
-												>
-													Sign Up
-												</button>
-											</div>
-										</form>
-									</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-					<br />
-				</Jumbotron>
-			</Fragment>
+				</div>
+			</div>
 		);
 	}
 }

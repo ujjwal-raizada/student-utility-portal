@@ -49,7 +49,8 @@ class PostNotice extends Component {
 
 	handleChange = event => {
 		const target = event.target;
-		const value = target.type === "checkbox" ? target.checked : target.value;
+		const value =
+			target.type === "checkbox" ? target.checked : target.value;
 		const name = target.name;
 
 		this.setState({
@@ -107,15 +108,19 @@ class PostNotice extends Component {
 					<div className="container">
 						<div className="row">
 							<div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
-								<div className="card card-postNotice my-5">
+								<div className="card card-postNotice">
 									<div className="card-body">
-										<h5 className="card-title text-center">Post Notice</h5>
+										<h5 className="card-title text-center">
+											Post Notice
+										</h5>
 										<h6 className="text-danger text-center">
 											{this.state.placeholder}
 										</h6>
 										<form className="form-postNotice">
 											<div className="form-label-group">
-												<label for="inputEmail">Title</label>
+												<label for="inputEmail">
+													Title
+												</label>
 												<input
 													type="text"
 													className="form-control"
@@ -144,7 +149,9 @@ class PostNotice extends Component {
 											</div>
 
 											<div className="form-label-group">
-												<label for="inputEmail">URL</label>
+												<label for="inputEmail">
+													URL
+												</label>
 												<input
 													type="text"
 													className="form-control"
@@ -162,16 +169,24 @@ class PostNotice extends Component {
 													<input
 														type="checkbox"
 														name="is_event"
-														checked={this.state.is_event}
-														onChange={this.handleChange}
+														checked={
+															this.state.is_event
+														}
+														onChange={
+															this.handleChange
+														}
 													/>
 												</label>
 												<br />
 												<label>Starts At:</label>
 												<DateTimePicker
 													value={this.state.date}
-													onChange={this.handleChangeDate}
-													disabled={!this.state.is_event}
+													onChange={
+														this.handleChangeDate
+													}
+													disabled={
+														!this.state.is_event
+													}
 												/>
 											</div>
 
@@ -180,8 +195,12 @@ class PostNotice extends Component {
 													<input
 														type="checkbox"
 														name="tag1"
-														checked={this.state.tag1}
-														onChange={this.handleChange}
+														checked={
+															this.state.tag1
+														}
+														onChange={
+															this.handleChange
+														}
 													/>
 													tag1
 												</label>
@@ -190,8 +209,12 @@ class PostNotice extends Component {
 													<input
 														type="checkbox"
 														name="tag2"
-														checked={this.state.tag2}
-														onChange={this.handleChange}
+														checked={
+															this.state.tag2
+														}
+														onChange={
+															this.handleChange
+														}
 													/>
 													tag2
 												</label>
@@ -200,8 +223,12 @@ class PostNotice extends Component {
 													<input
 														type="checkbox"
 														name="tag3"
-														checked={this.state.tag3}
-														onChange={this.handleChange}
+														checked={
+															this.state.tag3
+														}
+														onChange={
+															this.handleChange
+														}
 													/>
 													tag3
 												</label>
@@ -210,8 +237,12 @@ class PostNotice extends Component {
 													<input
 														type="checkbox"
 														name="tag4"
-														checked={this.state.tag4}
-														onChange={this.handleChange}
+														checked={
+															this.state.tag4
+														}
+														onChange={
+															this.handleChange
+														}
 													/>
 													tag4
 												</label>
@@ -220,8 +251,12 @@ class PostNotice extends Component {
 													<input
 														type="checkbox"
 														name="tag5"
-														checked={this.state.tag5}
-														onChange={this.handleChange}
+														checked={
+															this.state.tag5
+														}
+														onChange={
+															this.handleChange
+														}
 													/>
 													tag5
 												</label>

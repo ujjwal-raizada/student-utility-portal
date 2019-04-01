@@ -92,7 +92,7 @@ class Header extends Component {
 
 		return (
 			<Fragment>
-				<Navbar sticky="top" bg="dark" variant="dark">
+				<Navbar sticky="top" bg="info" variant="dark">
 					<Navbar.Brand href="/">Stud Util Port</Navbar.Brand>
 					<Nav className="mr-auto">
 						{this.state.loggedin === false && login}

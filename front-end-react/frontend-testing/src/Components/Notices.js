@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import NoticeData from "./NoticeData";
 import Sidebar from "./Sidebar";
 import axios from "axios";
+import "./Stylesheets/Notices.css";
 
 class Notices extends Component {
 	state = {
@@ -36,23 +37,25 @@ class Notices extends Component {
 		));
 
 		return (
-			<Fragment>
+			<div className="container-fluid">
 				<div className="row">
 					<div className="col col-sm-8">
 						<h1 className="text-center">Notices</h1>
-						<h4 className="text-danger text-center">
-							{this.state.loading
-								? `loading...`
-								: this.state.placeholder}
-						</h4>
-						<div>{display_data}</div>
+						<div className="text-danger text-center">
+							{this.state.loading ? (
+								<div className="text-center">
+									<div className="loader" />
+								</div>
+							) : (
+								<div>{display_data}</div>
+							)}
+						</div>
 					</div>
 					<div className="col col-sm-4">
 						<Sidebar />
-						{/* to do */}
 					</div>
 				</div>
-			</Fragment>
+			</div>
 		);
 	}
 }
