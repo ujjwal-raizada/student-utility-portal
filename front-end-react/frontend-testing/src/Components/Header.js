@@ -79,9 +79,20 @@ class Header extends Component {
 			</Nav.Link>
 		);
 
+		const search = (
+			<Form inline>
+				<FormControl
+					type="text"
+					placeholder="Search"
+					className="mr-sm-2"
+				/>
+				<Button variant="outline-light">Search</Button>
+			</Form>
+		);
+
 		return (
 			<Fragment>
-				<Navbar sticky="top" bg="light" variant="light">
+				<Navbar sticky="top" bg="dark" variant="dark">
 					<Navbar.Brand href="/">Stud Util Port</Navbar.Brand>
 					<Nav className="mr-auto">
 						{this.state.loggedin === false && login}
@@ -90,14 +101,7 @@ class Header extends Component {
 						{this.state.type === `official` && post_notice}
 						{this.state.loggedin === true && signout}
 					</Nav>
-					<Form inline>
-						<FormControl
-							type="text"
-							placeholder="Search"
-							className="mr-sm-2"
-						/>
-						<Button variant="outline-dark">Search</Button>
-					</Form>
+					{this.state.page === "Profile" && search}
 				</Navbar>
 			</Fragment>
 		);
