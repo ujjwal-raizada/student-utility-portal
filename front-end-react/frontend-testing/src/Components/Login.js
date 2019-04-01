@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Header from "./Header";
+import { Form, Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
 
 const ColoredLine = ({ color }) => (
 	<hr
@@ -84,83 +85,88 @@ class Login extends Component {
 		return (
 			<div>
 				<Header page="login" />
-				<div className = "jumbotron jumbotron-fluid">
-					<h2 align="center"> Login </h2>
-					<br />
-					<form class="form-horizontal" action={this.handleLogin}>
-						<div class="form-group">
-							<label class="control-label col-sm-4" for="email">
-								Username
-							</label>
-							<div class="col-sm-4">
-								<input
-									type="email"
-									class="form-control"
-									id="email"
-									value={this.state.username}
-									name="username"
-									placeholder="Enter Email"
-									onChange={this.handleChange}
-								/>
+				<Jumbotron>
+					<div className="container">
+						<div className="row">
+							<div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+								<div className="card card-signin my-5">
+									<div className="card-body">
+										<h5 className="card-title text-center">
+											Sign In
+										</h5>
+										<form className="form-signin">
+											<div className="form-label-group">
+												<label for="inputEmail">
+													Email address
+												</label>
+												<input
+													type="email"
+													id="inputEmail"
+													className="form-control"
+													placeholder="Email address"
+													name="username"
+													value={this.state.username}
+													onChange={this.handleChange}
+												/>
+											</div>
+											<label for="inputPassword">
+												Password
+											</label>
+											<div className="form-label-group">
+												<input
+													type="password"
+													id="inputPassword"
+													className="form-control"
+													placeholder="Password"
+													name="password"
+													value={this.state.password}
+													onChange={this.handleChange}
+												/>
+											</div>
+											<div className="custom-control custom-checkbox mb-3">
+												<input
+													type="checkbox"
+													className="custom-control-input"
+													id="customCheck1"
+												/>
+												<label
+													className="custom-control-label"
+													for="customCheck1"
+												>
+													Remember password
+												</label>
+											</div>
+											<button
+												className="btn btn-lg btn-primary btn-block text-uppercase"
+												type="submit"
+												onClick={this.handleLogin}
+											>
+												{this.state.placeholder}
+											</button>
+											<br />
+											<div className="col text-center">
+												Forgot Password? &nbsp;&nbsp;
+												<a href="/forgotpassword">
+													Reset here{" "}
+												</a>
+											</div>
+											<hr className="my-4" />
+											<div className="col text-center">
+												<button
+													className="btn btn-success"
+													type="submit"
+													onClick={this.handleSignup}
+												>
+													Sign Up
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-4" for="pwd">
-								Password
-							</label>
-							<div class="col-sm-4">
-								<input
-									type="password"
-									class="form-control"
-									id="password"
-									value={this.state.password}
-									name="password"
-									placeholder="Enter password"
-									onChange={this.handleChange}
-								/>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-5 col-sm-4">
-								<button
-									onClick={this.handleLogin}
-									className="btn btn-primary col-sm-5"
-								>
-									{this.state.placeholder}
-								</button>
-							</div>
-						</div>
-						<ColoredLine color="black" />
-						<div class="form-group">
-							<div class="col-sm-offset-4 col-sm-4">
-								<span>
-									<h5 class="col-sm col-sm-4"> Don't have account?</h5>
-									<button
-										onClick={this.handleSignup}
-										className="btn btn-success col-sm-4"
-									>
-										Sign Up
-									</button>
-									<br />
-									<br />
-									<h5 class="col-sm col-sm-4"> Forgot Password?</h5>
-									<button
-										onClick={this.handlePassword}
-										className="btn btn-danger col-sm-4"
-									>
-										Reset
-									</button>
-								</span>
-								<br />
-								<br />
-								<h4 align="center" className="text-danger">
-									{" "}
-									{this.state.placeholder2}{" "}
-								</h4>
-							</div>
-						</div>
-					</form>
-				</div>
+					</div>
+				</Jumbotron>
 			</div>
 		);
 	}
