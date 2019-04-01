@@ -2,4 +2,9 @@ email/credentials.json
 email/token.json
 node_modules/
 *.sublime-workspace
+<<<<<<< HEAD
 *.pyc
+=======
+*.sublime-project
+TodoStack
+
