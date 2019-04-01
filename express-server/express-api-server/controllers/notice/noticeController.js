@@ -2,6 +2,7 @@ var Notice = require('../../models/Notice');
 var Student = require('../../models/Student');
 var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
+var mongoose = require('mongoose')
 
 // GET endpoint
 exports.get_all_notices = function(req, res) {
@@ -96,3 +97,20 @@ exports.create_notice = function(req, res) {
     });
 
 }
+
+exports.get_notice = function(req, res) {
+
+    notice_id = req.params.noticeID;
+
+    var res_data = {};
+    res_data.noticeID = notice_id
+    var obj_id = new mongoose.Types.ObjectId(notice_id);
+
+    Notice.findOne({'_id': obj_id}, function(err, result){
+        if (err) next(err);
+
+        res_data.notice = result
+        console.log('Notice Fetched!');
+        res.json(res_data);
+    });
+};

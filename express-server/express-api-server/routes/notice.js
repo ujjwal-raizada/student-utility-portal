@@ -14,5 +14,6 @@ router.post('/createtag', tag_controller.create_tags);
 
 router.get('/getall', notice_controller.get_all_notices);
 router.post('/create', notice_controller.create_notice);
+router.get('/id/:noticeID', notice_controller.get_notice);
 
 module.exports = router;
