@@ -1,17 +1,27 @@
 var Student = require('../../models/Student');
 var async = require('async');
 
-view_students = function(req, res){
-    var res_data = {}
-    Student.find({}, function(err, result){
-        if (err) next(err);
+var view_students = function(req, res){
+    console.log('Returning all the sources');
 
-        res_data = result;
-        for (var i = 0; i < res_data.length; i++) 
-            res_data[i].password = '';
-        console.log(`List of students registered to our portal ${res_data}`);
+    async.parallel({
+        'Student' : function (callback){
+            Student.find()
+            .exec(callback);
+            console.log('Students fetched');
+        },
+
+    },  function(err, result){
+        if (err) throw err;
+
+        student_list = [];
+
+        for (x in result.Student){
+            student_list.push(result.Student[x]);
+        }
+
+        console.log(student_list);
+        res.json(student_list);
     });
-    res.json(res_data);
 };
-
 module.exports = view_students;
