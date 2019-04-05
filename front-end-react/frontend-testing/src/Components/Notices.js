@@ -20,7 +20,7 @@ class Notices extends Component {
         console.log(res);
         this.setState({
           loading: false,
-          notice_data: res.data.notices
+          notice_data: res.data
         });
       })
       .then(res => console.log("success"))

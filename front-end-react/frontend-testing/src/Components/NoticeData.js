@@ -3,7 +3,7 @@ import "./Stylesheets/NoticeData-stylesheet.css";
 
 class NoticeData extends Component {
   render() {
-    const { title, text, username } = this.props.data[1];
+    const { title, body, username } = this.props.data[1];
     return (
       <div>
         <div className="cont">
@@ -18,7 +18,7 @@ class NoticeData extends Component {
                 />
               </div>
               <div className="col col-sm-8">
-                <pre>{text}</pre>
+                <pre>{body}</pre>
               </div>
               <div className="col-sm-2">
                 <button className="button button1">b0</button>
