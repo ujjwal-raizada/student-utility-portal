@@ -3,14 +3,14 @@ import Header from "./Header";
 import Notices from "./Notices";
 
 class Homepage extends Component {
-    render() {
-        return (
-            <Fragment>
-                <Header page="Home" />
-                <Notices />
-            </Fragment>
-        );
-    }
+  render() {
+    return (
+      <Fragment>
+        <Header page="Home" />
+        <Notices />
+      </Fragment>
+    );
+  }
 }
 
 export default Homepage;
