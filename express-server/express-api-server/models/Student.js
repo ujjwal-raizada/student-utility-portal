@@ -25,10 +25,15 @@ var studentSchema = new Schema({
         maxlength: [20, 'Password can contain a maximum of 20 characters'],
         required: true,
     },
-    subscription:{
+    sourceSubscription: {
         // contains list of Notice_objectID(s) in hexstrings 
         type: [String],
-        default: null,
+        default: [],
+    },
+    starNotice: {
+        // contains list of all starred notices.
+        type : [String],
+        default : [],
     },
 });
 

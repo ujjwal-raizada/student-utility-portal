@@ -20,8 +20,13 @@ var OfficialSourceSchema = new Schema({
         maxlength: [20, 'Password can contain a maximum of 20 characters'],
         required: true,
     },
-    subscription:{
-        // contains list of Notice_objectID(s) in hexstrings 
+    sourceSubscription:{
+        // contains list of all the sources subscribed by this source
+        type: [String],
+        default: null,
+    },
+    starNotice: {
+        // contains list of all the starred notice
         type: [String],
         default: null,
     },
@@ -31,5 +36,11 @@ var OfficialSourceSchema = new Schema({
         default: null,
     },    
 });
+
+//Virtual for student's URL
+OfficialSourceSchema.virtual('url')
+    .get(function () {
+        return '/user/officialsource/' + this._id;
+    });
 
 module.exports = mongoose.model('OfficialSource', OfficialSourceSchema);

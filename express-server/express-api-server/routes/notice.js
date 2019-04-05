@@ -16,4 +16,7 @@ router.get('/getall', notice_controller.get_all_notices);
 router.post('/create', notice_controller.create_notice);
 router.get('/id/:noticeID', notice_controller.get_notice);
 
+router.post('/subscribe', notice_controller.subscribe);
+router.post('/star', notice_controller.star)
+
 module.exports = router;
