@@ -3,7 +3,7 @@ import config from "react-global-configuration";
 function InitConfig(production) {
     config.set({
         host_url: production
-            ? `http://localhost:3000`
+            ? `http://sup-express.herokuapp.com`
             : `http://sup-express.herokuapp.com`,
         routes: {
             user_login: `/user/login`,
