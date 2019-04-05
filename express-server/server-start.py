@@ -47,4 +47,3 @@ elif (len(sys.argv) == 0):
 else:
     print('Flag(s) unknown: looking for --dev flag?')
 
-    
