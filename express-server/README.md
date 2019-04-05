@@ -5,12 +5,27 @@ Link for the backend API : [sup-express.herokuapp.com](https://sup-express.herok
 
 
 ## How to run:
+
+### 1. Using python script:
+
+In normal mode:
+```
+$ python3 server-start.py
+```
+<br>
+In dev mode:
+```
+$python3 server-start.py --dev
+```
+
+### 2. Directly from command line:
+
 In Dev Mode <br>
-### Windows: <br>
+##### Windows: <br>
 ```
 SET DEBUG=express-api-server:* & npm run devstart
 ```
-### MacOS or Linux: <br>
+##### MacOS or Linux: <br>
 ```
 DEBUG=express-api-server:* & npm run devstart
 ```
