@@ -13,15 +13,44 @@ exports.get_all_notices = function(req, res) {
         'Notice': function(callback) {
             Notice.find()
             .exec(callback);
-            console.log('Notices fetched.')
         },
 
     
     }, function(err, result) {
-        if(err) throw err;
+
+
+        if(err) {
+            console.log(err)
+            res.json({'status': 'failure'})
+            return            
+        }
+
+        /* Notice JSON Structure
+
+        [
+            [timestamp, {Notice(1)}],
+            [timestamp, {Notice(2)}],
+            .
+            .
+            .
+            [timestamp, {Notice(n)}]
+        ]
+
+        */
+
+        let notice_data = []
+
+        for (x in result.Notice) {
+
+            let notice = [result.Notice[x].timestamp, result.Notice[x]]
+            notice_data.push(notice) 
+        }
+
+        // Sorting in desc. order of timestamp
+        notice_data.sort(function(a, b) {return b[0] - a[0]})
         
-        console.log(result.Notice)
-        res.json(result.Notice)
+        console.log(notice_data)
+        res.json(notice_data)
 
     });
 }
@@ -114,3 +143,4 @@ exports.get_notice = function(req, res) {
         res.json(res_data);
     });
 };
+
