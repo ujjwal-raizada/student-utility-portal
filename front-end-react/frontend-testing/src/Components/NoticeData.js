@@ -7,27 +7,29 @@ class NoticeData extends Component {
     let username = source.split("@")[0].toUpperCase();
     console.log(this.props.data[1]);
     return (
-      <div class="card cont">
-        <div class="row no-gutters">
-          <div class="col-auto">
+      <div className="card cont">
+        <div className="row no-gutters">
+          <div className="col-auto">
             <img
               src="https://picsum.photos/400/450/?random"
-              class="img-fluid"
+              className="img-fluid"
               alt=""
             />
           </div>
-          <div class="col">
-            <div class="card-block px-2 description">
-              <h4 class="card-title">{title}</h4>
-              <p class="card-text">
+          <div className="col">
+            <div className="card-block px-2 description">
+              <h4 className="card-title">{title}</h4>
+              <p className="card-text">
                 <pre>{body}</pre>
               </p>
             </div>
-            <button className="btn btn-primary">Read More &rarr;</button>
+            <button className="btn btn-info">Read More &rarr;</button>
           </div>
         </div>
         <div />
-        <div class="card-footer w-100 text-muted">Posted by - {username}</div>
+        <div className="card-footer w-100 text-muted">
+          Posted by - {username}
+        </div>
       </div>
     );
   }
