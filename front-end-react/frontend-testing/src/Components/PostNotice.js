@@ -11,15 +11,12 @@ class PostNotice extends Component {
     type: "normal",
     placeholder: "",
     title: "",
-    text: "",
+    body: "",
     url: "",
     is_event: false,
-    date: new Date(),
-    tag1: false,
-    tag2: false,
-    tag3: false,
-    tag4: false,
-    tag5: false,
+    eventDateTime: new Date(),
+    tags: [],
+    submitting: false,
     status: "failure",
     error: ""
   };
@@ -28,11 +25,20 @@ class PostNotice extends Component {
     const username = localStorage.getItem("username");
     const type = localStorage.getItem("type");
     const user_input = this.props.match.params.username;
-    if (username === user_input && type === "official") {
+    if (username == user_input && type == "Official Source") {
       this.setState({
         username: username,
-        type: type
+        type: type,
+        submitting: false
       });
+      axios
+        .get(config.get("host_url") + config.get("routes.get_tags"))
+        .then(res => {
+          this.setState({ tags: res.data });
+        })
+        .catch(error => {
+          console.log(error);
+        });
     } else {
       this.redirect();
     }
@@ -41,16 +47,53 @@ class PostNotice extends Component {
   redirect = () => {
     const username = localStorage.getItem("username");
     const type = localStorage.getItem("type");
-    if (username === "") {
+    if (username == "") {
       this.props.history.push(`/login`);
     } else {
       this.props.history.push(`/Profile/${type}/${username}`);
     }
   };
 
+  postNotice = () => {
+    this.setState({
+      submitting: true
+    });
+    const data = this.state;
+    /*const username = localStorage.getItem("username");
+    if (data.tags.indexOf(username) == -1) {
+      data.tags.push(username);
+    }*/
+    console.log(data);
+    axios
+      .post(config.get("host_url") + config.get("routes.create_notice"), data)
+      .then(res => {
+        console.log(res.data);
+        const { status, message } = res.data;
+        if (status == "success") {
+          this.setState({ submitting: false });
+          alert("Notice Submitted Successfully!");
+          const url = `/profile/official/${this.state.username}`;
+          this.props.history.push(url);
+        } else if (status == "failure") {
+          this.setState({
+            submitting: false,
+            placeholder: message
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          error: error,
+          placeholder: error.message,
+          submitting: false
+        });
+      });
+  };
+
   handleChange = event => {
     const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.type == "checkbox" ? target.checked : target.value;
     const name = target.name;
 
     this.setState({
@@ -60,39 +103,8 @@ class PostNotice extends Component {
 
   handleChangeDate = date => {
     this.setState({
-      date: date
+      eventDateTime: date
     });
-  };
-
-  postNotice = () => {
-    this.setState({
-      placeholder: "Submitting..."
-    });
-    const data = this.state;
-    console.log(data);
-    axios
-      .post(config.get("host_url") + config.get("routes.create_notice"), data)
-      .then(res => {
-        console.log(res.data);
-        const status = res.data.status;
-        const message = res.data.message;
-        if (status === "success") {
-          alert("Notice Submitted Successfully!");
-          const url = `/profile/official/${this.state.username}`;
-          this.props.history.push(url);
-        } else if (status === "failure") {
-          this.setState({
-            placeholder: message
-          });
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({
-          error: error,
-          placeholder: error.message
-        });
-      });
   };
 
   handleSubmit = event => {
@@ -100,7 +112,34 @@ class PostNotice extends Component {
     this.postNotice();
   };
 
+  handleTag = tag => {
+    this.setState((prevState, props) => {
+      const pos = prevState.tags.indexOf(tag);
+      tags: pos == -1
+        ? prevState.tags.push(tag)
+        : prevState.tags.splice(pos, 1);
+    });
+  };
+
+  setClass = tag => {
+    return this.state.tags.indexOf(tag) != -1
+      ? "badge badge-pill badge-secondary"
+      : "badge badge-pill badge-light";
+  };
+
   render() {
+    const tag_list = this.state.tags.map((item, index) => (
+      <a
+        className={this.setClass(item)}
+        key={item}
+        onClick={e => {
+          e.preventDefault();
+          this.handleTag(item);
+        }}
+      >
+        {item}
+      </a>
+    ));
     return (
       <div>
         <Header page="PostNotice" />
@@ -136,14 +175,13 @@ class PostNotice extends Component {
                         <textarea
                           class="form-control"
                           rows="5"
-                          name="text"
+                          name="body"
                           placeholder="Text"
-                          value={this.state.text}
+                          value={this.state.body}
                           onChange={this.handleChange}
                         />
                         <br />
                       </div>
-
                       <div className="form-label-group">
                         <label for="inputEmail">URL</label>
                         <input
@@ -170,74 +208,24 @@ class PostNotice extends Component {
                         <br />
                         <label>Starts At:</label>
                         <DateTimePicker
-                          value={this.state.date}
+                          value={this.state.eventDateTime}
                           onChange={this.handleChangeDate}
                           disabled={!this.state.is_event}
                         />
                       </div>
-
+                      <label> Tags </label>
+                      <br />
+                      {tag_list}
+                      <br />
                       <div>
-                        <label style={{ width: 100 }}>
-                          <input
-                            type="checkbox"
-                            name="tag1"
-                            checked={this.state.tag1}
-                            onChange={this.handleChange}
-                          />
-                          tag1
-                        </label>
-
-                        <label style={{ width: 100 }}>
-                          <input
-                            type="checkbox"
-                            name="tag2"
-                            checked={this.state.tag2}
-                            onChange={this.handleChange}
-                          />
-                          tag2
-                        </label>
-
-                        <label style={{ width: 100 }}>
-                          <input
-                            type="checkbox"
-                            name="tag3"
-                            checked={this.state.tag3}
-                            onChange={this.handleChange}
-                          />
-                          tag3
-                        </label>
-
-                        <label style={{ width: 100 }}>
-                          <input
-                            type="checkbox"
-                            name="tag4"
-                            checked={this.state.tag4}
-                            onChange={this.handleChange}
-                          />
-                          tag4
-                        </label>
-
-                        <label style={{ width: 100 }}>
-                          <input
-                            type="checkbox"
-                            name="tag5"
-                            checked={this.state.tag5}
-                            onChange={this.handleChange}
-                          />
-                          tag5
-                        </label>
-
-                        <br />
-                        <br />
-                      </div>
-
-                      <div>
-                        <input
+                        <button
+                          className="btn btn-lg btn-success btn-block"
                           type="submit"
-                          className="btn btn-primary"
-                          name="Submit"
+                          disabled={this.state.submitting}
                           onClick={this.handleSubmit}
-                        />
+                        >
+                          {this.state.submitting ? "Submitting.." : "Submit"}
+                        </button>
 
                         <br />
                       </div>
