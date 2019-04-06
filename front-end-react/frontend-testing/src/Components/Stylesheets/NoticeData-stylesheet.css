@@ -1,20 +1,20 @@
 .cont {
-	border: 2px mediumseagreen;
 	border-radius: 5px;
-	background-color: rgb(150, 233, 232);
-	margin: 50px;
-	padding: 10px;
+	margin: 40px;
 }
 
 pre {
-	white-space: pre-wrap; /* css-3 */
-	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-	white-space: -pre-wrap; /* Opera 4-6 */
-	white-space: -o-pre-wrap; /* Opera 7 */
+	white-space: normal;
 	word-wrap: break-word;
 	font-size: 20px;
 	font-family: Macondo Swash Caps;
+	text-align: justify;
 }
+
+.description {
+	height: 400px;
+}
+
 h4 {
 	margin-top: 5px;
 	font-family: Macondo Swash Caps;
@@ -34,7 +34,7 @@ h4 {
 }
 .grid-item {
 	border: 1px solid rgba(0, 0, 0, 0.8);
-	padding: 20px;
+	padding: 10px;
 	font-size: 20px;
 	text-align: center;
 }

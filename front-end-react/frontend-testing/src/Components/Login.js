@@ -52,10 +52,12 @@ class Login extends Component {
         const { type, username, status } = res.data;
 
         if (status === "success") {
-          localStorage.setItem(`username`, username);
+          var name = username.split("@");
+          console.log(name[0]);
+          localStorage.setItem(`username`, name[0]);
           localStorage.setItem(`type`, type);
           this.setState({ logging_in: false });
-          this.props.history.push(`/Profile/${type}/${username}`);
+          this.props.history.push(`/Profile/${type}/${name[0]}`);
         } else if (status === "failure") {
           this.setState({
             placeholder: `Login failed`,
@@ -77,6 +79,13 @@ class Login extends Component {
   };
 
   render() {
+    const spin = (
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      />
+    );
     return (
       <div className="bg-light">
         <Header page="login" />
@@ -98,6 +107,7 @@ class Login extends Component {
                         onChange={this.handleChange}
                       />
                     </div>
+                    <br />
                     <label for="inputPassword">Password</label>
                     <div className="form-label-group">
                       <input
@@ -109,6 +119,7 @@ class Login extends Component {
                         onChange={this.handleChange}
                       />
                     </div>
+                    <br />
                     <div className="col text-center">
                       {this.state.placeholder}
                     </div>
@@ -131,6 +142,7 @@ class Login extends Component {
                       type="submit"
                       onClick={this.handleLogin}
                     >
+                      {this.state.logging_in ? spin : ""} &nbsp;
                       {this.state.logging_in ? "Logging in" : "Log in"}
                     </button>
                     <br />
