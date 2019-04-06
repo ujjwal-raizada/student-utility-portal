@@ -79,7 +79,7 @@ exports.star = function(req, res, next){
                     }
                 }
                 else {
-                    log = `User could not be found with username ${username}`;
+                    log = `User doesn't exists`;
                     res_data['status'] = 'failure';
                     res_data['message'] = log;
                     console.log(log);
@@ -96,7 +96,7 @@ exports.star = function(req, res, next){
 
         }
         else {
-            log = `The Official Source with username ${noticeSource} doesn't exists`;
+            log = `Official Source doensn't exists`;
             res_data['status'] = 'failure';
             res_data['message'] = log;
             console.log(log);
@@ -141,6 +141,9 @@ exports.unstar = function(req, res, next){
 
             if (get_existingNotice) {
                 console.log("Unstarring user's notice ... ")
+                res_data['status'] = 'success';
+                res_data['message'] = 'User starred the notice successfully';
+
                 var temp_sub = [];
                 var filter_array = [];
                 var get_existingID = [];
@@ -157,9 +160,10 @@ exports.unstar = function(req, res, next){
                                     res_data['status'] = 'failure';
                                     res_data['message'] = 'Error while updating records'
                                     return next({...err, res_data});
-                                }
-                        result.Student.save() // add callback method
-                        });
+                                }        
+                            });
+                        result.Student.save(); // add callback method
+                        return res.json(res_data);
                     }
                     else {
                         res_data['status'] = 'failure';
@@ -181,8 +185,9 @@ exports.unstar = function(req, res, next){
                                     res_data['message'] = 'Error while updating records'
                                     return next({...err, res_data});
                                 }
+                            });
                         result.OfficialSource.save() // add callback method
-                        });   
+                        return res.json(res_data);   
                     }
                     else {
                         res_data['status'] = 'failure';

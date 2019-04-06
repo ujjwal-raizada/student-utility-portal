@@ -124,6 +124,9 @@ exports.unsubscribe = function(req, res, next){
         var filter_array = [];
 
         if (result.SourceCheck != null) {
+            res_data['status'] = 'success';
+            res_data['message'] = 'User subscribed successfully';
+
             if (res.Student != null) {
                 temp_sub = result.Student.sourceSubscription;
                 get_existingID = temp_sub.find(element => element == sourceID);
@@ -140,6 +143,7 @@ exports.unsubscribe = function(req, res, next){
                             }
                         });
                     result.Student.save(); // add callback here 
+                    return res.json(res_data);
                 }
                 else {
                     // given sourceID doesn't exists
@@ -164,6 +168,7 @@ exports.unsubscribe = function(req, res, next){
                             }
                         });
                     result.OfficialSource.save();
+                    return res.json(res_data);
                 }
                 else {
                     // given sourceID doesn't exists
