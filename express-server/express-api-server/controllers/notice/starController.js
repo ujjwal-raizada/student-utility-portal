@@ -103,4 +103,116 @@ exports.star = function(req, res, next){
             return res.json(res_data);
         }
     });
-};
+}
+
+exports.unstar = function(req, res, next){
+    var username = req.body.username;
+    var noticeID = req.body.id;
+    var noticeSource = req.body.source;
+    var res_data = {
+        'username' : username,
+        'status' : '',
+        'message' : '',
+    }
+
+    async.parallel({
+        'Student' : function(callback){
+            Student.findOne({'username' : username}, 'starNotice')
+            .exec(callback);
+        },
+        'OfficialSource' : function(callback){
+            OfficialSource.findOne({'username' : username}, 'starNotice')
+            .exec(callback);
+        },
+        'NoticeCheck' : function(callback){
+            OfficialSource.findOne({'username' : noticeSource}, 'noticeList')
+            .exec(callback);
+        },
+    }, function(err, result){
+        if (err) {
+            res_data['status'] = 'failure';
+            res_data['message'] = 'Unknown error'
+            return next({...err, res_data});
+        }
+
+        if (result.NoticeCheck != null){
+            var temp_notice = result.NoticeCheck.noticeList;
+            var get_existingNotice = temp_notice.find(element => element == noticeID);
+
+            if (get_existingNotice) {
+                console.log("Unstarring user's notice ... ")
+                var temp_sub = [];
+                var filter_array = [];
+                var get_existingID = [];
+
+                if (result.Student != null){
+                    temp_sub = result.Student.starNotice;
+                    get_existingID = temp_sub.find(element => element == noticeID);
+
+                    if (get_existingID){
+                        filter_array = temp_sub.filter((value, index, arr) => value != noticeID);
+                        result.Student.updateOne({'starNotice' : filter_array}, 
+                            function (err, instance){
+                                if (err) {
+                                    res_data['status'] = 'failure';
+                                    res_data['message'] = 'Error while updating records'
+                                    return next({...err, res_data});
+                                }
+                        result.Student.save() // add callback method
+                        });
+                    }
+                    else {
+                        res_data['status'] = 'failure';
+                        res_data['message'] = 'User had never starred the notice';
+                        return res.json(res_data);
+                    }
+
+                }
+                else if (result.OfficialSource != null){
+                    temp_sub = result.OfficialSource.starNotice;
+                    get_existingID = temp_sub.find(element => element == noticeID);
+
+                    if (get_existingID){
+                        filter_array = temp_sub.filter((value, index, arr) => value != noticeID);
+                        result.OfficialSource.updateOne({'starNotice' : filter_array}, 
+                            function (err, instance){
+                                if (err) {
+                                    res_data['status'] = 'failure';
+                                    res_data['message'] = 'Error while updating records'
+                                    return next({...err, res_data});
+                                }
+                        result.OfficialSource.save() // add callback method
+                        });   
+                    }
+                    else {
+                        res_data['status'] = 'failure';
+                        res_data['message'] = 'User had never starred the notice';
+                        return res.json(res_data);
+                    }
+                }
+                else {
+                    log = `User doesn't exist`;
+                    res_data['status'] = 'failure';
+                    res_data['message'] = log;
+                    console.log(log);
+                    return res.json(res_data);    
+                }
+            }
+            else {
+                log = `Source doesn't have the given notice`;
+                res_data['status'] = 'failure';
+                res_data['message'] = log;
+                console.log(log);
+                return res.json(res_data);
+            }
+        }
+        else{
+            log = `Official Source doesn't exists`;
+            res_data['status'] = 'failure';
+            res_data['message'] = log;
+            console.log(log);
+            return res.json(res_data);
+        }
+
+    });
+}
