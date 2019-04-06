@@ -141,6 +141,7 @@ class Login extends Component {
                       className="btn btn-lg btn-primary btn-block"
                       type="submit"
                       onClick={this.handleLogin}
+                      disabled={this.state.logging_in}
                     >
                       {this.state.logging_in ? spin : ""} &nbsp;
                       {this.state.logging_in ? "Logging in" : "Log in"}
