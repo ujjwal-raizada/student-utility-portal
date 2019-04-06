@@ -91,13 +91,15 @@ class Header extends Component {
         <Navbar sticky="top" bg="info" variant="dark">
           <Navbar.Brand href="/">Stud Util Port</Navbar.Brand>
           <Nav className="mr-auto">
+            {this.state.type === `OfficialSource` && post_notice}
+          </Nav>
+          {this.state.page === "Profile" && search}
+          <Nav className="ml-auto">
             {this.state.loggedin === false && login}
             {this.state.loggedin === true && profile}
             {this.state.loggedin === false && signup}
-            {this.state.type === `official` && post_notice}
             {this.state.loggedin === true && signout}
           </Nav>
-          {this.state.page === "Profile" && search}
         </Navbar>
       </Fragment>
     );

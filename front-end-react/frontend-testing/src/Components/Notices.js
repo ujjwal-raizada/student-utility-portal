@@ -33,14 +33,14 @@ class Notices extends Component {
       });
   }
   render() {
-    const display_data = this.state.notice_data.map((item, index) => (
+    const total_notice = this.state.notice_data.map((item, index) => (
       <NoticeData key={index} data={item} />
     ));
 
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col col-sm-8">
+          <div className="col col-md-8">
             <h1 className="text-center">Notices</h1>
             <div className="text-danger text-center">
               {this.state.loading ? (
@@ -48,11 +48,11 @@ class Notices extends Component {
                   <div className="loader" />
                 </div>
               ) : (
-                <div>{display_data}</div>
+                <div>{total_notice}</div>
               )}
             </div>
           </div>
-          <div className="col col-sm-4">
+          <div className="col col-md-4">
             <Sidebar />
           </div>
         </div>

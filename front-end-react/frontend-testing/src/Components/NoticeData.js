@@ -3,34 +3,31 @@ import "./Stylesheets/NoticeData-stylesheet.css";
 
 class NoticeData extends Component {
   render() {
-    const { title, body, username } = this.props.data[1];
+    const { title, body, source } = this.props.data[1];
+    let username = source.split("@")[0].toUpperCase();
+    console.log(this.props.data[1]);
     return (
-      <div>
-        <div className="cont">
-          <h4 align="center">{title}</h4>
-          <hr className="my-4" />
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col col-sm-2">
-                <img
-                  className="NoticeImg"
-                  src="https://i.ytimg.com/vi/ImO-vBmL4gk/hqdefault.jpg"
-                />
-              </div>
-              <div className="col col-sm-8">
-                <pre>{body}</pre>
-              </div>
-              <div className="col-sm-2">
-                <button className="button button1">b0</button>
-                <button className="button button2">b1</button>
-                <button className="button button3">b2</button>
-                <button className="button button4">b3</button>
-              </div>
-            </div>
+      <div class="card cont">
+        <div class="row no-gutters">
+          <div class="col-auto">
+            <img
+              src="https://picsum.photos/400/450/?random"
+              class="img-fluid"
+              alt=""
+            />
           </div>
-          <hr className="my-4" />
-          <h6 align="center">-{username}</h6>
+          <div class="col">
+            <div class="card-block px-2 description">
+              <h4 class="card-title">{title}</h4>
+              <p class="card-text">
+                <pre>{body}</pre>
+              </p>
+            </div>
+            <button className="btn btn-primary">Read More &rarr;</button>
+          </div>
         </div>
+        <div />
+        <div class="card-footer w-100 text-muted">Posted by - {username}</div>
       </div>
     );
   }
