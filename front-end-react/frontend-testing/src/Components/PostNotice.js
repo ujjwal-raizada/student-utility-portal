@@ -25,7 +25,7 @@ class PostNotice extends Component {
     const username = localStorage.getItem("username");
     const type = localStorage.getItem("type");
     const user_input = this.props.match.params.username;
-    if (username == user_input && type == "Official Source") {
+    if (username == user_input && type == "OfficialSource") {
       this.setState({
         username: username,
         type: type,

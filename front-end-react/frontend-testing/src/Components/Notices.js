@@ -10,7 +10,27 @@ class Notices extends Component {
     notice_data: [],
     loading: true,
     error: "",
-    placeholder: ""
+    placeholder: "",
+    filter_tags: new Set()
+  };
+
+  handleFilter = tag => {
+    var current_tags = this.state.filter_tags;
+    if (current_tags.has(tag)) current_tags.delete(tag);
+    else current_tags.add(tag);
+    this.setState({ filter_tags: current_tags });
+  };
+
+  filter = item => {
+    console.log(item[1].tags);
+    var tags_searched = item[1].tags;
+    if (this.state.filter_tags.size === 0) return true;
+    else {
+      for (let i = 0; i < tags_searched.length; i++) {
+        if (this.state.filter_tags.has(tags_searched[i].slice(1))) return true;
+      }
+      return false;
+    }
   };
 
   componentDidMount() {
@@ -33,7 +53,9 @@ class Notices extends Component {
       });
   }
   render() {
-    const total_notice = this.state.notice_data.map((item, index) => (
+    var total_notice = this.state.notice_data.filter(this.filter);
+
+    var total_notice = total_notice.map((item, index) => (
       <NoticeData key={index} data={item} />
     ));
 
@@ -53,7 +75,7 @@ class Notices extends Component {
             </div>
           </div>
           <div className="col col-md-4">
-            <Sidebar />
+            <Sidebar callback={this.handleFilter} />
           </div>
         </div>
       </div>
