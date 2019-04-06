@@ -15,7 +15,8 @@ class PostNotice extends Component {
     url: "",
     is_event: false,
     eventDateTime: new Date(),
-    tags: [],
+    all_tags: [],
+    selected_tags: [],
     submitting: false,
     status: "failure",
     error: ""
@@ -25,23 +26,25 @@ class PostNotice extends Component {
     const username = localStorage.getItem("username");
     const type = localStorage.getItem("type");
     const user_input = this.props.match.params.username;
+
     if (username == user_input && type == "OfficialSource") {
       this.setState({
         username: username,
         type: type,
         submitting: false
       });
-      axios
-        .get(config.get("host_url") + config.get("routes.get_tags"))
-        .then(res => {
-          this.setState({ tags: res.data });
-        })
-        .catch(error => {
-          console.log(error);
-        });
     } else {
       this.redirect();
     }
+
+    axios
+      .get(config.get("host_url") + config.get("routes.get_tags"))
+      .then(res => {
+        this.setState({ all_tags: res.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   redirect = () => {
@@ -58,25 +61,24 @@ class PostNotice extends Component {
     this.setState({
       submitting: true
     });
-    const data = this.state;
-    /*const username = localStorage.getItem("username");
-    if (data.tags.indexOf(username) == -1) {
-      data.tags.push(username);
-    }*/
+    var data = this.state;
+    const username = localStorage.getItem("username");
+    if (data.selected_tags.indexOf(username) == -1) {
+      data.selected_tags.push(username);
+    }
     console.log(data);
     axios
       .post(config.get("host_url") + config.get("routes.create_notice"), data)
       .then(res => {
+        this.setState({ submitting: false });
         console.log(res.data);
         const { status, message } = res.data;
         if (status == "success") {
-          this.setState({ submitting: false });
           alert("Notice Submitted Successfully!");
           const url = `/profile/official/${this.state.username}`;
           this.props.history.push(url);
         } else if (status == "failure") {
           this.setState({
-            submitting: false,
             placeholder: message
           });
         }
@@ -112,34 +114,44 @@ class PostNotice extends Component {
     this.postNotice();
   };
 
-  handleTag = tag => {
+  handleTag = event => {
+    event.preventDefault();
+    const tag = event.target.textContent;
+    const pos = this.state.selected_tags.indexOf(tag);
     this.setState((prevState, props) => {
-      const pos = prevState.tags.indexOf(tag);
-      tags: pos == -1
-        ? prevState.tags.push(tag)
-        : prevState.tags.splice(pos, 1);
+      selected_tags: pos == -1
+        ? prevState.selected_tags.push(tag)
+        : prevState.selected_tags.splice(pos, 1);
     });
   };
 
   setClass = tag => {
-    return this.state.tags.indexOf(tag) != -1
+    return this.state.selected_tags.indexOf(tag) != -1
       ? "badge badge-pill badge-secondary"
       : "badge badge-pill badge-light";
   };
 
   render() {
-    const tag_list = this.state.tags.map((item, index) => (
-      <a
-        className={this.setClass(item)}
+    const tag_list = this.state.all_tags.map((item, index) => (
+      <button
+        className={
+          this.state.selected_tags.indexOf(item) != -1
+            ? "badge badge-pill badge-secondary"
+            : "badge badge-pill badge-light"
+        }
         key={item}
-        onClick={e => {
-          e.preventDefault();
-          this.handleTag(item);
-        }}
+        onClick={this.handleTag}
       >
-        {item}
-      </a>
+        #{item}
+      </button>
     ));
+    const spin = (
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      />
+    );
     return (
       <div>
         <Header page="PostNotice" />
@@ -214,8 +226,7 @@ class PostNotice extends Component {
                         />
                       </div>
                       <label> Tags </label>
-                      <br />
-                      {tag_list}
+                      <div>{tag_list}</div>
                       <br />
                       <div>
                         <button
@@ -224,6 +235,7 @@ class PostNotice extends Component {
                           disabled={this.state.submitting}
                           onClick={this.handleSubmit}
                         >
+                          {this.state.logging_in ? spin : ""} &nbsp;
                           {this.state.submitting ? "Submitting.." : "Submit"}
                         </button>
 

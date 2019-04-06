@@ -127,6 +127,7 @@ class Signup extends Component {
                         className="btn btn-lg btn-success btn-block"
                         type="submit"
                         onClick={this.handleSubmit}
+                        disabled={this.state.submitting}
                       >
                         {this.state.submitting ? "Submitting.." : "Sign Up"}
                       </button>
