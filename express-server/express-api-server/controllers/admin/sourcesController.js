@@ -1,27 +1,34 @@
 var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
 
-var view_sources = function(req, res){
+var view_sources = function(req, res, next){
     console.log('Returning all the sources');
-
+    var res_data = {
+        'status' : '',
+        'message' : '',
+        'source_list' : [],
+    }
     async.parallel({
         'Source' : function (callback){
             OfficialSource.find()
             .exec(callback);
-            console.log('Sources fetched');
+            console.log('Fetching Sources ... ');
         },
 
-    },  function(err, result){
-        if (err) throw err;
-
-        source_list = [];
-
-        for (x in result.Source){
-            source_list.push(result.Source[x]);
+    },  
+    function(err, result){
+        if (err) {
+            res_data['status'] = 'failure';
+            res_data['message'] = 'Unknown error';
+            return next({...err, res_data});
         }
-
-        console.log(source_list);
-        res.json(source_list);
+        for (x in result.Source){
+            res_data.source_list.push(result.Source[x]);
+        }
+        res_data['status'] = 'success';
+        res_data['message'] = 'Fetched Sources';
+        console.log(res_data.source_list);
+        return res.json(res_data);
     });
 };
 

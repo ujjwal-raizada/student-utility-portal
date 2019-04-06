@@ -2,9 +2,18 @@ var Student = require('../../models/Student');
 var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
 
-view_profile = function(req, res){
+view_profile = function(req, res, next){
     var username = req.query.username;
     var type = req.query.type;
+    var res_data = {
+        'username' : username,
+        'sourceSubscription' : [],
+        'starList' : [],
+        'noticeList' : [],
+        'status' : '',
+        'message' : '', // status of the query 
+    };
+
     console.log(`Displaying profile of ${username}`);
 
     async.parallel({
@@ -17,22 +26,22 @@ view_profile = function(req, res){
             .exec(callback);
         },        
     }, function(err, result){
-        if (err) next(err);
-        res_data = {
-            'username' : username,
-            'subscription' : [],
-            'message' : 'Successful', // status of the query 
-        };
-
+        if (err) {
+            res_data['status'] = 'failure';
+            res_data['message'] = 'Unknown error'; 
+            return next({...err, res_data});
+        }
         if (result.Student != null) {
-            res_data['subscription'] = result.Student.subscription;
+            res_data['sourceSubscription'] = result.Student.sourceSubscription;
+            res_data['starList'] = result.Student.starList;
         }
         else if (result.OfficialSource != null) {
-            res_data['subscription'] = result.OfficialSource.subscription;
-            res_data['NoticeList'] = result.OfficialSource.noticeList;
+            res_data['sourceSubscription'] = result.OfficialSource.sourceSubscription;
+            res_data['starList'] = result.OfficialSource.starList;
+            res_data['noticeList'] = result.OfficialSource.noticeList;
         }
         else res_data['message'] = 'Failed';
-        res.json(res_data);
+        return res.json(res_data);
     });
 
 };

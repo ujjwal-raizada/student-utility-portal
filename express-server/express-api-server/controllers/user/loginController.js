@@ -3,10 +3,14 @@ var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
 
 //Check for valid credentials
-validate_login = function(req, res) {
+validate_login = function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-
+    var res_data = {
+        'username' : username,
+        'status' : '',
+        'message' : ``,
+    };
     console.log('Validating Login : User : ' + username + ' Password : ' + password);
     
     async.parallel({
@@ -20,38 +24,40 @@ validate_login = function(req, res) {
         },
     
     }, function(err, result) {
-        if(err) next(err);
-        res_data = {
-            'status' : 'success',
-            'username' : username,
-            'message' : `Successful login of ${username}`
+        if(err) {
+            res_data['status'] = 'failure';
+            res_data['message'] = 'Unknown error';
+            console.log(res_data['status' + ' ' + res_data['message']]);
+            return next({...err, res_data});
         }
+
         if (result.OfficialSource != null){
             if (result.OfficialSource.password == password){
-                res_data['type'] = 'OfficialSource';
+                res_data['status'] = 'success';
+                res_data['message'] = 'User logged in';
             }
             else{
                 res_data['status'] = 'failure';
                 res_data['message'] = 'Invalid Password';                
             }
+            return res.json(res_data);
         }
-
         else if (result.Student != null) {
             if (result.Student.password == password) {
-               res_data['type'] = 'Student';                
+               res_data['status'] = 'success';
+               res_data['message'] = 'User logged in';                
             }
             else{
                 res_data['status'] = 'failure';
                 res_data['message'] = 'Invalid Password';                  
             }
+            return res.json(res_data);
         }
-
         else {
-            console.log('Failed login attempt : ' + username + ' does not exist');
-            res_data['message'] = `Failed login of ${username}`;
+            res_data['status'] = 'failure'
+            res_data['message'] = `User doesn't exists`;
+            return res.json(res_data);
         }
-        console.log(res_data['status'] + ' ' + res_data['message']); 
-        res.json(res_data);
     });
 };
 
