@@ -88,7 +88,7 @@ exports.subscribe = function(req, res, next){
             return res.json(res_data);
         }
     });
-};
+}
 
 exports.unsubscribe = function(req, res, next){
     var username = req.body.username;
@@ -184,4 +184,4 @@ exports.unsubscribe = function(req, res, next){
             return res.json(res_data);
         }
     });
-};
+}
