@@ -5,7 +5,7 @@ var async = require('async');
 exports.star = function(req, res, next){
     var username = req.body.username;
     var noticeSource = req.body.source;
-    var noticeID = req.body.ID;
+    var noticeID = req.body.id;
     var res_data = {
         'username' : username,
         'status' : '',

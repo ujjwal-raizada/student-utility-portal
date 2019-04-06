@@ -19,6 +19,7 @@ router.post('/create', notice_controller.create_notice);
 router.get('/id/:noticeID', notice_controller.get_notice);
 
 router.post('/subscribe', subscribe_controller.subscribe);
+router.post('/unsubscribe', subscribe_controller.unsubscribe);
 router.post('/star', star_controller.star);
 
 module.exports = router;
