@@ -66,8 +66,28 @@ class Notices extends Component {
             <h1 className="text-center">Notices</h1>
             <div className="text-danger text-center">
               {this.state.loading ? (
-                <div className="text-center">
-                  <div className="loader" />
+                <div className="CustomDiv">
+                  <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-secondary" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-success" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-danger" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-warning" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-dark" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
                 </div>
               ) : (
                 <div>{total_notice}</div>
