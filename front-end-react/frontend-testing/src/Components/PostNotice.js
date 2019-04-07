@@ -25,16 +25,17 @@ class PostNotice extends Component {
   componentDidMount() {
     const username = localStorage.getItem("username");
     const type = localStorage.getItem("type");
-    const user_input = this.props.match.params.username;
 
-    if (username == user_input && type == "Official Source") {
+    if (username == "") {
+      this.props.history.push(`/login`);
+    } else if (type != "Official Source") {
+      this.props.history.push(`/`);
+    } else {
       this.setState({
         username: username,
         type: type,
         submitting: false
       });
-    } else {
-      this.redirect();
     }
 
     axios
@@ -47,17 +48,8 @@ class PostNotice extends Component {
       });
   }
 
-  redirect = () => {
-    const username = localStorage.getItem("username");
-    const type = localStorage.getItem("type");
-    if (username == "") {
-      this.props.history.push(`/login`);
-    } else {
-      this.props.history.push(`/Profile/${type}/${username}`);
-    }
-  };
-
-  postNotice = () => {
+  postNotice = event => {
+    event.preventDefault();
     this.setState({
       submitting: true
     });
@@ -75,8 +67,7 @@ class PostNotice extends Component {
         const { status, message } = res.data;
         if (status == "success") {
           alert("Notice Submitted Successfully!");
-          const url = `/profile/official/${this.state.username}`;
-          this.props.history.push(url);
+          this.props.history.push(`/`);
         } else if (status == "failure") {
           this.setState({
             placeholder: message
@@ -107,11 +98,6 @@ class PostNotice extends Component {
     this.setState({
       eventDateTime: date
     });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    this.postNotice();
   };
 
   handleTag = event => {
@@ -234,7 +220,7 @@ class PostNotice extends Component {
                           className="btn btn-lg btn-success btn-block"
                           type="submit"
                           disabled={this.state.submitting}
-                          onClick={this.handleSubmit}
+                          onClick={this.postNotice}
                         >
                           {this.state.logging_in ? spin : ""} &nbsp;
                           {this.state.submitting ? "Submitting.." : "Submit"}

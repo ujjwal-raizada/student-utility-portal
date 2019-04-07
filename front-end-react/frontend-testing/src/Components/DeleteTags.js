@@ -21,19 +21,21 @@ class DeleteTags extends Component {
       });
   }
 
-  handleChange = event => {
-    const target = event.target;
-    if (target.type == "checkbox") {
-      const tag = target.name;
-      const pos = this.state.selected_tags.indexOf(tag);
+  handleTag = event => {
+    event.preventDefault();
+    const tag = event.target.textContent;
+    const pos = this.state.selected_tags.indexOf(tag);
+
+    if (pos == -1) {
+      event.target.className = "badge badge-pill badge-secondary";
       this.setState((prevState, props) => {
-        selected_tags: pos == -1
-          ? prevState.selected_tags.push(tag)
-          : prevState.selected_tags.splice(pos, 1);
+        selected_tags: prevState.selected_tags.push(tag);
       });
     } else {
-      const value = event.target.value;
-      this.setState({ [event.target.name]: event.target.value });
+      event.target.className = "badge badge-pill badge-light";
+      this.setState((prevState, props) => {
+        selected_tags: prevState.selected_tags.splice(pos, 1);
+      });
     }
   };
 
@@ -69,17 +71,17 @@ class DeleteTags extends Component {
   render() {
     const tag_list = this.state.all_tags.map((item, index) => (
       <div>
-        <label key={index}>
-          <input
-            name={item}
-            type="checkbox"
-            checked={
-              this.state.selected_tags.indexOf(item) != -1 ? true : false
-            }
-            onChange={this.handleChange}
-          />{" "}
+        <button
+          className={
+            this.state.selected_tags.indexOf(item) != -1
+              ? "badge badge-pill badge-secondary"
+              : "badge badge-pill badge-light"
+          }
+          key={index}
+          onClick={this.handleTag}
+        >
           #{item}
-        </label>
+        </button>
       </div>
     ));
 

@@ -25,6 +25,7 @@ class Login extends Component {
   componentDidMount() {
     localStorage.setItem(`username`, ``);
     localStorage.setItem(`type`, ``);
+    localStorage.setItem(`name`, ``);
   }
 
   handleChange = event => {

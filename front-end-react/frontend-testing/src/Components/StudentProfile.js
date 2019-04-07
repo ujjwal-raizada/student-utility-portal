@@ -1,11 +1,10 @@
 import React, { Fragment, Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
-import Header from "./Header";
 import "./Stylesheets/UserProfileOfficial.css";
 import { Tabs, Tab } from "react-bootstrap";
 
-class UserPofile extends Component {
+class StudentPofile extends Component {
   /* state variable for the class */
   state = {
     name: "",
@@ -21,7 +20,6 @@ class UserPofile extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
         <div className="container-fluid cont">
           <div className="row" />
         </div>
@@ -61,4 +59,4 @@ class UserPofile extends Component {
   }
 }
 
-export default UserPofile;
+export default StudentPofile;
