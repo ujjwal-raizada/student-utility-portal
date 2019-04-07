@@ -41,8 +41,7 @@ exports.subscribe = function(req, res, next){
             if (result.Student != null) {
                 // update the student doc
                 temp_sub = result.Student.sourceSubscription;
-                const get_existingID = temp_sub.find(element => element == sourceID);
-                if (!get_existingID) {
+                if (!(source in temp_sub)) {
                     temp_sub.push(sourceID);
                     result.Student.updateOne({'sourceSubscription' : temp_sub});
                     result.Student.save();
@@ -58,9 +57,8 @@ exports.subscribe = function(req, res, next){
             else if (result.OfficialSource != null){
                 // update the official source doc
                 temp_sub = result.OfficialSource.sourceSubscription;
-                const get_existingID = temp_sub.find(element => element == sourceID);
 
-                if (!get_existingID) {
+                if (!(source in temp_sub)) {
                     temp_sub.push(sourceID);
                     result.OfficialSource.updateOne({'sourceSubscription' : temp_sub});
                     result.OfficialSource.save(); 
