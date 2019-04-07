@@ -12,6 +12,11 @@ export default class Sidebar extends Component {
 
   handleClick = event => {
     event.preventDefault();
+    console.log(event.target.className);
+    var color = event.target.className;
+    if (color === `btn btn-block btn-info`)
+      event.target.className = `btn btn-block btn-dark`;
+    else event.target.className = `btn btn-block btn-info`;
     const tag = event.target.textContent;
     this.props.callback(tag);
   };
@@ -48,12 +53,12 @@ export default class Sidebar extends Component {
   render() {
     const left_display = this.state.tags_on_left.map(tag => (
       <button className="btn btn-block btn-info" onClick={this.handleClick}>
-        <b>#{tag}</b>
+        #{tag}
       </button>
     ));
     const right_display = this.state.tags_on_right.map(tag => (
-      <button className="btn btn-info btn-block" onClick={this.handleClick}>
-        <b>#{tag}</b>
+      <button className="btn btn-block btn-info" onClick={this.handleClick}>
+        #{tag}
       </button>
     ));
     return (
