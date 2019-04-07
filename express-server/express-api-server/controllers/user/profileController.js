@@ -5,6 +5,7 @@ var async = require('async');
 view_profile = function(req, res, next){
     var username = req.body.username;
     var type = req.body.type;
+    console.log(username, type);
     var res_data = {
         'username' : username,
         'type' : '',
@@ -36,19 +37,27 @@ view_profile = function(req, res, next){
         if (result.Student != null) {
             res_data['type'] = 'Student';
             res_data['sourceSubscription'] = result.Student.sourceSubscription;
-            res_data['starList'] = result.Student.starList;
+            res_data['starList'] = result.Student.starNotice;
+            console.log(res_data);
+            return res.json(res_data);
+    
         }
         else if (result.OfficialSource != null) {
             res_data['type'] = 'Official Source';
             res_data['sourceSubscription'] = result.OfficialSource.sourceSubscription;
-            res_data['starList'] = result.OfficialSource.starList;
+            res_data['starList'] = result.OfficialSource.starNotice;
             res_data['noticeList'] = result.OfficialSource.noticeList;
+            console.log(res_data);
+            return res.json(res_data);
+    
         }
         else {
             res_data['type'] = undefined;
             res_data['message'] = 'failure';
+            console.log(res_data);
+            return res.json(res_data);
+    
         }
-        return res.json(res_data);
     });
 
 };
