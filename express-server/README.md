@@ -58,7 +58,7 @@ Following are the endpoints of the API:
 * /notice/subscribe
 * /notice/star
 * /notice/unsubscribe
-* /notice/unsubscribe
+* /notice/unstar
 
 
 ## Authors
