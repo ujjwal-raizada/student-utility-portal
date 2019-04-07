@@ -37,9 +37,7 @@ class NoticeData extends Component {
                 <b>{title} </b>
               </h4>
               <hr />
-              <p className="card-text">
-                <pre>{body}</pre>
-              </p>
+              <pre className="card-text">{body}</pre>
               <hr />
             </div>
             <button className="btn btn-info">Read More &rarr;</button>
