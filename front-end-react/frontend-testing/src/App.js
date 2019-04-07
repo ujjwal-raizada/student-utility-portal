@@ -11,6 +11,7 @@ import ContactUs from "./Components/ContactUs";
 import Homepage from "./Components/Homepage";
 import AdminLogin from "./Components/AdminLogin";
 import AdminHome from "./Components/AdminHome";
+import UserProfileOfficial from "./Components/UserProfileOfficial";
 
 class App extends React.Component {
 	render() {
@@ -23,11 +24,17 @@ class App extends React.Component {
 					<Route path="/signup" component={Signup} />
 					<Route exact path="/login" component={Login} />
 					<Route path="/forgotpassword" component={ForgotPassword} />
-					<Route path="/profile/:type/:username" component={Profile} />
+					<Route
+						path="/profile/:type/:username"
+						component={UserProfileOfficial}
+					/>
 					<Route path="/test" component={Test} />
 					<Route path="/notice" component={Homepage} />
 					<Route path="/contactus" component={ContactUs} />
-					<Route path="/:postnotice/:username" component={PostNotice} />
+					<Route
+						path="/:postnotice/:username"
+						component={PostNotice}
+					/>
 					<Route component={NotFound} />
 				</Switch>
 			</BrowserRouter>
