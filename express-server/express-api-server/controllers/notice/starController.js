@@ -1,11 +1,11 @@
 var Student = require('../../models/Student');
 var OfficialSource = require('../../models/OfficialSource');
+var Notice = require('../../models/Notice');
 var async = require('async');
 
 exports.star = function(req, res, next){
     var username = req.body.username;
-    var noticeSource = req.body.source;
-    var noticeID = req.body.id;
+    var noticeid = req.body.noticeid;
     var res_data = {
         'username' : username,
         'status' : '',
@@ -21,82 +21,70 @@ exports.star = function(req, res, next){
             .exec(callback);
         },
         'NoticeCheck' : function(callback){
-            OfficialSource.findOne({'username' : noticeSource}, 'noticeList')
+            Notice.findOne({'_id' : noticeid})
             .exec(callback);
         },
 
-    }, function(err, result){
+    }, 
+    function(err, result){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error'
             return res.json(res_data);
         }
         if (result.NoticeCheck != null){
-            console.log(`${username} starring a notice of ${noticeSource} with noticeID ${noticeID}`);
+            console.log(`${username} staring notice id: ${noticeid} ...`);
+            
+            res_data['status'] = 'success';
+            res_data['message'] = 'User starred notice successfully';
 
-            var temp_notice = result.NoticeCheck.noticeList;
-            const get_existingNotice = temp_notice.find(element => element == noticeID);
-
-            if (!get_existingNotice){
-
-                res_data['status'] = 'success';
-                res_data['message'] = 'User starred the notice successfully';
-
-                var temp_sub = [];
-                if (result.Student != null) {
-                    // update the student doc
-                    temp_sub = result.Student.starNotice;
-                    const get_existingID = temp_sub.find(element => element == noticeID);
-                    if (!get_existingID) {
-                        temp_sub.push(noticeID);
-                        result.Student.updateOne({'starNotice' : temp_sub});
-                        result.Student.save();
-                        return res.json(res_data);
-                    }
-                    else {
-                        res_data['status'] = 'failure';
-                        res_data['message'] = 'User has already starred the notice';
-                        return res.json(res_data);
-                        
-                    }
-
-                }
-                else if (result.OfficialSource != null){
-                    // update the official source doc
-                    temp_sub = result.OfficialSource.starNotice;
-                    const get_existingID = temp_sub.find(element => element == noticeID);
-
-                    if (!get_existingID ) {
-                        temp_sub.push(noticeID);
-                        result.OfficialSource.updateOne({'starNotice' : temp_sub});
-                        result.OfficialSource.save();
-                        return res.json(res_data);
-                    }
-                    else {
-                        res_data['status'] = 'failure';
-                        res_data['message'] = 'User has already starred the notice';
-                        return res.json(res_data);
-                    }
+            var temp_sub = []; 
+            if (result.Student != null) {
+                // update the student doc
+                temp_sub = result.Student.starNotice;
+                if (temp_sub.indexOf(noticeid) < 0) {
+                    temp_sub.push(noticeid);
+                    result.Student.updateOne({'starNotice' : temp_sub})
+                    .then(result => {
+                    return res.json(res_data);
+                    })
+                    .catch(err => res.json({'status': 'failure'})) 
                 }
                 else {
-                    log = `User doesn't exists`;
                     res_data['status'] = 'failure';
-                    res_data['message'] = log;
-                    console.log(log);
+                    res_data['message'] = 'User has already starred this notice';
+                    return res.json(res_data);
+                }
+
+            }
+            else if (result.OfficialSource != null){
+                // update the official source doc
+                temp_sub = result.OfficialSource.starNotice;
+
+                if (temp_sub.indexOf(noticeid) < 0) {
+                    temp_sub.push(noticeid);
+                    result.OfficialSource.updateOne({'starNotice' : temp_sub})
+                    .then(result => {
+                        return res.json(res_data);
+                        })
+                        .catch(err => res.json({'status': 'failure'}))          
+                }
+                else {
+                    res_data['status'] = 'failure';
+                    res_data['message'] = 'User has already starred this notice';
                     return res.json(res_data);
                 }
             }
-            else{
-                log = "Either the notice has been deleted or it doesn't exists";
+            else {
+                log = `User could not be found with username ${username}`;
                 res_data['status'] = 'failure';
-                res_data['message'] = log;
+                res_data['message'] = log;            
                 console.log(log);
                 return res.json(res_data);
             }
-
         }
         else {
-            log = `Official Source doensn't exists`;
+            log = 'No such Official Source exists !';
             res_data['status'] = 'failure';
             res_data['message'] = log;
             console.log(log);
@@ -107,117 +95,91 @@ exports.star = function(req, res, next){
 
 exports.unstar = function(req, res, next){
     var username = req.body.username;
-    var noticeID = req.body.id;
-    var noticeSource = req.body.source;
+    var noticeid = req.body.noticeid;
     var res_data = {
         'username' : username,
         'status' : '',
         'message' : '',
     }
-
     async.parallel({
         'Student' : function(callback){
-            Student.findOne({'username' : username}, 'starNotice')
+            Student.findOne({'username' : username})
             .exec(callback);
         },
         'OfficialSource' : function(callback){
-            OfficialSource.findOne({'username' : username}, 'starNotice')
+            OfficialSource.findOne({'username' : username})
             .exec(callback);
         },
         'NoticeCheck' : function(callback){
-            OfficialSource.findOne({'username' : noticeSource}, 'noticeList')
+            Notice.findOne({'_id' : noticeid})
             .exec(callback);
         },
-    }, function(err, result){
+
+    }, 
+    function(err, result){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error'
             return res.json(res_data);
         }
-
         if (result.NoticeCheck != null){
-            var temp_notice = result.NoticeCheck.noticeList;
-            var get_existingNotice = temp_notice.find(element => element == noticeID);
+            console.log(`${username} unstarring.`);
+            
+            res_data['status'] = 'success';
+            res_data['message'] = 'User unstarred successfully';
 
-            if (get_existingNotice) {
-                console.log("Unstarring user's notice ... ")
-                res_data['status'] = 'success';
-                res_data['message'] = 'User starred the notice successfully';
-
-                var temp_sub = [];
-                var filter_array = [];
-                var get_existingID = [];
-
-                if (result.Student != null){
-                    temp_sub = result.Student.starNotice;
-                    get_existingID = temp_sub.find(element => element == noticeID);
-
-                    if (get_existingID){
-                        filter_array = temp_sub.filter((value, index, arr) => value != noticeID);
-                        result.Student.updateOne({'starNotice' : filter_array}, 
-                            function (err, instance){
-                                if (err) {
-                                    res_data['status'] = 'failure';
-                                    res_data['message'] = 'Error while updating records'
-                                    return res.json(res_data);
-                                }        
-                            });
-                        result.Student.save(); // add callback method
-                        return res.json(res_data);
-                    }
-                    else {
-                        res_data['status'] = 'failure';
-                        res_data['message'] = 'User had never starred the notice';
-                        return res.json(res_data);
-                    }
-
-                }
-                else if (result.OfficialSource != null){
-                    temp_sub = result.OfficialSource.starNotice;
-                    get_existingID = temp_sub.find(element => element == noticeID);
-
-                    if (get_existingID){
-                        filter_array = temp_sub.filter((value, index, arr) => value != noticeID);
-                        result.OfficialSource.updateOne({'starNotice' : filter_array}, 
-                            function (err, instance){
-                                if (err) {
-                                    res_data['status'] = 'failure';
-                                    res_data['message'] = 'Error while updating records'
-                                    return res.json(res_data);
-                                }
-                            });
-                        result.OfficialSource.save() // add callback method
-                        return res.json(res_data);   
-                    }
-                    else {
-                        res_data['status'] = 'failure';
-                        res_data['message'] = 'User had never starred the notice';
-                        return res.json(res_data);
-                    }
+            var temp_sub = []; 
+            if (result.Student != null) {
+                // update the student doc
+                temp_sub = result.Student.starNotice;
+                if (temp_sub.indexOf(noticeid) >= 0) {
+                    // temp_sub.push(source);
+                    temp_sub.splice( temp_sub.indexOf(noticeid), 1 );
+                    result.Student.updateOne({'starNotice' : temp_sub})
+                    .then(result => {
+                    return res.json(res_data);
+                    })
+                    .catch(err => res.json({'status': 'failure'})) 
                 }
                 else {
-                    log = `User doesn't exist`;
                     res_data['status'] = 'failure';
-                    res_data['message'] = log;
-                    console.log(log);
-                    return res.json(res_data);    
+                    res_data['message'] = 'User not starred this notice.';
+                    return res.json(res_data);
+                }
+
+            }
+            else if (result.OfficialSource != null){
+                // update the official source doc
+                temp_sub = result.OfficialSource.starNotice;
+
+                if (temp_sub.indexOf(noticeid) >= 0) {
+                    temp_sub.splice( temp_sub.indexOf(noticeid), 1 );
+                    result.OfficialSource.updateOne({'starNotice' : temp_sub})
+                    .then(result => {
+                        return res.json(res_data);
+                        })
+                        .catch(err => res.json({'status': 'failure'}))          
+                }
+                else {
+                    res_data['status'] = 'failure';
+                    res_data['message'] = 'User not starred this notice.';
+                    return res.json(res_data);
                 }
             }
             else {
-                log = `Source doesn't have the given notice`;
+                log = `User could not be found with username ${username}`;
                 res_data['status'] = 'failure';
-                res_data['message'] = log;
+                res_data['message'] = log;            
                 console.log(log);
                 return res.json(res_data);
             }
         }
-        else{
-            log = `Official Source doesn't exists`;
+        else {
+            log = 'No such Official Source exists !';
             res_data['status'] = 'failure';
             res_data['message'] = log;
             console.log(log);
             return res.json(res_data);
         }
-
     });
 }
