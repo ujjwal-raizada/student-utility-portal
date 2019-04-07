@@ -31,7 +31,7 @@ view_profile = function(req, res, next){
             res_data['type'] = undefined;
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error'; 
-            return next({...err, res_data});
+            return res.json(res_data);
         }
         if (result.Student != null) {
             res_data['type'] = 'Student';

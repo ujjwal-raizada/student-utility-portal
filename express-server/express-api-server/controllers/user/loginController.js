@@ -30,7 +30,7 @@ validate_login = function(req, res, next) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error';
             console.log(res_data['status' + ' ' + res_data['message']]);
-            return next({...err, res_data});
+            return res.json(res_data);
         }
 
         if (result.OfficialSource != null){

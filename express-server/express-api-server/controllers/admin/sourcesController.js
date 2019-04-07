@@ -20,7 +20,7 @@ var view_sources = function(req, res, next){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error';
-            return next({...err, res_data});
+            return res.json(res_data);
         }
         for (x in result.Source){
             res_data.source_list.push(result.Source[x]);

@@ -29,7 +29,8 @@ create_account = function(req, res, next) {
         if(err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error';
-            return next({...err, res_data});
+            console.log(res_data);
+            return res.json(res_data);
         }
         if (result.OfficialSource == null && result.Student == null){
             user_data = {
@@ -39,6 +40,8 @@ create_account = function(req, res, next) {
             if (username == '' || password == ''){
                 res_data['status'] = 'failure';
                 res_data['message'] =  'Cannot leave any of the fields empty';
+                console.log(res_data);
+                return res.json(res_data);
             }
             else if(type == 'Official Source'){
                 OfficialSource.create(user_data, function(err, instance) {
@@ -46,11 +49,12 @@ create_account = function(req, res, next) {
                         res_data['status'] = 'failure'
                         res_data['message'] = 'mongodb error'
                         console.log(res_data['status'] + ' ' + res_data['message']);
-                        return next({...err, res_data});
+                        return res.json(res_data);
                     }
                     else {
-                        res_data['status'] = 'success'
-                        res_data['message'] = 'Official User created'
+                        res_data['status'] = 'success';
+                        res_data['message'] = 'Official User created';
+                        console.log(res_data);
                         return res.json(res_data)
                     }
                 });
@@ -61,12 +65,12 @@ create_account = function(req, res, next) {
                         res_data['status'] = 'failure'
                         res_data['message'] = 'mongodb error'
                         console.log(res_data['status'] + ' ' + res_data['message']);
-                        //return res.end({...res_data});
-                        return next({...err, res_data});
+                        return res.json(res_data);
                     }
                     else{
                         res_data['status'] = 'success'
-                        res_data['message'] = 'Official User created'
+                        res_data['message'] = 'Official User created';
+                        console.log(res_data);
                         return res.json(res_data)                            
                     }
                 });
