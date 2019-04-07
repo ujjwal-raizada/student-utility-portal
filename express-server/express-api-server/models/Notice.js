@@ -19,9 +19,14 @@ var noticeSchema = new Schema({
         type: [String],
         required: false,
     },
-    source:{
+    source: {
         type: String,
         required: true,
+    },
+    sourceid: {
+        type: String,
+        required: true,
+        default: null,
     },
     isEvent: {
         type: Boolean,

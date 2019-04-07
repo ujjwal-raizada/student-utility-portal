@@ -92,6 +92,7 @@ exports.create_notice = function(req, res) {
             notice_data.body = body
             notice_data.source = source
             notice_data.tags = tags
+            notice_data.sourceid = result.OfficialSource._id
 
             if (eventDateTime == null)
                 notice_data.isEvent = false
@@ -148,3 +149,85 @@ exports.get_notice = function(req, res) {
         res.json(res_data);
     });
 };
+
+
+exports.user_notices = function(req, res) {
+
+    var username = req.body.username
+
+    res_data = {}
+    res_data.username = username
+
+    async.parallel ({
+
+        'student': function(callback) {
+            Student.findOne({'username' : username})
+            .exec(callback);
+        },
+        'officialsource': function(callback) {
+            OfficialSource.findOne({'username' : username})
+            .exec(callback);
+        },
+        'Notice': function(callback) {
+            Notice.find()
+            .exec(callback);
+        }
+
+
+    }, function(err, result) {
+
+        if(err) {
+            res_data['status'] = 'failure';
+            res_data['message'] = 'Unknown error';
+            return next({...err, res_data});
+        }
+
+        let sub_source_list = []
+
+        if (result.student != null) {
+            
+            res_data.status = 'success';
+            sub_source_list = result.student.sourceSubscription;
+        }
+        else if (result.student != null) {
+
+            res_data.status = 'success';
+            sub_source_list = result.officialsource.sourceSubscription;
+        }
+        else {
+            res_data.status = 'failure';
+            return res.json(res_data);
+        }
+
+        /* Notice JSON Structure
+
+        [
+            [timestamp, {Notice(1)}],
+            [timestamp, {Notice(2)}],
+            .
+            .
+            .
+            [timestamp, {Notice(n)}]
+        ]
+
+        */
+
+       let notice_data = []
+
+       for (x in result.Notice) {
+            if (x.sourceid in sub_source_list) {
+                let notice = [result.Notice[x].timestamp, result.Notice[x]]
+                notice_data.push(notice)
+           }
+       }
+
+       // Sorting in desc. order of timestamp
+       notice_data.sort(function(a, b) {return b[0] - a[0]})
+       
+       console.log(notice_data)
+       res_data.notice = notice_data
+       return res.json(res_data)
+
+    });
+
+}
