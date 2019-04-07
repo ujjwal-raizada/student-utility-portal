@@ -4,7 +4,7 @@ function InitConfig(production) {
   config.set({
     host_url: production
       ? `http://sup-express.herokuapp.com`
-      : `http://localhost:8080`,
+      : `http://sup-express.herokuapp.com`,
     routes: {
       user_login: `/user/login`,
       user_signup: `/user/signup`,

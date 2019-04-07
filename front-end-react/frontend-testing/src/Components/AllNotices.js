@@ -27,7 +27,7 @@ class AllNotices extends Component {
     if (this.state.filter_tags.size === 0) return true;
     else {
       for (let i = 0; i < tags_searched.length; i++) {
-        if (this.state.filter_tags.has(tags_searched[i].slice(1))) return true;
+        if (this.state.filter_tags.has(tags_searched[i])) return true;
       }
       return false;
     }
