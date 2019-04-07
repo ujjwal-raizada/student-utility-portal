@@ -58,8 +58,9 @@ class Login extends Component {
           name[0] = name[0].toLowerCase();
           temp = temp.concat(name[0].slice(1));
           console.log(temp);
-          localStorage.setItem(`username`, temp);
-          localStorage.setItem(`type`, type);
+          localStorage.setItem("name", temp);
+          localStorage.setItem("username", username);
+          localStorage.setItem("type", type);
           this.setState({ logging_in: false });
           this.props.history.push(`/`);
         } else if (status === "failure") {
