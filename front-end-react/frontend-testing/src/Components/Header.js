@@ -45,19 +45,15 @@ class Header extends Component {
       </div>
     );
 
-    const login = <Nav.Link href={`/Login`}>Login</Nav.Link>;
+    const login = <Nav.Link href={`/login`}>Login</Nav.Link>;
 
     const signup = <Nav.Link href={`/signup`}>Sign Up</Nav.Link>;
 
     const contact_us = <Nav.Link href={`/contactus`}>Contact Us</Nav.Link>;
 
-    const profile = (
-      <Nav.Link href={`/Profile/${type}/${username}`}>{name}</Nav.Link>
-    );
+    const profile = <Nav.Link href={`/profile`}>{name}</Nav.Link>;
 
-    const post_notice = (
-      <Nav.Link href={`/postnotice/${username}`}>Post Notice</Nav.Link>
-    );
+    const post_notice = <Nav.Link href={`/postnotice`}>Post Notice</Nav.Link>;
 
     const signout = (
       <Nav.Link href={`/login`} onClick={this.handleSignout}>

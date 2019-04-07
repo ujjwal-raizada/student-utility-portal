@@ -1,22 +1,26 @@
 import React, { Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
-import Header from "./Header";
 import StudentsList from "./StudentsList";
 import SourcesList from "./SourcesList";
 import CreateTag from "./CreateTag";
 import DeleteTags from "./DeleteTags";
 import { Tabs, Tab } from "react-bootstrap";
 
-class AdminHome extends Component {
+class AdminProfile extends Component {
   state = {
     key: "Students List"
   };
 
+  componentDidMount() {
+    const type = localStorage.getItem("type");
+    if (type != "Admin") {
+      this.props.history.push("/error");
+    }
+  }
   render() {
     return (
       <div>
-        <Header />
         <Tabs
           activeKey={this.state.key}
           onSelect={key => {
@@ -44,4 +48,4 @@ class AdminHome extends Component {
   }
 }
 
-export default AdminHome;
+export default AdminProfile;

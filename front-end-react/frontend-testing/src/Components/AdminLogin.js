@@ -25,6 +25,7 @@ class AdminLogin extends Component {
   componentDidMount() {
     localStorage.setItem("username", "");
     localStorage.setItem("type", "");
+    localStorage.setItem("name", "");
   }
 
   handleChange = event => {
@@ -51,13 +52,17 @@ class AdminLogin extends Component {
         console.log(res);
         const { username, status, message } = res.data;
 
-        console.log("changepage");
         if (status == "success") {
+          this.setState({ logging_in: false, placeholder: "" });
+          var name = username.split("@");
+          name[0] = name[0].toUpperCase();
+          var temp = name[0][0];
+          name[0] = name[0].toLowerCase();
+          temp = temp.concat(name[0].slice(1));
+          localStorage.setItem("name", temp);
           localStorage.setItem("username", username);
           localStorage.setItem("type", "Admin");
-          this.setState({ logging_in: false, placeholder: "" });
-          console.log("changepage");
-          this.props.history.push("/admin/home");
+          this.props.history.push("/");
         } else if (status == "failure") {
           this.setState({
             placeholder: message,
