@@ -27,7 +27,7 @@ class PostNotice extends Component {
     const type = localStorage.getItem("type");
     const user_input = this.props.match.params.username;
 
-    if (username == user_input && type == "OfficialSource") {
+    if (username == user_input && type == "Official Source") {
       this.setState({
         username: username,
         type: type,
@@ -118,17 +118,18 @@ class PostNotice extends Component {
     event.preventDefault();
     const tag = event.target.textContent;
     const pos = this.state.selected_tags.indexOf(tag);
-    this.setState((prevState, props) => {
-      selected_tags: pos == -1
-        ? prevState.selected_tags.push(tag)
-        : prevState.selected_tags.splice(pos, 1);
-    });
-  };
 
-  setClass = tag => {
-    return this.state.selected_tags.indexOf(tag) != -1
-      ? "badge badge-pill badge-secondary"
-      : "badge badge-pill badge-light";
+    if (pos == -1) {
+      event.target.className = "badge badge-pill badge-secondary";
+      this.setState((prevState, props) => {
+        selected_tags: prevState.selected_tags.push(tag);
+      });
+    } else {
+      event.target.className = "badge badge-pill badge-light";
+      this.setState((prevState, props) => {
+        selected_tags: prevState.selected_tags.splice(pos, 1);
+      });
+    }
   };
 
   render() {
@@ -139,7 +140,7 @@ class PostNotice extends Component {
             ? "badge badge-pill badge-secondary"
             : "badge badge-pill badge-light"
         }
-        key={item}
+        key={index}
         onClick={this.handleTag}
       >
         #{item}

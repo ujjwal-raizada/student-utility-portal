@@ -11,37 +11,31 @@ class Header extends Component {
     Login: false,
     Signup: false,
     loggedin: false,
-    type: ``,
-    username: ``,
     page: ``
   };
 
   componentDidMount() {
-    this.updateState();
-  }
-
-  updateState = () => {
     const username = localStorage.getItem(`username`);
-    const type = localStorage.getItem(`type`);
-    const loggedin = username === `` ? false : true;
-    console.log(`Hey Man`);
-    console.log(loggedin);
+    const loggedin = username == `` ? false : true;
     this.setState({
       page: this.props.page,
       [this.state.page]: true,
-      loggedin: loggedin,
-      type: type,
-      username: username
+      loggedin: loggedin
     });
-  };
+  }
 
   handleSignout = () => {
     localStorage.setItem(`username`, ``);
     localStorage.setItem(`type`, ``);
+    localStorage.setItem(`name`, ``);
   };
 
   render() {
-    const { username, type, loggedin } = this.state;
+    const { loggedin, page } = this.state;
+    const username = localStorage.getItem(`username`);
+    const name = localStorage.getItem(`name`);
+    const type = localStorage.getItem(`type`);
+
     const brand = (
       <div className="navbar-header">
         <Link className="navbar-brand" to="/">
@@ -58,19 +52,11 @@ class Header extends Component {
     const contact_us = <Nav.Link href={`/contactus`}>Contact Us</Nav.Link>;
 
     const profile = (
-      <Nav.Link
-        href={`/Profile/${localStorage.getItem(`type`)}/${localStorage.getItem(
-          `username`
-        )}`}
-      >
-        {this.state.username}
-      </Nav.Link>
+      <Nav.Link href={`/Profile/${type}/${username}`}>{name}</Nav.Link>
     );
 
     const post_notice = (
-      <Nav.Link href={`/postnotice/${this.state.username}`}>
-        Post Notice
-      </Nav.Link>
+      <Nav.Link href={`/postnotice/${username}`}>Post Notice</Nav.Link>
     );
 
     const signout = (
@@ -91,14 +77,13 @@ class Header extends Component {
         <Navbar sticky="top" bg="info" variant="dark">
           <Navbar.Brand href="/">Stud Util Port</Navbar.Brand>
           <Nav className="mr-auto">
-            {this.state.type === `OfficialSource` && post_notice}
+            {type === `Official Source` && post_notice}
           </Nav>
-          {this.state.page === "Profile" && search}
           <Nav className="ml-auto">
-            {this.state.loggedin === false && login}
-            {this.state.loggedin === true && profile}
-            {this.state.loggedin === false && signup}
-            {this.state.loggedin === true && signout}
+            {loggedin === false && login}
+            {loggedin === true && profile}
+            {loggedin === false && signup}
+            {loggedin === true && signout}
           </Nav>
         </Navbar>
       </Fragment>
