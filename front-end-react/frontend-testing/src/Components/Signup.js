@@ -16,6 +16,7 @@ class Signup extends Component {
   componentDidMount() {
     localStorage.setItem(`username`, ``);
     localStorage.setItem(`type`, ``);
+    localStorage.setItem(`name`, ``);
   }
 
   handleChange = event => {
@@ -48,6 +49,13 @@ class Signup extends Component {
           });
           const { type, username } = this.state;
           localStorage.setItem(`username`, username);
+          var name = username.split("@");
+          name[0] = name[0].toUpperCase();
+          var temp = name[0][0];
+          name[0] = name[0].toLowerCase();
+          temp = temp.concat(name[0].slice(1));
+          console.log(temp);
+          localStorage.setItem(`name`, temp);
           localStorage.setItem(`type`, type);
           this.props.history.push(`/profile`);
         } else if (status === "failure") {
