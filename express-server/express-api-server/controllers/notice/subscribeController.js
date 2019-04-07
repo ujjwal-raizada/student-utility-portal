@@ -4,7 +4,7 @@ var async = require('async');
 
 exports.subscribe = function(req, res, next){
     var username = req.body.username;
-    var sourceID = req.body.id;
+    var source = req.body.source;
     var res_data = {
         'username' : username,
         'status' : '',
@@ -20,7 +20,7 @@ exports.subscribe = function(req, res, next){
             .exec(callback);
         },
         'SourceCheck' : function(callback){
-            OfficialSource.findById({'_id' : sourceID})
+            OfficialSource.findOne({'username' : source})
             .exec(callback);
         },
 
@@ -29,7 +29,7 @@ exports.subscribe = function(req, res, next){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error'
-            return next({...err, res_data});
+            return res.json(res_data);
         }
         if (result.SourceCheck != null){
             console.log(`${username} subscribing to ${result.SourceCheck.username} ...`);
@@ -92,7 +92,7 @@ exports.subscribe = function(req, res, next){
 
 exports.unsubscribe = function(req, res, next){
     var username = req.body.username;
-    var sourceID = req.body.id;
+    var source = req.body.source;
     var res_data = {
         'username' : username,
         'status' : '',
@@ -109,14 +109,14 @@ exports.unsubscribe = function(req, res, next){
             .exec(callback);
         },
         'SourceCheck' : function(callback){
-            OfficialSource.findById({'_id': sourceID})
+            OfficialSource.findOne({'username': source})
             .exec(callback);
         },
     }, function(err, result){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error';
-            return next({...err, res_data});
+            return releaseEvents.json(res_data);
         }
         console.log(`${User} trying to unsubscribe ... `);
         var temp_sub = [];
