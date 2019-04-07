@@ -9,6 +9,7 @@ create_account = function(req, res, next) {
     var type = req.body.type;
     var res_data = {
         'username' : username,
+        'type' : type,
         'status' : '',
         'message' : '',
     }

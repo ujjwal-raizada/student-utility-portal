@@ -7,6 +7,7 @@ view_profile = function(req, res, next){
     var type = req.query.type;
     var res_data = {
         'username' : username,
+        'type' : '',
         'sourceSubscription' : [],
         'starList' : [],
         'noticeList' : [],
@@ -27,20 +28,26 @@ view_profile = function(req, res, next){
         },        
     }, function(err, result){
         if (err) {
+            res_data['type'] = undefined;
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error'; 
             return next({...err, res_data});
         }
         if (result.Student != null) {
+            res_data['type'] = 'Student';
             res_data['sourceSubscription'] = result.Student.sourceSubscription;
             res_data['starList'] = result.Student.starList;
         }
         else if (result.OfficialSource != null) {
+            res_data['type'] = 'Official Source';
             res_data['sourceSubscription'] = result.OfficialSource.sourceSubscription;
             res_data['starList'] = result.OfficialSource.starList;
             res_data['noticeList'] = result.OfficialSource.noticeList;
         }
-        else res_data['message'] = 'Failed';
+        else {
+            res_data['type'] = undefined;
+            res_data['message'] = 'Failed';
+        }
         return res.json(res_data);
     });
 

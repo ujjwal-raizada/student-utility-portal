@@ -10,6 +10,7 @@ validate_login = function(req, res, next) {
         'username' : username,
         'status' : '',
         'message' : ``,
+        'type' : '',
     };
     console.log('Validating Login : User : ' + username + ' Password : ' + password);
     
@@ -25,6 +26,7 @@ validate_login = function(req, res, next) {
     
     }, function(err, result) {
         if(err) {
+            res_data['type'] = undefined;
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error';
             console.log(res_data['status' + ' ' + res_data['message']]);
@@ -33,29 +35,37 @@ validate_login = function(req, res, next) {
 
         if (result.OfficialSource != null){
             if (result.OfficialSource.password == password){
+                res_data['type'] = 'Official Source';
                 res_data['status'] = 'success';
                 res_data['message'] = 'User logged in';
             }
             else{
+                res_data['type'] = undefined;
                 res_data['status'] = 'failure';
                 res_data['message'] = 'Invalid Password';                
             }
+            console.log(res_data);
             return res.json(res_data);
         }
         else if (result.Student != null) {
             if (result.Student.password == password) {
-               res_data['status'] = 'success';
-               res_data['message'] = 'User logged in';                
+                res_data['type'] = 'Student';
+                res_data['status'] = 'success';
+                res_data['message'] = 'User logged in';                
             }
             else{
+                res_data['type'] = undefined;
                 res_data['status'] = 'failure';
                 res_data['message'] = 'Invalid Password';                  
             }
+            console.log(res_data);
             return res.json(res_data);
         }
         else {
+            res_data['type'] = undefined;
             res_data['status'] = 'failure'
             res_data['message'] = `User doesn't exists`;
+            console.log(res_data);
             return res.json(res_data);
         }
     });
