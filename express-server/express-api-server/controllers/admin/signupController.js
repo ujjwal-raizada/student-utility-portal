@@ -36,7 +36,8 @@ var create_account = function(req, res, next){
         }
         else {
             res_data['status'] = 'failure';
-            res_data['message'] = 'admin already exists'
+            res_data['message'] = 'admin already exists';
+            console.log(res_data['status'] + ' ' + res_data['message']);
             return res.json(res_data);
         }
         //console.log(res_data['status'] + ' ' + res_data['message']);                
