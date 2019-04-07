@@ -13,7 +13,7 @@ class StudentsList extends Component {
       .then(res => {
         console.log(res);
         this.setState({
-          students: res.data
+          students: res.data.student_list
         });
       });
   }
