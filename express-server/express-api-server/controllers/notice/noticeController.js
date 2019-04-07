@@ -80,7 +80,7 @@ exports.create_notice = function(req, res) {
             res_data['message'] = 'Some error occured'
             res_data['status'] = 'failure'
             console.log('Some error occured')
-            res.json(res_data)
+            return res.json(res_data)
         }
 
         if (result.OfficialSource != null) {

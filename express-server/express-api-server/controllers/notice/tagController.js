@@ -15,7 +15,11 @@ exports.get_tags = function(req, res) {
 
     
     }, function(err, result) {
-        if(err) throw err;
+        if(err) {
+            res_data['status'] = 'failure';
+            res_data['message'] = 'Unknown error';
+            return next({...err, res_data});
+        }
 
         tags_list = []
         for (x in result.Tag) {
@@ -44,8 +48,8 @@ exports.create_tags = function(req, res) {
     }, function(err, result) {
         if(err) {
             console.log(err);
-            res_data['status'] = err;
-            res.json(res_data);
+            res_data['status'] = 'failure';
+            return res.json(res_data);
         }
         console.log('Result_tag: ' + result.Tag);
         
@@ -54,18 +58,18 @@ exports.create_tags = function(req, res) {
                 if(err) {
                     console.log(err);
                 res_data['status'] = err;
-                res.json(res_data);
+                return res.json(res_data);
                 }
                 else {
                     console.log('Tag created!!!');
                     res_data['status'] = 'tag created!';
-                    res.json(res_data);
+                    return res.json(res_data);
                 }
             });
         }
         else {
             res_data['status'] = 'tag already exists!';
-            res.json(res_data);
+            return res.json(res_data);
         }
 
     });
