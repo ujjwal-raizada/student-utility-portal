@@ -8,7 +8,7 @@ var loginController = require(path + '/loginController');
 var profileController = require(path + '/profileController');
 
 /* GET users listing. */
-router.get('/profile', profileController);
+router.post('/profile', profileController);
 router.post('/signup', signupController);
 router.post('/login', loginController);
 

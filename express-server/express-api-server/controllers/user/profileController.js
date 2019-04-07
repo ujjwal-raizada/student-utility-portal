@@ -3,8 +3,8 @@ var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
 
 view_profile = function(req, res, next){
-    var username = req.query.username;
-    var type = req.query.type;
+    var username = req.body.username;
+    var type = req.body.type;
     var res_data = {
         'username' : username,
         'type' : '',
@@ -46,7 +46,7 @@ view_profile = function(req, res, next){
         }
         else {
             res_data['type'] = undefined;
-            res_data['message'] = 'Failed';
+            res_data['message'] = 'failure';
         }
         return res.json(res_data);
     });
