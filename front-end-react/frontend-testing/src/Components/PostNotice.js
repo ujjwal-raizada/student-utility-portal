@@ -16,7 +16,7 @@ class PostNotice extends Component {
     is_event: false,
     eventDateTime: new Date(),
     all_tags: [],
-    selected_tags: [],
+    tags: [],
     submitting: false,
     status: "failure",
     error: ""
@@ -55,9 +55,10 @@ class PostNotice extends Component {
     });
     var data = this.state;
     const username = localStorage.getItem("username");
-    if (data.selected_tags.indexOf(username) == -1) {
-      data.selected_tags.push(username);
+    if (data.tags.indexOf(username) == -1) {
+      data.tags.push(username);
     }
+    console.log("this is data");
     console.log(data);
     axios
       .post(config.get("host_url") + config.get("routes.create_notice"), data)
@@ -102,18 +103,18 @@ class PostNotice extends Component {
 
   handleTag = event => {
     event.preventDefault();
-    const tag = event.target.textContent;
-    const pos = this.state.selected_tags.indexOf(tag);
+    const tag = event.target.textContent.slice(1);
+    const pos = this.state.tags.indexOf(tag);
 
     if (pos == -1) {
       event.target.className = "badge badge-pill badge-secondary";
       this.setState((prevState, props) => {
-        selected_tags: prevState.selected_tags.push(tag);
+        tags: prevState.tags.push(tag);
       });
     } else {
       event.target.className = "badge badge-pill badge-light";
       this.setState((prevState, props) => {
-        selected_tags: prevState.selected_tags.splice(pos, 1);
+        tags: prevState.tags.splice(pos, 1);
       });
     }
   };
@@ -122,7 +123,7 @@ class PostNotice extends Component {
     const tag_list = this.state.all_tags.map((item, index) => (
       <button
         className={
-          this.state.selected_tags.indexOf(item) != -1
+          this.state.tags.indexOf(item) != -1
             ? "badge badge-pill badge-secondary"
             : "badge badge-pill badge-light"
         }
