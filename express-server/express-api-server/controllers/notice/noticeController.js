@@ -179,17 +179,19 @@ exports.user_notices = function(req, res) {
         if(err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error';
-            return next({...err, res_data});
+            return res.json(res_data);
         }
 
         let sub_source_list = []
 
         if (result.student != null) {
+
+            // console.log(result.student)
             
             res_data.status = 'success';
             sub_source_list = result.student.sourceSubscription;
         }
-        else if (result.student != null) {
+        else if (result.officialsource != null) {
 
             res_data.status = 'success';
             sub_source_list = result.officialsource.sourceSubscription;
@@ -214,17 +216,22 @@ exports.user_notices = function(req, res) {
 
        let notice_data = []
 
-       for (x in result.Notice) {
-            if (x.sourceid in sub_source_list) {
-                let notice = [result.Notice[x].timestamp, result.Notice[x]]
-                notice_data.push(notice)
+        // console.log(result.Notice)
+       console.log(sub_source_list)
+
+       for (let notice of result.Notice) {
+           console.log(notice)
+            if (sub_source_list.indexOf(notice.source) >= 0) {
+                console.log(notice.source)
+                let new_notice = [notice.timestamp, notice]
+                notice_data.push(new_notice)
            }
        }
 
        // Sorting in desc. order of timestamp
        notice_data.sort(function(a, b) {return b[0] - a[0]})
        
-       console.log(notice_data)
+    //    console.log(notice_data)
        res_data.notice = notice_data
        return res.json(res_data)
 

@@ -41,11 +41,13 @@ exports.subscribe = function(req, res, next){
             if (result.Student != null) {
                 // update the student doc
                 temp_sub = result.Student.sourceSubscription;
-                if (!(source in temp_sub)) {
-                    temp_sub.push(sourceID);
-                    result.Student.updateOne({'sourceSubscription' : temp_sub});
-                    result.Student.save();
-                    return res.json(res_data);                 
+                if (temp_sub.indexOf(source) < 0) {
+                    temp_sub.push(source);
+                    result.Student.updateOne({'sourceSubscription' : temp_sub})
+                    .then(result => {
+                    return res.json(res_data);
+                    })
+                    .catch(err => res.json({'status': 'failure'})) 
                 }
                 else {
                     res_data['status'] = 'failure';
@@ -58,11 +60,13 @@ exports.subscribe = function(req, res, next){
                 // update the official source doc
                 temp_sub = result.OfficialSource.sourceSubscription;
 
-                if (!(source in temp_sub)) {
-                    temp_sub.push(sourceID);
-                    result.OfficialSource.updateOne({'sourceSubscription' : temp_sub});
-                    result.OfficialSource.save(); 
-                    return res.json(res_data);               
+                if (temp_sub.indexOf(source) < 0) {
+                    temp_sub.push(source);
+                    result.OfficialSource.updateOne({'sourceSubscription' : temp_sub})
+                    .then(result => {
+                        return res.json(res_data);
+                        })
+                        .catch(err => res.json({'status': 'failure'}))          
                 }
                 else {
                     res_data['status'] = 'failure';
