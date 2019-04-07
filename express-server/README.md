@@ -55,6 +55,10 @@ Following are the endpoints of the API:
 * /notice/create
 * /notice/createtag
 * /notice/id/:noticeID
+* /notice/subscribe
+* /notice/star
+* /notice/unsubscribe
+* /notice/unsubscribe
 
 
 ## Authors
