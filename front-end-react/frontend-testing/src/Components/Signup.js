@@ -8,7 +8,7 @@ class Signup extends Component {
   state = {
     username: "",
     password: "",
-    type: "normal",
+    type: "Student",
     placeholder: "",
     submitting: false
   };
@@ -35,10 +35,11 @@ class Signup extends Component {
     this.setState({
       submitting: true
     });
-
+    console.log("checking");
     axios
       .post(config.get("host_url") + config.get("routes.user_signup"), data)
       .then(res => {
+        console.log("checked");
         const { status, message } = res.data;
         if (status === "success") {
           this.setState({
@@ -48,7 +49,7 @@ class Signup extends Component {
           const { type, username } = this.state;
           localStorage.setItem(`username`, username);
           localStorage.setItem(`type`, type);
-          this.props.history.push(`/profile/${type}/${username}`);
+          this.props.history.push(`/profile`);
         } else if (status === "failure") {
           this.setState({
             placeholder: message,
