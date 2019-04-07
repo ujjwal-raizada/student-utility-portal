@@ -22,12 +22,17 @@ class Notices extends Component {
   };
 
   filter = item => {
+    console.log("filtered tags");
+    console.log(this.state.filter_tags);
     console.log(item[1].tags);
     var tags_searched = item[1].tags;
+    console.log("testing filter");
+    console.log(tags_searched);
+    console.log("filter tested");
     if (this.state.filter_tags.size === 0) return true;
     else {
       for (let i = 0; i < tags_searched.length; i++) {
-        if (this.state.filter_tags.has(tags_searched[i].slice(1))) return true;
+        if (this.state.filter_tags.has(tags_searched[i])) return true;
       }
       return false;
     }
