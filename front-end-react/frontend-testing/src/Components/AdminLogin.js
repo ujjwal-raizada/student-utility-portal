@@ -52,7 +52,7 @@ class AdminLogin extends Component {
         const { username, status, message } = res.data;
 
         console.log("changepage");
-        if (status == "successful") {
+        if (status == "success") {
           localStorage.setItem("username", username);
           localStorage.setItem("type", "Admin");
           this.setState({ logging_in: false, placeholder: "" });

@@ -11,7 +11,7 @@ class SourcesList extends Component {
       .get(config.get("host_url") + config.get("routes.sources"))
       .then(res => {
         this.setState({
-          sources: res.data
+          sources: res.data.source_list
         });
       });
   }
