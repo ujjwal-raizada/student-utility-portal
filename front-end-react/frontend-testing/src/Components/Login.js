@@ -53,11 +53,15 @@ class Login extends Component {
 
         if (status === "success") {
           var name = username.split("@");
-          console.log(name[0]);
-          localStorage.setItem(`username`, name[0]);
+          name[0] = name[0].toUpperCase();
+          var temp = name[0][0];
+          name[0] = name[0].toLowerCase();
+          temp = temp.concat(name[0].slice(1));
+          console.log(temp);
+          localStorage.setItem(`username`, temp);
           localStorage.setItem(`type`, type);
           this.setState({ logging_in: false });
-          this.props.history.push(`/Profile/${type}/${name[0]}`);
+          this.props.history.push(`/`);
         } else if (status === "failure") {
           this.setState({
             placeholder: `Login failed`,
