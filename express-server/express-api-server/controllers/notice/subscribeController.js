@@ -100,94 +100,84 @@ exports.unsubscribe = function(req, res, next){
         'status' : '',
         'message' : '',
     }
-
     async.parallel({
         'Student' : function(callback){
-            Student.findOne({'username' : username}, 'sourceSubscription')
+            Student.findOne({'username' : username})
             .exec(callback);
         },
         'OfficialSource' : function(callback){
-            OfficialSource.findOne({'username': username}, 'sourceSubscription')
+            OfficialSource.findOne({'username' : username})
             .exec(callback);
         },
         'SourceCheck' : function(callback){
-            OfficialSource.findOne({'username': source})
+            OfficialSource.findOne({'username' : source})
             .exec(callback);
         },
-    }, function(err, result){
+
+    }, 
+    function(err, result){
         if (err) {
             res_data['status'] = 'failure';
-            res_data['message'] = 'Unknown error';
-            return releaseEvents.json(res_data);
+            res_data['message'] = 'Unknown error'
+            return res.json(res_data);
         }
-        console.log(`${User} trying to unsubscribe ... `);
-        var temp_sub = [];
-        var get_existingID = undefined;
-        var filter_array = [];
-
-        if (result.SourceCheck != null) {
+        if (result.SourceCheck != null){
+            console.log(`${username} subscribing to ${result.SourceCheck.username} ...`);
+            
             res_data['status'] = 'success';
-            res_data['message'] = 'User subscribed successfully';
+            res_data['message'] = 'User unsubscribed successfully';
 
-            if (res.Student != null) {
+            var temp_sub = []; 
+            if (result.Student != null) {
+                // update the student doc
                 temp_sub = result.Student.sourceSubscription;
-                get_existingID = temp_sub.find(element => element == sourceID);
-
-                if (get_existingID){
-                    // delete the given sourceID
-                    filter_array = temp_sub.filter((value, index, arr) => value != sourceID);
-                    result.Student.updateOne({'sourceSubscription' : filter_array}, 
-                        function(err, instance){
-                            if (err) {
-                                res_data['status'] = 'failure';
-                                res_data['message'] = 'Error while updating record';
-                                return res.json(res_data);
-                            }
-                        });
-                    result.Student.save(); // add callback here 
+                if (temp_sub.indexOf(source) >= 0) {
+                    // temp_sub.push(source);
+                    temp_sub.splice( temp_sub.indexOf(source), 1 );
+                    result.Student.updateOne({'sourceSubscription' : temp_sub})
+                    .then(result => {
                     return res.json(res_data);
+                    })
+                    .catch(err => res.json({'status': 'failure'})) 
                 }
                 else {
-                    // given sourceID doesn't exists
                     res_data['status'] = 'failure';
-                    res_data['message'] = 'User had never subscribed to the source';
+                    res_data['message'] = 'User not subscribed to the Source';
                     return res.json(res_data);
                 }
+
             }
-            else if (res.OfficialSource != null){
-                temp_sub = result.Student.sourceSubscription;
-                get_existingID = temp_sub.find(element => element == sourceID);
+            else if (result.OfficialSource != null){
+                // update the official source doc
+                temp_sub = result.OfficialSource.sourceSubscription;
 
-                if (get_existingID){
-                    // delete the given the sourceID
-                    filter_array = temp_sub.filter((value, index, arr) => value != sourceID);
-                    result.OfficialSource.updateOne({'sourceSubscription' : filter_array},
-                        function(err, instance){
-                            if (err) {
-                                res_data['status'] = 'failure';
-                                res_data['message'] = 'Error while updating record';
-                                return res.json(res_data);
-                            }
-                        });
-                    result.OfficialSource.save();
-                    return res.json(res_data);
+                if (temp_sub.indexOf(source) >= 0) {
+                    temp_sub.splice( temp_sub.indexOf(source), 1 );
+                    result.OfficialSource.updateOne({'sourceSubscription' : temp_sub})
+                    .then(result => {
+                        return res.json(res_data);
+                        })
+                        .catch(err => res.json({'status': 'failure'}))          
                 }
                 else {
-                    // given sourceID doesn't exists
                     res_data['status'] = 'failure';
-                    res_data['message'] = 'User had never subscribed to the source';
+                    res_data['message'] = 'User not subscribed to the Source';
                     return res.json(res_data);
                 }
             }
             else {
+                log = `User could not be found with username ${username}`;
                 res_data['status'] = 'failure';
-                res_data['message'] = "User doesn't exists"
+                res_data['message'] = log;            
+                console.log(log);
                 return res.json(res_data);
             }
         }
         else {
+            log = 'No such Official Source exists !';
             res_data['status'] = 'failure';
-            res_data['message'] = "Source doesn't exists";
+            res_data['message'] = log;
+            console.log(log);
             return res.json(res_data);
         }
     });
