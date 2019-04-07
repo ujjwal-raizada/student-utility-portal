@@ -17,6 +17,7 @@ router.post('/createtag', tag_controller.create_tags);
 router.get('/getall', notice_controller.get_all_notices);
 router.post('/create', notice_controller.create_notice);
 router.get('/id/:noticeID', notice_controller.get_notice);
+router.post('/usernotice', notice_controller.user_notices);
 
 router.post('/subscribe', subscribe_controller.subscribe);
 router.post('/unsubscribe', subscribe_controller.unsubscribe);
