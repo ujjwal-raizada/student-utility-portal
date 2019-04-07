@@ -21,7 +21,7 @@ var create_account = function(req, res, next){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error';
-            return next({...err, res_data});
+            return res.json(res_data);
         }
         if (result.Admin == null){
             return Admin.create({'username' : username, 'password' : password},
@@ -30,7 +30,7 @@ var create_account = function(req, res, next){
                         res_data['status'] = 'failure'
                         res_data['message'] = 'mongodb error'
                         console.log(res_data['status'] + ' ' + res_data['message']);
-                        return next({...err, res_data});
+                        return res.json(res_data);
                     }        
                 });
         }

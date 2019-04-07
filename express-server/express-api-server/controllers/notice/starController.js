@@ -29,7 +29,7 @@ exports.star = function(req, res, next){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error'
-            return next({...err, res_data});
+            return res.json(res_data);
         }
         if (result.NoticeCheck != null){
             console.log(`${username} starring a notice of ${noticeSource} with noticeID ${noticeID}`);
@@ -132,7 +132,7 @@ exports.unstar = function(req, res, next){
         if (err) {
             res_data['status'] = 'failure';
             res_data['message'] = 'Unknown error'
-            return next({...err, res_data});
+            return res.json(res_data);
         }
 
         if (result.NoticeCheck != null){
@@ -159,7 +159,7 @@ exports.unstar = function(req, res, next){
                                 if (err) {
                                     res_data['status'] = 'failure';
                                     res_data['message'] = 'Error while updating records'
-                                    return next({...err, res_data});
+                                    return res.json(res_data);
                                 }        
                             });
                         result.Student.save(); // add callback method
@@ -183,7 +183,7 @@ exports.unstar = function(req, res, next){
                                 if (err) {
                                     res_data['status'] = 'failure';
                                     res_data['message'] = 'Error while updating records'
-                                    return next({...err, res_data});
+                                    return res.json(res_data);
                                 }
                             });
                         result.OfficialSource.save() // add callback method
