@@ -1,11 +1,21 @@
 var express = require('express');
+var multer = require('multer')
 var router = express.Router();
+
+var path = require('path');
+var appDir = path.dirname(require.main.filename);
 
 //Require Controller Modules
 var tag_controller = require('../controllers/notice/tagController.js');
 var notice_controller = require('../controllers/notice/noticeController.js');
 var subscribe_controller = require('../controllers/notice/subscribeController.js');
 var star_controller = require('../controllers/notice/starController.js')
+var poster_controller = require('../controllers/notice/posterController.js')
+
+const upload = multer({
+    dest: path.join(appDir, '../temp/poster'),
+    limits: { fileSize: 1 * 1024 * 1024 },
+  });
 
 //NOTICE ROUTES//
 
@@ -23,5 +33,7 @@ router.post('/subscribe', subscribe_controller.subscribe);
 router.post('/unsubscribe', subscribe_controller.unsubscribe);
 router.post('/star', star_controller.star);
 router.post('/unstar', star_controller.unstar);
+
+router.post('/upload', upload.single("file"), poster_controller.poster_upload);
 
 module.exports = router;
