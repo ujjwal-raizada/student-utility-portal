@@ -35,5 +35,6 @@ router.post('/star', star_controller.star);
 router.post('/unstar', star_controller.unstar);
 
 router.post('/upload', upload.single("file"), poster_controller.poster_upload);
+router.get('/poster/:filename', poster_controller.poster_download);
 
 module.exports = router;
