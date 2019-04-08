@@ -16,7 +16,11 @@ class Header extends Component {
 
   componentDidMount() {
     const username = localStorage.getItem(`username`);
-    const loggedin = username == `` ? false : true;
+    if (username == `` || username == null) {
+      var loggedin = false;
+    } else {
+      var loggedin = true;
+    }
     this.setState({
       page: this.props.page,
       [this.state.page]: true,
