@@ -23,9 +23,9 @@ class AdminLogin extends Component {
   };
 
   componentDidMount() {
-    localStorage.setItem("username", "");
-    localStorage.setItem("type", "");
-    localStorage.setItem("name", "");
+    localStorage.removeItem("username");
+    localStorage.removeItem("type");
+    localStorage.removeItem("name");
   }
 
   handleChange = event => {

@@ -10,44 +10,36 @@ class Header extends Component {
     PostNotice: false,
     Login: false,
     Signup: false,
-    loggedin: false,
-    page: ``
+    logged_in: false,
+    page: " "
   };
 
   componentDidMount() {
-    const username = localStorage.getItem(`username`);
-    if (username == `` || username == null) {
-      var loggedin = false;
+    const username = localStorage.getItem("username");
+    if (username == null) {
+      var logged_in = false;
     } else {
-      var loggedin = true;
+      var logged_in = true;
     }
     this.setState({
       page: this.props.page,
       [this.state.page]: true,
-      loggedin: loggedin
+      logged_in: logged_in
     });
   }
 
   handleSignout = () => {
-    localStorage.setItem(`username`, ``);
-    localStorage.setItem(`type`, ``);
-    localStorage.setItem(`name`, ``);
+    localStorage.removeItem("username");
+    localStorage.removeItem("type");
+    localStorage.removeItem("name");
   };
 
   render() {
-    const { loggedin, page } = this.state;
-    const username = localStorage.getItem(`username`);
-    const name = localStorage.getItem(`name`);
-    const type = localStorage.getItem(`type`);
+    const { logged_in, page } = this.state;
+    const name = localStorage.getItem("name");
+    const type = localStorage.getItem("type");
 
-    const brand = (
-      <div className="navbar-header">
-        <Link className="navbar-brand" to="/">
-          {" "}
-          Student Portal{" "}
-        </Link>
-      </div>
-    );
+    const brand = <Navbar.Brand href="/">Student Utility Portal</Navbar.Brand>;
 
     const login = <Nav.Link href={`/login`}>Login</Nav.Link>;
 
@@ -75,15 +67,15 @@ class Header extends Component {
     return (
       <Fragment>
         <Navbar sticky="top" bg="info" variant="dark">
-          <Navbar.Brand href="/">Stud Util Port</Navbar.Brand>
+          {brand}
           <Nav className="mr-auto">
             {type === `Official Source` && post_notice}
           </Nav>
           <Nav className="ml-auto">
-            {loggedin === false && login}
-            {loggedin === true && profile}
-            {loggedin === false && signup}
-            {loggedin === true && signout}
+            {logged_in === false && login}
+            {logged_in === true && profile}
+            {logged_in === false && signup}
+            {logged_in === true && signout}
           </Nav>
         </Navbar>
       </Fragment>

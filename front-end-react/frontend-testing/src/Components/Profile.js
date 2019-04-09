@@ -5,11 +5,9 @@ import OfficialProfile from "./OfficialProfile";
 import AdminProfile from "./AdminProfile";
 
 class Profile extends Component {
-  state = {};
-
   componentDidMount() {
-    const username = localStorage.getItem(`username`);
-    if (username == ``) {
+    const username = localStorage.getItem("username");
+    if (username == null) {
       this.props.history.push(`/login`);
     }
   }
