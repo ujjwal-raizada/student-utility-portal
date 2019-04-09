@@ -26,7 +26,7 @@ class PostNotice extends Component {
     const username = localStorage.getItem("username");
     const type = localStorage.getItem("type");
 
-    if (username == "") {
+    if (username == null) {
       this.props.history.push(`/login`);
     } else if (type != "Official Source") {
       this.props.history.push(`/`);

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 class StudentsList extends Component {
   state = {
@@ -19,19 +21,40 @@ class StudentsList extends Component {
   }
 
   render() {
-    const students_list = this.state.students.map((item, index) => (
-      <h6 key={index}>
-        {index + 1}
-        {" . "}
-        {item.username}
-      </h6>
-    ));
+    const students_list = this.state.students.map((item, index) => {
+      console.log(item);
+      return {
+        index: index,
+        username: item.username
+      };
+    });
+    const columns = [
+      {
+        Header: "Index",
+        accessor: "index"
+      },
+      {
+        Header: "Username",
+        accessor: "username"
+      }
+    ];
 
     return (
       <div>
         <h2>Students Registered</h2>
         <br />
-        {students_list}
+
+        <ReactTable
+          data={students_list}
+          columns={columns}
+          defaultPageSize={10}
+          resized={[
+            {
+              id: "index",
+              value: 70
+            }
+          ]}
+        />
       </div>
     );
   }

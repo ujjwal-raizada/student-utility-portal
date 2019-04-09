@@ -9,14 +9,16 @@ class Notices extends Component {
   };
 
   componentDidMount() {
+    const type = localStorage.getItem("type");
     const key =
-      localStorage.getItem("type") == ("Student" || "Official Source")
+      type == "Student" || type == "Official Source"
         ? "Subscribed Notices"
         : "All Notices";
     this.setState({ key: key });
   }
 
   render() {
+    const type = localStorage.getItem("type");
     return (
       <div>
         <Tabs
@@ -25,7 +27,7 @@ class Notices extends Component {
             this.setState({ key: key });
           }}
         >
-          {localStorage.getItem("type") == ("Student" || "Official Source") && (
+          {(type == "Student" || type == "Official Source") && (
             <Tab title="Subscribed Notices" eventKey="Subscribed Notices">
               <SubscribedNotices />
             </Tab>

@@ -23,9 +23,9 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    localStorage.setItem(`username`, ``);
-    localStorage.setItem(`type`, ``);
-    localStorage.setItem(`name`, ``);
+    localStorage.removeItem("username");
+    localStorage.removeItem("type");
+    localStorage.removeItem("name");
   }
 
   handleChange = event => {
@@ -129,20 +129,20 @@ class Login extends Component {
                     <div className="col text-center">
                       {this.state.placeholder}
                     </div>
-                    <div className="custom-control custom-checkbox mb-3">
-                      <input
-                        type="checkbox"
-                        className="custom-control-input"
-                        checked="true"
-                      />
-
-                      <label
-                        className="custom-control-label"
-                        for="customCheck1"
-                      >
-                        Remember Me
-                      </label>
-                    </div>
+                    {/*<div className="custom-control custom-checkbox mb-3">
+                        <input
+                          type="checkbox"
+                          className="custom-control-input"
+                          checked="true"
+                        />
+  
+                        <label
+                          className="custom-control-label"
+                          for="customCheck1"
+                        >
+                          Remember Me
+                        </label>
+                      </div>*/}
                     <button
                       className="btn btn-lg btn-primary btn-block"
                       type="submit"
