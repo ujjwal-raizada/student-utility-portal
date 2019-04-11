@@ -36,11 +36,9 @@ class Signup extends Component {
     this.setState({
       submitting: true
     });
-    console.log("checking");
     axios
       .post(config.get("host_url") + config.get("routes.user_signup"), data)
       .then(res => {
-        console.log("checked");
         const { status, message } = res.data;
         if (status === "success") {
           this.setState({
@@ -90,7 +88,7 @@ class Signup extends Component {
                 <div className="card-body">
                   <h5 className="card-title text-center">Sign Up</h5>
                   <h6 className="text-danger text-center">
-                    {this.state.placeholder}
+                    {!this.state.submitting && this.state.placeholder}
                   </h6>
                   <form className="form-signup">
                     <div className="form-label-group">
