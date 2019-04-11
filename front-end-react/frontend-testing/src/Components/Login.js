@@ -23,9 +23,9 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    localStorage.removeItem("username");
-    localStorage.removeItem("type");
-    localStorage.removeItem("name");
+    localStorage.setItem(`username`, ``);
+    localStorage.setItem(`type`, ``);
+    localStorage.setItem(`name`, ``);
   }
 
   handleChange = event => {
@@ -49,18 +49,16 @@ class Login extends Component {
       .post(config.get("host_url") + config.get("routes.user_login"), user)
 
       .then(res => {
-        console.log(res);
         const { type, username, status } = res.data;
 
         if (status === "success") {
-          localStorage.setItem("username", username);
-          var name = this.state.username.split("@");
+          var name = username.split("@");
           name[0] = name[0].toUpperCase();
           var temp = name[0][0];
           name[0] = name[0].toLowerCase();
           temp = temp.concat(name[0].slice(1));
-          console.log(temp);
           localStorage.setItem("name", temp);
+          localStorage.setItem("username", username);
           localStorage.setItem("type", type);
           this.setState({ logging_in: false });
           this.props.history.push(`/`);
@@ -71,9 +69,7 @@ class Login extends Component {
           });
         }
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   };
 
   handlePassword = () => {
@@ -129,20 +125,20 @@ class Login extends Component {
                     <div className="col text-center">
                       {this.state.placeholder}
                     </div>
-                    {/*<div className="custom-control custom-checkbox mb-3">
-                        <input
-                          type="checkbox"
-                          className="custom-control-input"
-                          checked="true"
-                        />
-  
-                        <label
-                          className="custom-control-label"
-                          for="customCheck1"
-                        >
-                          Remember Me
-                        </label>
-                      </div>*/}
+                    <div className="custom-control custom-checkbox mb-3">
+                      <input
+                        type="checkbox"
+                        className="custom-control-input"
+                        checked="true"
+                      />
+
+                      <label
+                        className="custom-control-label"
+                        for="customCheck1"
+                      >
+                        Remember Me
+                      </label>
+                    </div>
                     <button
                       className="btn btn-lg btn-primary btn-block"
                       type="submit"

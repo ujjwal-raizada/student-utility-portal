@@ -36,7 +36,6 @@ class StudentPofile extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
         this.setState({
           error: error,
           placeholder: error.message,
@@ -47,11 +46,24 @@ class StudentPofile extends Component {
 
   /* render method enclosing jsx expression */
   render() {
-    const subscribed = this.state.sourceSubscription.map(item => {
-      return <h3>{item}</h3>;
+    const subscribed = this.state.sourceSubscription.map((item, index) => {
+      var name = item.split("@");
+      name[0] = name[0].toUpperCase();
+      var temp = name[0][0];
+      name[0] = name[0].toLowerCase();
+      temp = temp.concat(name[0].slice(1));
+      return (
+        <h3>
+          {index + 1}.&nbsp;{temp}
+        </h3>
+      );
     });
-    const starred = this.state.starList.map(item => {
-      return <h3>{item}</h3>;
+    const starred = this.state.starList.map((item, index) => {
+      return (
+        <h3>
+          {index + 1}.&nbsp;{item}
+        </h3>
+      );
     });
     return (
       <Fragment>

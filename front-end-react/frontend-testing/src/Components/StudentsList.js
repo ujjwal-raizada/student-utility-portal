@@ -24,7 +24,7 @@ class StudentsList extends Component {
     const students_list = this.state.students.map((item, index) => {
       console.log(item);
       return {
-        index: index,
+        index: index + 1,
         username: item.username
       };
     });

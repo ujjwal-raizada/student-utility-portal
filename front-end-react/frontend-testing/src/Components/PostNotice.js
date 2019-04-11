@@ -13,8 +13,10 @@ class PostNotice extends Component {
     title: "",
     body: "",
     url: "",
+    img_url: null,
     is_event: false,
     eventDateTime: new Date(),
+    file: null,
     all_tags: [],
     tags: [],
     submitting: false,
@@ -119,6 +121,36 @@ class PostNotice extends Component {
     }
   };
 
+  onFileChange = event => {
+    console.log(event.target.files[0]);
+    this.setState({ file: event.target.files[0] });
+    console.log(this.state.file);
+  };
+
+  onFormSubmit = event => {
+    event.preventDefault();
+    const formData = new FormData();
+    console.log("in onFormSubmit");
+    console.log(this.state.file);
+    formData.append("noticeImage", this.state.file);
+    const conf = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
+    console.log(formData.get("noticeImage"));
+    const upload_url = config.get("host_url") + `/notice/upload`;
+    console.log(upload_url);
+    axios
+      .post(upload_url, formData, conf)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   render() {
     const tag_list = this.state.all_tags.map((item, index) => (
       <button
@@ -194,7 +226,12 @@ class PostNotice extends Component {
                         />
                         <br />
                       </div>
-
+                      <div>
+                        <form onSubmit={this.onFormSubmit}>
+                          <input type="file" onChange={this.onFileChange} />
+                          <button type="submit">Upload</button>
+                        </form>
+                      </div>
                       <div>
                         <label style={{ width: 100 }}>
                           Is an Event :
