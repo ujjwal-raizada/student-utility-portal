@@ -21,7 +21,7 @@ class SourcesList extends Component {
   render() {
     const sources_list = this.state.sources.map((item, index) => {
       return {
-        index: index,
+        index: index + 1,
         username: item.username
       };
     });
@@ -50,16 +50,6 @@ class SourcesList extends Component {
               value: 70
             }
           ]}
-          SubComponent={row => {
-            return (
-              <div>
-                You can put any component you want here, even another React
-                Table! You even have access to the row-level data if you need!
-                Spark-charts, drill-throughs, infographics... the possibilities
-                are endless!
-              </div>
-            );
-          }}
         />
       </div>
     );

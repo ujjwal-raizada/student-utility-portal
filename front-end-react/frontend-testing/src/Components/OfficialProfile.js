@@ -58,11 +58,27 @@ class OfficialPofile extends Component {
 
   /* render method enclosing jsx expression */
   render() {
-    const pastNotices = this.state.noticeList.map(item => {
-      return <h3>{item}</h3>;
+    const pastNotices = this.state.noticeList.map((item, index) => {
+      return (
+        <h3>
+          {index + 1}.&nbsp;{item}
+        </h3>
+      );
     });
     const subscribers = this.state.sourceSubscription.map(item => {
       return <h3>{item}</h3>;
+    });
+    const subscribed = this.state.sourceSubscription.map((item, index) => {
+      var name = item.split("@");
+      name[0] = name[0].toUpperCase();
+      var temp = name[0][0];
+      name[0] = name[0].toLowerCase();
+      temp = temp.concat(name[0].slice(1));
+      return (
+        <h3>
+          {index + 1}.&nbsp;{temp}
+        </h3>
+      );
     });
     return (
       <Fragment>
@@ -90,7 +106,9 @@ class OfficialPofile extends Component {
                   <br />
                   <h3>User Type: {localStorage.getItem(`type`)}</h3>
                 </Tab>
-                <Tab eventKey="subscribers" title="Subscribers" />
+                <Tab eventKey="subscribed" title="Subscribed">
+                  {subscribed}
+                </Tab>
                 <Tab eventKey="pastNotices" title="Past Notices">
                   {pastNotices}
                 </Tab>

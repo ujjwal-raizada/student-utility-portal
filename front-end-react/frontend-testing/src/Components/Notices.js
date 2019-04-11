@@ -19,6 +19,8 @@ class Notices extends Component {
 
   render() {
     const type = localStorage.getItem("type");
+    const is_user =
+      type == "Student" || type == "Official Source" ? true : false;
     return (
       <div>
         <Tabs
@@ -27,14 +29,14 @@ class Notices extends Component {
             this.setState({ key: key });
           }}
         >
-          {(type == "Student" || type == "Official Source") && (
+          {is_user && (
             <Tab title="Subscribed Notices" eventKey="Subscribed Notices">
               <SubscribedNotices />
             </Tab>
           )}
 
           <Tab title="All Notices" eventKey="All Notices">
-            <AllNotices />
+            <AllNotices is_user={is_user} />
           </Tab>
         </Tabs>
       </div>

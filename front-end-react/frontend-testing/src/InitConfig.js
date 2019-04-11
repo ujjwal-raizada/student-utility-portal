@@ -19,7 +19,11 @@ function InitConfig(production) {
       all_notices: `/notice/getall`,
       create_notice: `/notice/create`,
       get_notice: `/notice/id/:noticeID`,
-      subscribed_notices: `/notice/usernotice`
+      subscribed_notices: `/notice/usernotice`,
+      subscribe: `/notice/subscribe`,
+      unsubscribe: `/notice/unsubscribe`,
+      star: `/notice/star`,
+      unstar: `/notice/unstar`
     }
   });
 }
