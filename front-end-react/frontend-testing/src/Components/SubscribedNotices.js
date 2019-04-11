@@ -36,7 +36,17 @@ class SubscribedNotices extends Component {
       return false;
     }
   };
+  addSource = source => {
+    var source_list = this.state.subscribed_sources;
+    source_list.push(source);
+    this.setState({ subscribed_sources: source_list });
+  };
 
+  removeSource = source => {
+    var source_list = this.state.subscribed_sources;
+    source_list.splice(source_list.indexOf(source), 1);
+    this.setState({ subscribed_sources: source_list });
+  };
   componentDidMount() {
     const username = localStorage.getItem("username");
     axios
@@ -93,6 +103,9 @@ class SubscribedNotices extends Component {
             is_user={true}
             is_starred={is_starred}
             is_subscribed={is_subscribed}
+            addSource={this.addSource}
+            removeSource={this.removeSource}
+            index={index}
           />
         );
       });

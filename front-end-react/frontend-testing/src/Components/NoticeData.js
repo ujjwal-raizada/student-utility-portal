@@ -72,12 +72,18 @@ class NoticeData extends Component {
   render() {
     const { title, body, source } = this.props.data[1];
     let username = source.split("@")[0].toUpperCase();
+    var img_url = [
+      "https://i.ibb.co/mbY2R0j/4.png",
+      "https://i.ibb.co/zb6FXgn/3.png",
+      "https://i.ibb.co/Tb9B0Tt/2.png",
+      "https://i.ibb.co/PQzBcx3/1.png"
+    ];
     return (
       <div className="card cont">
         <div className="row no-gutters">
           <div className="col col-md-6 customDiv">
             <img
-              src="https://scontent.fmaa1-3.fna.fbcdn.net/v/t1.0-9/56371106_1535602813243383_420630675855507456_n.jpg?_nc_cat=101&_nc_ht=scontent.fmaa1-3.fna&oh=5625da8e034d740cb05dba6435b459eb&oe=5D40E221"
+              src={img_url[this.props.index % 4]}
               className="img-fluid NoticeImg"
               alt="Poster"
             />

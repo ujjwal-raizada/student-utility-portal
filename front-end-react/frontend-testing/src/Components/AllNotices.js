@@ -106,9 +106,9 @@ class AllNotices extends Component {
             is_user={this.props.is_user}
             is_starred={is_starred}
             is_subscribed={is_subscribed}
-            sender={"AllNotices"}
             addSource={this.addSource}
             removeSource={this.removeSource}
+            index={index}
           />
         );
       });
