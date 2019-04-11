@@ -213,15 +213,10 @@ exports.star_notice_list = function(req, res) {
         }
 
         if (result.student != null) {
-
-            res_data.star_notices = result.student.starNotice;
-            res_data['status'] = 'success';
-            return res.json(res_data);
+            return res.json(result.student.starNotice);
         }
         else if (result.officialsource != null) {
-            res_data.star_notices = result.officialsource.starNotice;
-            res_data['status'] = 'success';
-            return res.json(res_data)
+            return res.json(result.officialsource.starNotice);
         }
         else {
             res_data['status'] = 'failure';
