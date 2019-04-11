@@ -84,7 +84,7 @@ exports.star = function(req, res, next){
             }
         }
         else {
-            log = 'No such Official Source exists !';
+            log = 'No such notice exists !';
             res_data['status'] = 'failure';
             res_data['message'] = log;
             console.log(log);
@@ -175,7 +175,7 @@ exports.unstar = function(req, res, next){
             }
         }
         else {
-            log = 'No such Official Source exists !';
+            log = 'No such notice exists !';
             res_data['status'] = 'failure';
             res_data['message'] = log;
             console.log(log);
