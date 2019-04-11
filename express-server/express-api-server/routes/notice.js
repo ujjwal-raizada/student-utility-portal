@@ -33,6 +33,7 @@ router.post('/subscribe', subscribe_controller.subscribe);
 router.post('/unsubscribe', subscribe_controller.unsubscribe);
 router.post('/star', star_controller.star);
 router.post('/unstar', star_controller.unstar);
+router.post('/getstarred', star_controller.star_notice_list)
 
 router.post('/upload', upload.single("file"), poster_controller.poster_upload);
 router.get('/poster/:filename', poster_controller.poster_download);

@@ -183,3 +183,50 @@ exports.unstar = function(req, res, next){
         }
     });
 }
+
+
+exports.star_notice_list = function(req, res) {
+
+    let username = req.body.username;
+
+    var res_data = {
+        'username' : username,
+        'status' : '',
+        'message' : '',
+    }
+    
+    async.parallel({
+        'student': function(callback) {
+            Student.findOne({'username': username})
+            .exec(callback);
+        },
+        'officialsource': function(callback) {
+            OfficialSource.findOne({'username': username})
+            .exec(callback);
+        }
+    }, function(err, result) {
+
+        if (err) {
+            res_data['status'] = 'failure';
+            res_data['message'] = 'Unknown error'
+            return res.json(res_data);
+        }
+
+        if (result.student != null) {
+
+            res_data.star_notices = result.student.starNotice;
+            res_data['status'] = 'success';
+            return res.json(res_data);
+        }
+        else if (result.officialsource != null) {
+            res_data.star_notices = result.officialsource.starNotice;
+            res_data['status'] = 'success';
+            return res.json(res_data)
+        }
+        else {
+            res_data['status'] = 'failure';
+            return res.json(res_data)
+        }
+
+    });
+};
