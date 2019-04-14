@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "react-global-configuration";
 import "./Stylesheets/UserProfileOfficial.css";
 import { Tabs, Tab } from "react-bootstrap";
+import Source from "./Source";
 
 class StudentPofile extends Component {
   /* state variable for the class */
@@ -13,7 +14,8 @@ class StudentPofile extends Component {
     username: "",
     type: "",
     starList: [],
-    sourceSubscription: []
+    sourceSubscription: [],
+    sources: []
   };
 
   /* lifecycle methods of the class */
@@ -23,6 +25,7 @@ class StudentPofile extends Component {
       type: localStorage.getItem(`type`),
       username: localStorage.getItem(`username`)
     });
+
     axios
       .post(config.get("host_url") + config.get("routes.user_profile"), {
         username: localStorage.getItem(`username`),
@@ -30,6 +33,7 @@ class StudentPofile extends Component {
       })
       .then(res => {
         var data = res.data;
+        console.log(data);
         this.setState({
           starList: data.starList,
           sourceSubscription: data.sourceSubscription
@@ -40,6 +44,14 @@ class StudentPofile extends Component {
           error: error,
           placeholder: error.message,
           submitting: false
+        });
+      });
+
+    axios
+      .get(config.get("host_url") + config.get("routes.sources"))
+      .then(res => {
+        this.setState({
+          sources: res.data.source_list
         });
       });
   }
@@ -62,23 +74,15 @@ class StudentPofile extends Component {
   };
   /* render method enclosing jsx expression */
   render() {
-    const subscribed = this.state.sourceSubscription.map((item, index) => {
-      var name = item.split("@");
-      name[0] = name[0].toUpperCase();
-      var temp = name[0][0];
-      name[0] = name[0].toLowerCase();
-      temp = temp.concat(name[0].slice(1));
+    const subscribed = this.state.sources.map((item, index) => {
       return (
-        <h3>
-          {index + 1}.&nbsp;{temp}&nbsp;&nbsp;&nbsp;&nbsp;
-          <button
-            value={item}
-            onClick={this.handleUnsubscribe}
-            className="btn btn-primary btn-sm"
-          >
-            unsubscribe
-          </button>
-        </h3>
+        <Source
+          index={index}
+          source={item.username}
+          subscribed={
+            this.state.sourceSubscription.indexOf(item.username) != -1
+          }
+        />
       );
     });
     const starred = this.state.starList.map((item, index) => {

@@ -51,7 +51,7 @@ class SubscribedNotices extends Component {
     const username = localStorage.getItem("username");
     axios
       .post(config.get("host_url") + config.get("routes.subscribed_notices"), {
-        username
+        username: username
       })
       .then(res => {
         this.setState({

@@ -3,7 +3,7 @@ import { Modal, Button, ButtonToolbar } from "react-bootstrap";
 class ModalNotice extends React.Component {
   render() {
     const tag_list = this.props.tags.map((item, index) => {
-      return <span>{"#" + item + " "} </span>;
+      return <span key={index}>{"#" + item + " "} </span>;
     });
     return (
       <Modal

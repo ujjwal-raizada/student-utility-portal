@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "react-global-configuration";
 import "./Stylesheets/UserProfileOfficial.css";
 import { Tabs, Tab } from "react-bootstrap";
+import Source from "./Source";
 
 class OfficialPofile extends Component {
   /* state variable for the class */
@@ -15,7 +16,8 @@ class OfficialPofile extends Component {
     type: "",
     starList: [],
     sourceSubscription: [],
-    noticeList: []
+    noticeList: [],
+    sources: []
   };
 
   /* lifecycle methods of the class */
@@ -30,6 +32,7 @@ class OfficialPofile extends Component {
       type: localStorage.getItem(`type`),
       username: localStorage.getItem(`username`)
     });
+
     axios
       .post(config.get("host_url") + config.get("routes.user_profile"), {
         username: localStorage.getItem(`username`),
@@ -54,24 +57,15 @@ class OfficialPofile extends Component {
           submitting: false
         });
       });
-  }
 
-  handleUnsubscribe = event => {
-    event.preventDefault();
-    const source = event.target.value;
-    const username = localStorage.getItem("username");
-    const path = config.get("host_url") + config.get("routes.unsubscribe");
     axios
-      .post(path, { username: username, source: source })
+      .get(config.get("host_url") + config.get("routes.sources"))
       .then(res => {
-        if (res.data.status == "success") {
-          var source_list = this.state.sourceSubscription;
-          source_list.splice(source_list.indexOf(source), 1);
-          this.setState({ sourceSubscription: source_list });
-        }
-      })
-      .catch(error => {});
-  };
+        this.setState({
+          sources: res.data.source_list
+        });
+      });
+  }
 
   /* render method enclosing jsx expression */
   render() {
@@ -82,26 +76,16 @@ class OfficialPofile extends Component {
         </h3>
       );
     });
-    const subscribers = this.state.sourceSubscription.map(item => {
-      return <h3>{item}</h3>;
-    });
-    const subscribed = this.state.sourceSubscription.map((item, index) => {
-      var name = item.split("@");
-      name[0] = name[0].toUpperCase();
-      var temp = name[0][0];
-      name[0] = name[0].toLowerCase();
-      temp = temp.concat(name[0].slice(1));
+
+    const subscribed = this.state.sources.map((item, index) => {
       return (
-        <h3>
-          {index + 1}.&nbsp;{temp}&nbsp;&nbsp;&nbsp;&nbsp;
-          <button
-            value={item}
-            onClick={this.handleUnsubscribe}
-            className="btn btn-primary btn-sm"
-          >
-            unsubscribe
-          </button>
-        </h3>
+        <Source
+          index={index}
+          source={item.username}
+          subscribed={
+            this.state.sourceSubscription.indexOf(item.username) != -1
+          }
+        />
       );
     });
     return (
