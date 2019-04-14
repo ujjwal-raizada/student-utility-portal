@@ -2,11 +2,16 @@ import React, { Component, Fragment } from "react";
 import "./Stylesheets/NoticeData-stylesheet.css";
 import axios from "axios";
 import config from "react-global-configuration";
+import { Modal, Button, ButtonToolbar } from "react-bootstrap";
+import ModalNotice from "./ModalNotice";
+import ModalPoster from "./ModalPoster";
 
 class NoticeData extends Component {
   state = {
     star_status: false,
-    subscribe_status: false
+    subscribe_status: false,
+    modalShow: false,
+    posterShow: false
   };
   componentDidMount() {
     this.setState({
@@ -70,37 +75,71 @@ class NoticeData extends Component {
   };
 
   render() {
-    const { title, body, source } = this.props.data[1];
+    const { title, body, source, tags } = this.props.data[1];
     let username = source.split("@")[0].toUpperCase();
-    var img_url = [
+    var images = [
       "https://i.ibb.co/mbY2R0j/4.png",
       "https://i.ibb.co/zb6FXgn/3.png",
       "https://i.ibb.co/Tb9B0Tt/2.png",
       "https://i.ibb.co/PQzBcx3/1.png"
     ];
+    const img_url = images[this.props.index % 4];
     return (
       <div className="card cont">
         <div className="row no-gutters">
           <div className="col col-md-6 customDiv">
-            <img
-              src={img_url[this.props.index % 4]}
-              className="img-fluid NoticeImg"
-              alt="Poster"
+            <a href="#">
+              <img
+                src={img_url}
+                className="img-fluid NoticeImg"
+                alt="Poster"
+                onClick={event => {
+                  event.preventDefault();
+                  this.setState({ posterShow: true });
+                }}
+              />
+            </a>
+
+            <ModalPoster
+              show={this.state.posterShow}
+              onHide={() => this.setState({ posterShow: false })}
+              url={img_url}
             />
           </div>
+
           <div className="col col-md-6 ">
             <div className="card-block px-2 description">
               <h4 className="card-title">
-                {" "}
                 <b>{title} </b>
               </h4>
+
               <hr />
+
               <pre className="card-text">{body}</pre>
+
               <hr />
             </div>
-            <button className="btn btn-info">Read More &rarr;</button>
+
             <br />
+
+            <button
+              className="btn btn-info aligned-right"
+              onClick={event => {
+                event.preventDefault();
+                this.setState({ modalShow: true });
+              }}
+            >
+              Read More &rarr;
+            </button>
           </div>
+          <ModalNotice
+            show={this.state.modalShow}
+            onHide={() => this.setState({ modalShow: false })}
+            body={body}
+            title={title}
+            username={username}
+            tags={tags}
+          />
         </div>
         <div />
         <div className="card-footer w-100 text-muted">

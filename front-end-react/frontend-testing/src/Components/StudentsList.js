@@ -13,7 +13,6 @@ class StudentsList extends Component {
     axios
       .get(config.get("host_url") + config.get("routes.students"))
       .then(res => {
-        console.log(res);
         this.setState({
           students: res.data.student_list
         });
@@ -22,7 +21,6 @@ class StudentsList extends Component {
 
   render() {
     const students_list = this.state.students.map((item, index) => {
-      console.log(item);
       return {
         index: index + 1,
         username: item.username

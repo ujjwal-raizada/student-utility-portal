@@ -46,8 +46,8 @@ class DeleteTags extends Component {
     this.setState({ submitting: true });
     axios
       .post(config.get("host_url") + config.get("routes.delete_tag"), {
-        admin,
-        tags
+        admin: admin,
+        tags: tags
       })
       .then(res => {
         this.setState({ submitting: false });
