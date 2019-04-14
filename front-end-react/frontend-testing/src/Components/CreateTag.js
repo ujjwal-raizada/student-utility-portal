@@ -16,22 +16,23 @@ class CreateTag extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    const admin = localStorage.getItem("username");
+    const username = localStorage.getItem("username");
     const tag = this.state.tag;
     this.setState({ submitting: true });
     axios
       .post(config.get("host_url") + config.get("routes.create_tag"), {
-        tag,
-        admin
+        tag: tag,
+        username: username
       })
       .then(res => {
         this.setState({ submitting: false });
         console.log(res);
         const { status, message } = res.data;
         if (status == "success") {
-          this.setState({ placeholder: message });
+          alert("Tag Created Successfully!");
+          this.setState({ tag: "" });
         } else {
-          this.setState({ placeholder: message });
+          this.setState({ placeholder: status });
         }
       })
       .catch(error => {
@@ -58,6 +59,9 @@ class CreateTag extends Component {
             <label className="control-label col-sm-4">
               <h2>New Tag</h2>
             </label>
+            <h6 className="text-danger text-center">
+              {this.state.placeholder}
+            </h6>
             <div className="col-sm-4">
               <input
                 type="text"
