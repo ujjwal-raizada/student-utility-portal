@@ -3,5 +3,5 @@ import ReactDOM from "react-dom";
 
 import App from "./App";
 import InitConfig from "./InitConfig";
-InitConfig(false);
+InitConfig(true);
 ReactDOM.render(<App />, document.getElementById("root"));

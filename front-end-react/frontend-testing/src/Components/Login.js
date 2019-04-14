@@ -122,7 +122,7 @@ class Login extends Component {
                       />
                     </div>
                     <br />
-                    <div className="col text-center">
+                    <div className="col text-center text-danger">
                       {!this.state.logging_in && this.state.placeholder}
                     </div>
                     <div className="custom-control custom-checkbox mb-3">
