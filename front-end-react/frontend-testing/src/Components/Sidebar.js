@@ -46,13 +46,21 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const left_display = this.state.tags_on_left.map(tag => (
-      <button className="btn btn-block btn-info" onClick={this.handleClick}>
+    const left_display = this.state.tags_on_left.map((tag, index) => (
+      <button
+        className="btn btn-block btn-info"
+        onClick={this.handleClick}
+        key={index}
+      >
         {tag}
       </button>
     ));
-    const right_display = this.state.tags_on_right.map(tag => (
-      <button className="btn btn-block btn-info" onClick={this.handleClick}>
+    const right_display = this.state.tags_on_right.map((tag, index) => (
+      <button
+        className="btn btn-block btn-info"
+        onClick={this.handleClick}
+        key={index}
+      >
         {tag}
       </button>
     ));
