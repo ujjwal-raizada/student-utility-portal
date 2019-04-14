@@ -21,14 +21,14 @@ class ModalNotice extends React.Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>{this.props.body}</p>
+          <pre>{this.props.body}</pre>
           <br />
           <br />
           <div className="text text-right">{tag_list}</div>
         </Modal.Body>
         <Modal.Footer>
           <div className=" col col-ls-4 text-left">
-            Posted by - {this.props.username}
+            Posted by - {this.props.source}
           </div>
           <Button onClick={this.props.onHide} className="btn btn-info">
             Close

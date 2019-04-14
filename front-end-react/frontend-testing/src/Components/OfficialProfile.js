@@ -4,6 +4,7 @@ import config from "react-global-configuration";
 import "./Stylesheets/UserProfileOfficial.css";
 import { Tabs, Tab } from "react-bootstrap";
 import Source from "./Source";
+import NoticeShrinked from "./NoticeShrinked";
 
 class OfficialPofile extends Component {
   /* state variable for the class */
@@ -70,14 +71,12 @@ class OfficialPofile extends Component {
   /* render method enclosing jsx expression */
   render() {
     const pastNotices = this.state.noticeList.map((item, index) => {
-      return (
-        <h3>
-          {index + 1}.&nbsp;{item}
-        </h3>
-      );
+      return <NoticeShrinked key={index} id={index} notice_id={item} />;
     });
-
-    const subscribed = this.state.sources.map((item, index) => {
+    const starred = this.state.starList.map((item, index) => {
+      return <NoticeShrinked key={index} id={index} notice_id={item} />;
+    });
+    const source_list = this.state.sources.map((item, index) => {
       return (
         <Source
           index={index}
@@ -114,8 +113,11 @@ class OfficialPofile extends Component {
                   <br />
                   <h3>User Type: {localStorage.getItem(`type`)}</h3>
                 </Tab>
-                <Tab eventKey="subscribed" title="Subscribed">
-                  {subscribed}
+                <Tab eventKey="sources" title="Sources">
+                  {source_list}
+                </Tab>
+                <Tab eventKey="starred" title="Starred Notices">
+                  {starred}
                 </Tab>
                 <Tab eventKey="pastNotices" title="Past Notices">
                   {pastNotices}
