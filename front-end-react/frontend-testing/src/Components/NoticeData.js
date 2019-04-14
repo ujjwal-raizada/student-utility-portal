@@ -115,7 +115,9 @@ class NoticeData extends Component {
 
               <hr />
 
-              <pre className="card-text">{body}</pre>
+              <pre className="card-text">
+                {body.slice(0, 400) + (body.length > 400 ? "..." : "")}
+              </pre>
 
               <hr />
             </div>

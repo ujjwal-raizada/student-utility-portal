@@ -56,6 +56,23 @@ class OfficialPofile extends Component {
       });
   }
 
+  handleUnsubscribe = event => {
+    event.preventDefault();
+    const source = event.target.value;
+    const username = localStorage.getItem("username");
+    const path = config.get("host_url") + config.get("routes.unsubscribe");
+    axios
+      .post(path, { username: username, source: source })
+      .then(res => {
+        if (res.data.status == "success") {
+          var source_list = this.state.sourceSubscription;
+          source_list.splice(source_list.indexOf(source), 1);
+          this.setState({ sourceSubscription: source_list });
+        }
+      })
+      .catch(error => {});
+  };
+
   /* render method enclosing jsx expression */
   render() {
     const pastNotices = this.state.noticeList.map((item, index) => {
@@ -76,7 +93,14 @@ class OfficialPofile extends Component {
       temp = temp.concat(name[0].slice(1));
       return (
         <h3>
-          {index + 1}.&nbsp;{temp}
+          {index + 1}.&nbsp;{temp}&nbsp;&nbsp;&nbsp;&nbsp;
+          <button
+            value={item}
+            onClick={this.handleUnsubscribe}
+            className="btn btn-primary btn-sm"
+          >
+            unsubscribe
+          </button>
         </h3>
       );
     });
