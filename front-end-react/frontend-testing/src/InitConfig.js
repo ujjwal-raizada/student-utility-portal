@@ -18,7 +18,7 @@ function InitConfig(production) {
       delete_tag: `/admin/deletetag`,
       all_notices: `/notice/getall`,
       create_notice: `/notice/create`,
-      get_notice: `/notice/id/:noticeID`,
+      get_notice: `/notice/id`,
       subscribed_notices: `/notice/usernotice`,
       subscribe: `/notice/subscribe`,
       unsubscribe: `/notice/unsubscribe`,

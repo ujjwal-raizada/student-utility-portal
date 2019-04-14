@@ -4,6 +4,7 @@ import config from "react-global-configuration";
 import "./Stylesheets/UserProfileOfficial.css";
 import { Tabs, Tab } from "react-bootstrap";
 import Source from "./Source";
+import NoticeShrinked from "./NoticeShrinked";
 
 class StudentPofile extends Component {
   /* state variable for the class */
@@ -33,7 +34,6 @@ class StudentPofile extends Component {
       })
       .then(res => {
         var data = res.data;
-        console.log(data);
         this.setState({
           starList: data.starList,
           sourceSubscription: data.sourceSubscription
@@ -56,25 +56,9 @@ class StudentPofile extends Component {
       });
   }
 
-  handleUnsubscribe = event => {
-    event.preventDefault();
-    const source = event.target.value;
-    const username = localStorage.getItem("username");
-    const path = config.get("host_url") + config.get("routes.unsubscribe");
-    axios
-      .post(path, { username: username, source: source })
-      .then(res => {
-        if (res.data.status == "success") {
-          var source_list = this.state.sourceSubscription;
-          source_list.splice(source_list.indexOf(source), 1);
-          this.setState({ sourceSubscription: source_list });
-        }
-      })
-      .catch(error => {});
-  };
   /* render method enclosing jsx expression */
   render() {
-    const subscribed = this.state.sources.map((item, index) => {
+    const source_list = this.state.sources.map((item, index) => {
       return (
         <Source
           index={index}
@@ -86,11 +70,7 @@ class StudentPofile extends Component {
       );
     });
     const starred = this.state.starList.map((item, index) => {
-      return (
-        <h3>
-          {index + 1}.&nbsp;{item}
-        </h3>
-      );
+      return <NoticeShrinked key={index} id={index} notice_id={item} />;
     });
     return (
       <Fragment>
@@ -122,8 +102,8 @@ class StudentPofile extends Component {
                   <br />
                   <h3>User Type: {localStorage.getItem(`type`)}</h3>
                 </Tab>
-                <Tab eventKey="subscribed" title="Subscribed">
-                  {subscribed}
+                <Tab eventKey="sources" title="Sources">
+                  {source_list}
                 </Tab>
                 <Tab eventKey="starred" title="Starred Notices">
                   {starred}

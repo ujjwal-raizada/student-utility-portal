@@ -75,8 +75,8 @@ class NoticeData extends Component {
   };
 
   render() {
-    const { title, body, source, tags } = this.props.data[1];
-    let username = source.split("@")[0].toUpperCase();
+    let { title, body, source, tags } = this.props.data[1];
+    source = source.split("@")[0].toUpperCase();
     var images = [
       "https://i.ibb.co/mbY2R0j/4.png",
       "https://i.ibb.co/zb6FXgn/3.png",
@@ -139,16 +139,14 @@ class NoticeData extends Component {
             onHide={() => this.setState({ modalShow: false })}
             body={body}
             title={title}
-            username={username}
+            source={source}
             tags={tags}
           />
         </div>
         <div />
         <div className="card-footer w-100 text-muted">
           <div className="row">
-            <div className=" col col-sm-4 text-left">
-              Posted by - {username}
-            </div>
+            <div className=" col col-sm-4 text-left">Posted by - {source}</div>
             {this.props.is_user && (
               <div className="col col-sm-8 text-right">
                 <button
