@@ -1,5 +1,5 @@
-email/credentials.json
-email/token.json
+credentials.json
+token.json
 node_modules/
 *.sublime-workspace
 *.pyc
