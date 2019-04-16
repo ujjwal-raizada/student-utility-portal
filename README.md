@@ -2,17 +2,16 @@
 
 Software Engineering Project (IS F341)<br>
 
-* Frontend (ReactJS): [Frontend Link](https://sup-react.herokuapp.com/)
-* Backend (NodeJS + Express): [Backend Link](https://damp-fjord-85414.herokuapp.com/)
-* Server Logs: [Server Logs link](https://damp-fjord-85414.herokuapp.com/logs)
+* Frontend (ReactJS): [Frontend Link](https://student-util.herokuapp.com/)
+* Backend (NodeJS + Express): [Backend Link](https://sup-express.herokuapp.com/)
 
 
 ## Team:
-* Ujjwal Raizada `(Scrum Master)`
-* Satyam Mani   `(Product Owner)`
-* Daksh Yashlaha `(Developer)`
-* Prakhar Goenka `(Developer)`
-* Pranjal Gupta  `(Developer)`
+* [Ujjwal Raizada](https://github.com/ujjwalrox) `(Scrum Master)`
+* [Satyam Mani](https://github.com/sat13mani)   `(Product Owner)`
+* [Daksh Yashlaha](https://github.com/tufty-123) `(Developer)`
+* [Prakhar Goenka](https://github.com/PrakharGoenka) `(Developer)`
+* [Pranjal Gupta](https://github.com/PranjalGupta2199) `(Developer)`
 
 ## Milestones:
 
