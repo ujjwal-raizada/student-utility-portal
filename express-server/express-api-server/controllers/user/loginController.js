@@ -34,32 +34,84 @@ validate_login = function(req, res, next) {
         }
 
         if (result.OfficialSource != null){
-            if (result.OfficialSource.password == password){
+
+            result.OfficialSource.comparePassword(password, function(err, result) {
+                if(err){
+                res_data['type'] = undefined;
+                res_data['status'] = 'failure';
+                res_data['message'] = 'Invalid Password';
+                console.log(res_data['status' + ' ' + res_data['message']]);
+                return res.json(res_data);
+                }
+
+                if(result == true){
                 res_data['type'] = 'Official Source';
                 res_data['status'] = 'success';
-                res_data['message'] = 'User logged in';
-            }
-            else{
+                res_data['message'] = 'User logged in';   
+                console.log(res_data['status' + ' ' + res_data['message']]);
+                return res.json(res_data);                 
+                }
+
+                else{
                 res_data['type'] = undefined;
                 res_data['status'] = 'failure';
-                res_data['message'] = 'Invalid Password';                
-            }
-            console.log(res_data);
-            return res.json(res_data);
+                res_data['message'] = 'Invalid Password';
+                console.log(res_data['status' + ' ' + res_data['message']]);
+                return res.json(res_data);                        
+                }
+            });
+
+            // if (result.OfficialSource.password == password){
+            //     res_data['type'] = 'Official Source';
+            //     res_data['status'] = 'success';
+            //     res_data['message'] = 'User logged in';
+            // }
+            // else{
+            //     res_data['type'] = undefined;
+            //     res_data['status'] = 'failure';
+            //     res_data['message'] = 'Invalid Password';                
+            // }
+            // console.log(res_data);
+            // return res.json(res_data);
         }
         else if (result.Student != null) {
-            if (result.Student.password == password) {
-                res_data['type'] = 'Student';
-                res_data['status'] = 'success';
-                res_data['message'] = 'User logged in';                
-            }
-            else{
+            result.Student.comparePassword(password, function(err, result) {
+                if(err){
                 res_data['type'] = undefined;
                 res_data['status'] = 'failure';
-                res_data['message'] = 'Invalid Password';                  
-            }
-            console.log(res_data);
-            return res.json(res_data);
+                res_data['message'] = 'Invalid Password';
+                console.log(res_data['status' + ' ' + res_data['message']]);
+                return res.json(res_data);
+                }
+
+                if(result == true){
+                res_data['type'] = 'Student';
+                res_data['status'] = 'success';
+                res_data['message'] = 'User logged in';   
+                console.log(res_data['status' + ' ' + res_data['message']]);
+                return res.json(res_data);                 
+                }
+
+                else{
+                res_data['type'] = undefined;
+                res_data['status'] = 'failure';
+                res_data['message'] = 'Invalid Password';
+                console.log(res_data['status' + ' ' + res_data['message']]);
+                return res.json(res_data);                        
+                }
+            });
+            // if (result.Student.password == password) {
+            //     res_data['type'] = 'Student';
+            //     res_data['status'] = 'success';
+            //     res_data['message'] = 'User logged in';                
+            // }
+            // else{
+            //     res_data['type'] = undefined;
+            //     res_data['status'] = 'failure';
+            //     res_data['message'] = 'Invalid Password';                  
+            // }
+            // console.log(res_data);
+            // return res.json(res_data);
         }
         else {
             res_data['type'] = undefined;

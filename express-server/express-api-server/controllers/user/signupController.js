@@ -1,6 +1,8 @@
 var Student = require('../../models/Student');
 var OfficialSource = require('../../models/OfficialSource');
 var async = require('async');
+var bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
 
 //Create new user account
 create_account = function(req, res, next) {
@@ -43,12 +45,13 @@ create_account = function(req, res, next) {
                 console.log(res_data);
                 return res.json(res_data);
             }
-            else if(type == 'Official Source'){
+            else if(type == 'Official Source'){ 
                 OfficialSource.create(user_data, function(err, instance) {
                     if(err) {
                         res_data['status'] = 'failure'
                         res_data['message'] = 'mongodb error'
                         console.log(res_data['status'] + ' ' + res_data['message']);
+                        console.log(err);
                         return res.json(res_data);
                     }
                     else {
@@ -65,6 +68,7 @@ create_account = function(req, res, next) {
                         res_data['status'] = 'failure'
                         res_data['message'] = 'mongodb error'
                         console.log(res_data['status'] + ' ' + res_data['message']);
+                        console.log(err);
                         return res.json(res_data);
                     }
                     else{
