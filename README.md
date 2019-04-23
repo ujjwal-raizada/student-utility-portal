@@ -1,5 +1,7 @@
 # student-utility-portal
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c0a284533a90452d9b65230ccd5dac1c)](https://app.codacy.com/app/ujjwalrox/student-utility-portal?utm_source=github.com&utm_medium=referral&utm_content=ujjwalrox/student-utility-portal&utm_campaign=Badge_Grade_Dashboard)
+
 Software Engineering Project (IS F341)<br>
 
 * Frontend (ReactJS): [Frontend Link](https://student-util.herokuapp.com/)
