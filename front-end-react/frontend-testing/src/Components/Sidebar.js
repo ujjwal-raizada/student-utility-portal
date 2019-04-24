@@ -87,7 +87,14 @@ export default class Sidebar extends Component {
           </div>
           <div className="card my-4">
             <h5 className="card-header">Tags</h5>
-            <div className="card-body">
+            <div
+              className="card-body"
+              style={{
+                overflowX: "hidden",
+                overflowY: "auto",
+                height: "210px"
+              }}
+            >
               <div className="row">
                 <div className="col-lg-6">
                   <ul className="list-unstyled mb-0">{left_display}</ul>

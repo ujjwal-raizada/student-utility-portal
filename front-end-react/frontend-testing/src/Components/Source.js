@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
 
@@ -54,23 +54,29 @@ class Source extends Component {
     temp[0] = temp[0].toLowerCase();
     name = name.concat(temp[0].slice(1));
     return (
-      <div>
-        <label>
-          {" "}
-          {this.props.index + 1 + ". " + name}{" "}
-          <button
-            className="btn btn-info aligned-right"
-            onClick={this.handleClick}
-            disabled={this.state.submitting}
-          >
-            {this.state.submitting
-              ? "requesting"
-              : this.state.subscribed
-              ? "subscribed"
-              : "subscribe"}{" "}
-          </button>{" "}
-        </label>
-      </div>
+      <Fragment>
+        <div className="row container-fluid">
+          <div className="col col-sm-4">
+            {this.props.index + 1 + ". " + name}{" "}
+          </div>
+          <div className="col col-sm-4 " />
+          <div className="col col-sm-3">
+            <button
+              className="btn btn-outline-info btn-sm btn-block"
+              onClick={this.handleClick}
+              disabled={this.state.submitting}
+            >
+              {this.state.submitting
+                ? "requesting"
+                : this.state.subscribed
+                ? "subscribed"
+                : "subscribe"}{" "}
+            </button>{" "}
+          </div>
+          <hr />
+          <div className="col col-sm-1 " />
+        </div>
+      </Fragment>
     );
   }
 }

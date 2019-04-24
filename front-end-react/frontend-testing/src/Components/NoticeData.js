@@ -122,8 +122,6 @@ class NoticeData extends Component {
               <hr />
             </div>
 
-            <br />
-
             <button
               className="btn btn-info aligned-right"
               onClick={event => {

@@ -2,6 +2,7 @@ import React, { Fragment, Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
 import "./Stylesheets/UserProfileOfficial.css";
+import "./Stylesheets/OfficialProf.css";
 import { Tabs, Tab } from "react-bootstrap";
 import Source from "./Source";
 import NoticeShrinked from "./NoticeShrinked";
@@ -78,18 +79,21 @@ class OfficialPofile extends Component {
     });
     const source_list = this.state.sources.map((item, index) => {
       return (
-        <Source
-          index={index}
-          source={item.username}
-          subscribed={
-            this.state.sourceSubscription.indexOf(item.username) != -1
-          }
-        />
+        <Fragment>
+          <Source
+            index={index}
+            source={item.username}
+            subscribed={
+              this.state.sourceSubscription.indexOf(item.username) != -1
+            }
+          />
+          <br />
+        </Fragment>
       );
     });
     return (
       <Fragment>
-        <div className="container-fluid cont">
+        <div className="container-fluid my-4">
           <div className="row" />
         </div>
         <div className="container-fluid">
@@ -114,7 +118,17 @@ class OfficialPofile extends Component {
                   <h3>User Type: {localStorage.getItem(`type`)}</h3>
                 </Tab>
                 <Tab eventKey="sources" title="Sources">
-                  {source_list}
+                  <br />
+                  <div
+                    style={{
+                      overflowX: "hidden",
+                      overflowY: "auto",
+                      height: "450px"
+                    }}
+                    className="source_list"
+                  >
+                    {source_list}
+                  </div>
                 </Tab>
                 <Tab eventKey="starred" title="Starred Notices">
                   {starred}
