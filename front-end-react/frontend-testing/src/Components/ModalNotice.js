@@ -3,7 +3,8 @@ import { Modal, Button, ButtonToolbar } from "react-bootstrap";
 class ModalNotice extends React.Component {
   render() {
     const tag_list = this.props.tags.map((item, index) => {
-      return <span key={index}>{"#" + item + " "} </span>;
+      item = item.split("@")[0];
+      return <span key={index}>{"#" + item + " "}&nbsp;</span>;
     });
     return (
       <Modal
@@ -24,7 +25,9 @@ class ModalNotice extends React.Component {
           <pre>{this.props.body}</pre>
           <br />
           <br />
-          <div className="text text-right">{tag_list}</div>
+          <div className="text text-right">
+            <b>{tag_list}</b>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <div className=" col col-ls-4 text-left">

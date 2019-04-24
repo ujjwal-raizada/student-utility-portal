@@ -23,7 +23,8 @@ function InitConfig(production) {
       subscribe: `/notice/subscribe`,
       unsubscribe: `/notice/unsubscribe`,
       star: `/notice/star`,
-      unstar: `/notice/unstar`
+      unstar: `/notice/unstar`,
+      forgot_password: `/email/forgot`
     }
   });
 }

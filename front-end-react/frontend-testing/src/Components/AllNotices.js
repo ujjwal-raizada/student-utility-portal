@@ -53,6 +53,7 @@ class AllNotices extends Component {
     axios
       .get(config.get("host_url") + config.get("routes.all_notices"))
       .then(res => {
+        console.log(res.data);
         this.setState({
           loading: false,
           notice_data: res.data

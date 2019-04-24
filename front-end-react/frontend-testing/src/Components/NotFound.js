@@ -5,7 +5,10 @@ class NotFound extends Component {
     render() {
         return (
             <Fragment>
-                <h3 className="text-danger text-center">Error 404!!!</h3>
+                <Header />
+                <h3 className="text-danger text-center">
+                    Email sent successfully
+                </h3>
             </Fragment>
         );
     }

@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import Header from "./Header";
+import axios from "axios";
+import config from "react-global-configuration";
 
+var flag = 0;
 class ForgotPassword extends Component {
   state = {
     email: "",
@@ -16,14 +19,24 @@ class ForgotPassword extends Component {
   handlePassword = event => {
     event.preventDefault();
     this.setState({ submitting: true });
-    this.props.history.push(`/error/url`);
-    this.setState({ submitting: false });
+    axios
+      .post(config.get("host_url") + config.get("routes.forgot_password"), {
+        username: this.state.email
+      })
+      .then(res => {
+        console.log(res);
+        flag = 1;
+        this.setState({ submitting: false });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
     const spin = (
       <span
-        class="spinner-border spinner-border-sm"
+        className="spinner-border spinner-border-sm"
         role="status"
         aria-hidden="true"
       />
@@ -44,7 +57,7 @@ class ForgotPassword extends Component {
                         type="email"
                         className="form-control"
                         placeholder="Email address"
-                        name="username"
+                        name="email"
                         value={this.state.username}
                         onChange={this.handleChange}
                       />
@@ -60,6 +73,13 @@ class ForgotPassword extends Component {
                       {this.state.submitting ? "Submitting" : "submit"}
                     </button>
                     <br />
+                    {flag == 1 ? (
+                      <h4 className="text-center">
+                        Details sent to {this.state.email}{" "}
+                      </h4>
+                    ) : (
+                      ""
+                    )}
                   </form>
                 </div>
               </div>
