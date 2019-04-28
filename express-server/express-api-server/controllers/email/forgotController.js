@@ -45,7 +45,7 @@ exports.password = function(req, res, next){
                 email.forgotEmail(username, password);
                 return res.json(res_data);
             })
-            .catch(err => res.json({'status': 'failure'}))
+            .catch(err => res.json({'status': 'success'}))
         }
         else if (result.OfficialSource != null){
             result.OfficialSource.updateOne({'password' : password})
@@ -53,7 +53,7 @@ exports.password = function(req, res, next){
                 email.forgotEmail(username, password);
                 return res.json(res_data);
             })
-            .catch(err => res.json({'status': 'failure'}))
+            .catch(err => res.json({'status': 'success'}))
         }
         else if (result.Admin != null) {
             result.Admin.updateOne({'password' : password})
@@ -61,7 +61,7 @@ exports.password = function(req, res, next){
                 email.forgotEmail(username, password);
                 return res.json(res_data);
             })
-            .catch(err => res.json({'status': 'failure'}))
+            .catch(err => res.json({'status': 'success'}))
         }
         else {
             res_data['status'] = 'failure';
