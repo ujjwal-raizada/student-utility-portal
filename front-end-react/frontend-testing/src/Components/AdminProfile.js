@@ -10,7 +10,7 @@ import AdminStats from "./AdminStats";
 
 class AdminProfile extends Component {
   state = {
-    key: "Students List"
+    key: "Stats"
   };
 
   componentDidMount() {
@@ -31,6 +31,10 @@ class AdminProfile extends Component {
           unmountOnExit="true"
           variant="pills"
         >
+          <Tab title="Stats" eventKey="Stats">
+            <AdminStats />
+          </Tab>
+
           <Tab title="Students List" eventKey="Students List">
             <StudentsList />
           </Tab>
@@ -46,9 +50,7 @@ class AdminProfile extends Component {
           <Tab title="Delete Tags" eventKey="Delete Tags">
             <DeleteTags />
           </Tab>
-          <Tab title="Stats" eventKey="Stats">
-            <AdminStats />
-          </Tab>
+
         </Tabs>
       </div>
     );

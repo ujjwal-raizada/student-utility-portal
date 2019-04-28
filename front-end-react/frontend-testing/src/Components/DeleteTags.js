@@ -66,31 +66,55 @@ class DeleteTags extends Component {
       </option>
     ));
     return (
-      <div>
-        <form className="form-horizontal">
-          <div className="form-group">
-            <div className="col text-center">{this.state.placeholder}</div>
-            <label className="control-label col-sm-4">
-              <h2>Delete Tags</h2>
-            </label>
-          </div>
-          <select value={this.state.selected_tag} onChange={this.handleChange}>
-            {tag_list}
-          </select>
-          <div className="form-group">
-            <div className="col-sm-offset-5 col-sm-4">
-              <button
-                type="submit"
-                className="btn btn-default btn-primary"
-                disabled={this.state.submitting}
-                onClick={this.handleSubmit}
-              >
-                {this.state.submitting ? spin : ""} &nbsp;
-                {this.state.submitting ? "Submitting..." : "Delete"}
-              </button>
+      <div className="bg-light">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div className="card card-create-tag my-5">
+
+                <div className="card-header">
+                  <h5 className="card-title text-center">Delete Tag</h5>
+                </div>
+
+                <div className="card-body">
+                  <form className="form-horizontal">
+
+                    <div className="form-group">
+                      <div className="col text-center">{this.state.placeholder}</div>
+                    </div>
+
+                    <div className="col-md-8">
+                      <select
+                        className="form-control" 
+                        value={this.state.selected_tag}
+                        onChange={this.handleChange}
+                        >
+                        {tag_list}
+                      </select>
+                    </div>
+                    <br/>
+
+                    <div className="form-group">
+                      <div className="col-sm-offset-5 col-sm-6">
+                        <button
+                          type="submit"
+                          className="btn btn-default btn-primary"
+                          disabled={this.state.submitting}
+                          onClick={this.handleSubmit}
+                        >
+                          {this.state.submitting ? spin : ""} &nbsp;
+                          {this.state.submitting ? "Submitting..." : "Delete"}
+                        </button>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+
+              </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     );
   }
