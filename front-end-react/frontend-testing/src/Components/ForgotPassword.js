@@ -24,13 +24,17 @@ class ForgotPassword extends Component {
         username: this.state.email
       })
       .then(res => {
-        console.log(res);
-        flag = 1;
-        this.setState({ submitting: false });
+        if (res.data.status == `success`) {
+          var string = `details sent to ` + this.state.email;
+          alert(string);
+          this.setState({ submitting: false, username: "" });
+          this.props.history.push(`/login`);
+        } else {
+          alert("invalid id please sign up");
+          this.props.history.push(`/signup`);
+        }
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   };
 
   render() {
@@ -73,13 +77,6 @@ class ForgotPassword extends Component {
                       {this.state.submitting ? "Submitting" : "submit"}
                     </button>
                     <br />
-                    {flag == 1 ? (
-                      <h4 className="text-center">
-                        Details sent to {this.state.email}{" "}
-                      </h4>
-                    ) : (
-                      ""
-                    )}
                   </form>
                 </div>
               </div>
