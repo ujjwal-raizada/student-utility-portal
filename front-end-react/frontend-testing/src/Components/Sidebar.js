@@ -7,7 +7,8 @@ export default class Sidebar extends Component {
   state = {
     tags: [],
     tags_on_left: [],
-    tags_on_right: []
+    tags_on_right: [],
+    keyword: ""
   };
 
   handleClick = event => {
@@ -19,6 +20,15 @@ export default class Sidebar extends Component {
     const tag = event.target.textContent;
     this.props.callback(tag);
   };
+
+  handleSearch = event => {
+    event.preventDefault();
+    const keyword = event.target.value;
+    this.setState({
+      keyword: keyword
+    })
+    this.props.handleSearch(keyword);
+  }
 
   tagDisplay = () => {
     var left_array = [];
@@ -75,6 +85,8 @@ export default class Sidebar extends Component {
                   type="text"
                   className="form-control"
                   placeholder="Search for..."
+                  value={this.state.keyword}
+                  onChange={this.handleSearch}
                 />
                 &nbsp;
                 <span className="input-group-btn">
