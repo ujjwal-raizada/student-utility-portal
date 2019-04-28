@@ -52,44 +52,54 @@ class CreateTag extends Component {
       />
     );
     return (
-      <div className="row">
-        <div className="col col-sm-4" />
-        <div className="col col-sm-8">
-          <form className="form-horizontal">
-            <div className="form-group">
-              <div className="col text-center">{this.state.placeholder}</div>
-              <label className="control-label col-sm-4">
-                <h2>New Tag</h2>
-              </label>
-              <h6 className="text-danger text-center">
-                {this.state.placeholder}
-              </h6>
-              <div className="col-sm-4">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="tag"
-                  value={this.state.tag}
-                  name="tag"
-                  placeholder="Enter New Tag"
-                  onChange={this.handleChange}
-                />
+      <div className="bg-light">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div className="card card-create-tag my-5">
+
+                <div className="card-header">
+                  <h5 className="card-title text-center">Create Tag</h5>
+                </div>
+
+                <div className="card-body">
+                  <form className="form-create-tag">
+                    <div className="form-label-group">
+                      <h6 className="text-danger text-center">
+                        {this.state.placeholder}
+                      </h6>
+                      <div className="col-md-8">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="tag"
+                          value={this.state.tag}
+                          name="tag"
+                          placeholder="Enter New Tag"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                    </div>
+                    <br/>
+                    <div className="form-group">
+                      <div className="col-sm-offset-5 col-sm-6">
+                        <button
+                          type="submit"
+                          className="btn btn-md btn-primary btn-block"
+                          disabled={this.state.submitting}
+                          onClick={this.handleSubmit}
+                        >
+                          {this.state.submitting ? spin : ""} &nbsp;
+                          {this.state.submitting ? "Submitting..." : "Submit"}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
               </div>
             </div>
-            <div className="form-group">
-              <div className="col-sm-offset-5 col-sm-4 text-center">
-                <button
-                  type="submit"
-                  className="btn btn-default btn-primary"
-                  disabled={this.state.submitting}
-                  onClick={this.handleSubmit}
-                >
-                  {this.state.submitting ? spin : ""} &nbsp;
-                  {this.state.submitting ? "Submitting..." : "Submit"}
-                </button>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     );

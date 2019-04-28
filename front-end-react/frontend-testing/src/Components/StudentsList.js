@@ -56,6 +56,7 @@ class StudentsList extends Component {
                     value: 70
                   }
                 ]}
+                noDataText='Loading...'
               />
             </div>
             <div className="col col-lg-2" />

@@ -62,7 +62,7 @@ class AdminLogin extends Component {
           localStorage.setItem("name", temp);
           localStorage.setItem("username", username);
           localStorage.setItem("type", "Admin");
-          this.props.history.push("/");
+          this.props.history.push("/profile");
         } else if (status == "failure") {
           this.setState({
             placeholder: message,
