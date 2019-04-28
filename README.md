@@ -1,27 +1,34 @@
 # student-utility-portal
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c0a284533a90452d9b65230ccd5dac1c)](https://app.codacy.com/app/ujjwalrox/student-utility-portal?utm_source=github.com&utm_medium=referral&utm_content=ujjwalrox/student-utility-portal&utm_campaign=Badge_Grade_Dashboard)
-<br>
+<br><br>
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=ujjwalrox_student-utility-portal)](https://sonarcloud.io/dashboard?id=ujjwalrox_student-utility-portal)
 
 Software Engineering Project (IS F341)<br>
+
+We have followed Scrum framework thorughout this project. All the scrum project reports are available in the scrum/ directory.
+
+Complete project was divided into 3 sprints of 3 weeks each.
+Each sprint had 6 daily scrums, 1 sprint planning, 1 sprint retrospective meets.
+
+## Deployment Links:
 
 * Frontend (ReactJS): [Frontend Link](https://student-util.herokuapp.com/)
 * Backend (NodeJS + Express): [Backend Link](https://sup-express.herokuapp.com/)
 
 
 ## Team:
-* [Ujjwal Raizada](https://github.com/ujjwalrox) `(Scrum Master)`
-* [Satyam Mani](https://github.com/sat13mani)   `(Product Owner)`
-* [Daksh Yashlaha](https://github.com/tufty-123) `(Developer)`
-* [Prakhar Goenka](https://github.com/PrakharGoenka) `(Developer)`
-* [Pranjal Gupta](https://github.com/PranjalGupta2199) `(Developer)`
+* [Ujjwal Raizada](https://github.com/ujjwalrox) &nbsp;&nbsp;&nbsp; `(Scrum Master)`
+* [Satyam Mani](https://github.com/sat13mani) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `(Product Owner)`
+* [Daksh Yashlaha](https://github.com/tufty-123)&nbsp;&nbsp; `(Developer)`
+* [Prakhar Goenka](https://github.com/PrakharGoenka) &nbsp;&nbsp;`(Developer)`
+* [Pranjal Gupta](https://github.com/PranjalGupta2199) &nbsp; &nbsp;&nbsp; &nbsp;`(Developer)`
 
-## Milestones:
-
-* Session Handling
-* Search based on tags
-* Bootstrap for UI
+## Technologies Used:
+* ReactJS
+* ExpressJS
+* Atlas MongoDB
+* Bootstrap 4
 
 
 ## Contributing

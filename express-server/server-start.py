@@ -29,7 +29,7 @@ if ( len(sys.argv) > 1 and sys.argv[1] == '--dev'):
         os.system(linux_or_mac_dev)
     else:
         print('Platform unsupported!')
-elif (len(sys.argv) == 0):
+elif (len(sys.argv) == 1):
 
     print('Starting server:')
 
