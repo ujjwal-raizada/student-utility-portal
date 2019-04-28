@@ -23,13 +23,15 @@ class NoticeShrinked extends Component {
   }
   render() {
     const notice = this.state.notice;
-    /*if (notice != null) {
-            const source = notice.source.split("@")[0].toUpperCase();
-        }*/
+
+    if(notice == null) {
+      return null;
+    }
+
     return (
       <div>
         <span>
-          <pre>{notice != null && notice.title}</pre>
+          <pre>{notice.title}</pre>
         </span>
         <button
           className="btn btn-info aligned-right"
@@ -40,20 +42,14 @@ class NoticeShrinked extends Component {
         >
           Read More &rarr;
         </button>
-        {notice != null && (
           <ModalNotice
             show={this.state.modalShow}
             onHide={() => this.setState({ modalShow: false })}
             body={notice.body}
             title={notice.title}
-            source={
-              notice != null
-                ? notice.source.split("@")[0].toUpperCase()
-                : "abcd"
-            }
+            source={notice.source.split("@")[0].toUpperCase()}
             tags={notice.tags}
           />
-        )}
         <hr />
       </div>
     );
