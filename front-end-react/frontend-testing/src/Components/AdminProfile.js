@@ -6,6 +6,7 @@ import SourcesList from "./SourcesList";
 import CreateTag from "./CreateTag";
 import DeleteTags from "./DeleteTags";
 import { Tabs, Tab } from "react-bootstrap";
+import AdminStats from "./AdminStats";
 
 class AdminProfile extends Component {
   state = {
@@ -41,6 +42,9 @@ class AdminProfile extends Component {
 
           <Tab title="Delete Tags" eventKey="Delete Tags">
             <DeleteTags />
+          </Tab>
+          <Tab title="Stats" eventKey="Stats">
+            <AdminStats />
           </Tab>
         </Tabs>
       </div>

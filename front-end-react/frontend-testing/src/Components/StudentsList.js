@@ -38,22 +38,30 @@ class StudentsList extends Component {
     ];
 
     return (
-      <div>
-        <h2>Students Registered</h2>
-        <br />
+      <React.Fragment>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col col-lg-2" />
+            <div className="col col-lg-8">
+              <h2 className="text-center my-2">Students Registered</h2>
+              <br />
 
-        <ReactTable
-          data={students_list}
-          columns={columns}
-          defaultPageSize={10}
-          resized={[
-            {
-              id: "index",
-              value: 70
-            }
-          ]}
-        />
-      </div>
+              <ReactTable
+                data={students_list}
+                columns={columns}
+                defaultPageSize={10}
+                resized={[
+                  {
+                    id: "index",
+                    value: 70
+                  }
+                ]}
+              />
+            </div>
+            <div className="col col-lg-2" />
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
