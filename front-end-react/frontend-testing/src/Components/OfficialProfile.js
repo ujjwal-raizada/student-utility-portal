@@ -111,6 +111,9 @@ class OfficialPofile extends Component {
                 id="controlled-tab-example"
                 activeKey={this.state.key}
                 onSelect={key => this.setState({ key })}
+                mountOnEnter="true"
+                unmountOnExit="true"
+                variant="pills"
               >
                 <Tab eventKey="Home" title="Home">
                   <h3>Name: {this.state.name} </h3>
