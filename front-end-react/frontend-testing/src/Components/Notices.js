@@ -28,6 +28,9 @@ class Notices extends Component {
           onSelect={key => {
             this.setState({ key: key });
           }}
+          mountOnEnter="true"
+          unmountOnExit="true"
+          variant="pills"
         >
           {is_user && (
             <Tab title="Subscribed Notices" eventKey="Subscribed Notices">

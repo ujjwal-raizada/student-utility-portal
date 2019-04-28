@@ -27,6 +27,9 @@ class AdminProfile extends Component {
           onSelect={key => {
             this.setState({ key: key });
           }}
+          mountOnEnter="true"
+          unmountOnExit="true"
+          variant="pills"
         >
           <Tab title="Students List" eventKey="Students List">
             <StudentsList />
