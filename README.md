@@ -1,6 +1,8 @@
 # student-utility-portal
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c0a284533a90452d9b65230ccd5dac1c)](https://app.codacy.com/app/ujjwalrox/student-utility-portal?utm_source=github.com&utm_medium=referral&utm_content=ujjwalrox/student-utility-portal&utm_campaign=Badge_Grade_Dashboard)
+<br>
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=ujjwalrox_student-utility-portal)](https://sonarcloud.io/dashboard?id=ujjwalrox_student-utility-portal)
 
 Software Engineering Project (IS F341)<br>
 
