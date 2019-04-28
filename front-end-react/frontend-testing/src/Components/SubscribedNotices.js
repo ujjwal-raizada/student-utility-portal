@@ -16,7 +16,8 @@ class SubscribedNotices extends Component {
     placeholder: "",
     filter_tags: new Set(),
     starred_notices: [],
-    subscribed_sources: []
+    subscribed_sources: [],
+    keyword: ""
   };
 
   handleFilter = tag => {
@@ -26,7 +27,22 @@ class SubscribedNotices extends Component {
     this.setState({ filter_tags: current_tags });
   };
 
+  handleSearch = keyword => {
+    keyword = keyword.toLowerCase().trim();
+    this.setState({
+      keyword: keyword,
+    })
+  }
+
   filter = item => {
+
+    const keyword = this.state.keyword;
+    if(keyword !== "") {
+      const title = item[1].title.toLowerCase();
+      const body = item[1].body.toLowerCase();
+      if(title.indexOf(keyword) === -1 && body.indexOf(keyword) === -1) return false;
+    }
+
     var tags_searched = item[1].tags;
     if (this.state.filter_tags.size === 0) return true;
     else {
@@ -36,6 +52,7 @@ class SubscribedNotices extends Component {
       return false;
     }
   };
+
   addSource = source => {
     var source_list = this.state.subscribed_sources;
     source_list.push(source);
@@ -120,7 +137,7 @@ class SubscribedNotices extends Component {
               </div>
             </div>
             <div className="col col-md-4">
-              <Sidebar callback={this.handleFilter} />
+              <Sidebar callback={this.handleFilter} handleSearch={this.handleSearch}/>
             </div>
           </div>
         </div>
