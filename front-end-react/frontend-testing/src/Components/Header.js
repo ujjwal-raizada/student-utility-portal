@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 class Header extends Component {
   state = {
@@ -16,11 +16,13 @@ class Header extends Component {
 
   componentDidMount() {
     const username = localStorage.getItem("username");
+    
     if (username == null) {
       var logged_in = false;
     } else {
       var logged_in = true;
     }
+
     this.setState({
       page: this.props.page,
       [this.state.page]: true,
@@ -57,17 +59,11 @@ class Header extends Component {
       </Nav.Link>
     );
 
-    const search = (
-      <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-light">Search</Button>
-      </Form>
-    );
-
     return (
-      <Fragment>
-        <Navbar sticky="top" bg="info" variant="dark">
+        <Navbar sticky="top" bg="info" variant="dark" collapse="sm">
           {brand}
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             {type === `Official Source` && post_notice}
           </Nav>
@@ -77,8 +73,8 @@ class Header extends Component {
             {logged_in === false && signup}
             {logged_in === true && signout}
           </Nav>
+          </Navbar.Collapse>
         </Navbar>
-      </Fragment>
     );
   }
 }

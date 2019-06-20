@@ -18,7 +18,7 @@ export default class Sidebar extends Component {
       event.target.className = `btn btn-block btn-dark`;
     else event.target.className = `btn btn-block btn-info`;
     const tag = event.target.textContent;
-    this.props.callback(tag);
+    this.props.handleFilter(tag);
   };
 
   handleSearch = event => {
@@ -65,6 +65,7 @@ export default class Sidebar extends Component {
         {tag}
       </button>
     ));
+
     const right_display = this.state.tags_on_right.map((tag, index) => (
       <button
         className="btn btn-block btn-info"
@@ -74,6 +75,7 @@ export default class Sidebar extends Component {
         {tag}
       </button>
     ));
+
     return (
       <Fragment>
         <div className="position-fixed">
@@ -97,6 +99,7 @@ export default class Sidebar extends Component {
               </div>
             </div>
           </div>
+          
           <div className="card my-4">
             <h5 className="card-header">Tags</h5>
             <div

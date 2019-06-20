@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Header from "./Header";
 import axios from "axios";
 import config from "react-global-configuration";
 
-var flag = 0;
 class ForgotPassword extends Component {
   state = {
     email: "",
@@ -13,7 +12,7 @@ class ForgotPassword extends Component {
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [name]: value });
   };
 
   handlePassword = event => {
@@ -45,6 +44,7 @@ class ForgotPassword extends Component {
         aria-hidden="true"
       />
     );
+    
     return (
       <div className="bg-light">
         <Header page="forgotpassword" />

@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
-import config from "react-global-configuration";
 import StudentsList from "./StudentsList";
 import SourcesList from "./SourcesList";
 import CreateTag from "./CreateTag";
 import DeleteTags from "./DeleteTags";
 import { Tabs, Tab } from "react-bootstrap";
-import AdminStats from "./AdminStats";
 
 class AdminProfile extends Component {
   state = {
@@ -19,6 +16,7 @@ class AdminProfile extends Component {
       this.props.history.push("/error");
     }
   }
+
   render() {
     return (
       <div>
@@ -31,9 +29,6 @@ class AdminProfile extends Component {
           unmountOnExit="true"
           variant="pills"
         >
-          <Tab title="Stats" eventKey="Stats">
-            <AdminStats />
-          </Tab>
 
           <Tab title="Students List" eventKey="Students List">
             <StudentsList />

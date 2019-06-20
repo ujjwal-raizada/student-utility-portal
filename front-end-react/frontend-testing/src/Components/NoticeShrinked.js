@@ -7,6 +7,7 @@ class NoticeShrinked extends Component {
   state = {
     modalShow: false
   };
+
   componentDidMount() {
     const notice_id = this.props.notice_id;
     axios
@@ -21,6 +22,7 @@ class NoticeShrinked extends Component {
       })
       .catch(error => {});
   }
+
   render() {
     const notice = this.state.notice;
 
@@ -33,6 +35,7 @@ class NoticeShrinked extends Component {
         <span>
           <pre>{notice.title}</pre>
         </span>
+
         <button
           className="btn btn-info aligned-right"
           onClick={event => {
@@ -42,6 +45,7 @@ class NoticeShrinked extends Component {
         >
           Read More &rarr;
         </button>
+
           <ModalNotice
             show={this.state.modalShow}
             onHide={() => this.setState({ modalShow: false })}
@@ -50,7 +54,9 @@ class NoticeShrinked extends Component {
             source={notice.source.split("@")[0].toUpperCase()}
             tags={notice.tags}
           />
+
         <hr />
+        
       </div>
     );
   }

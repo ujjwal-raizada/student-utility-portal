@@ -1,17 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
 import Header from "./Header";
-
-const ColoredLine = ({ color }) => (
-  <hr
-    style={{
-      color: color,
-      backgroundColor: color,
-      height: 1
-    }}
-  />
-);
 
 class Login extends Component {
   state = {
@@ -23,9 +13,10 @@ class Login extends Component {
   };
 
   componentDidMount() {
-    localStorage.removeItem("username");
-    localStorage.removeItem("type");
-    localStorage.removeItem("name");
+    const username = localStorage.getItem("username");
+    if (username != null) {
+      this.props.history.push(`/`);
+    }
   }
 
   handleChange = event => {

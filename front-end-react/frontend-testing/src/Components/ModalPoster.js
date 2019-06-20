@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Modal, Button, ButtonToolbar } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 class ModalPoster extends React.Component {
   render() {
     return (
