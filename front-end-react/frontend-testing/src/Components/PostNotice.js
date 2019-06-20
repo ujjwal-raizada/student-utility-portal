@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
 import DateTimePicker from "react-datetime-picker";
-import { Form, Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
+import { Jumbotron } from "react-bootstrap";
 import Header from "./Header";
 
 class PostNotice extends Component {

@@ -12,8 +12,9 @@ class CreateTag extends Component {
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [name]: value });
   };
+
   handleSubmit = event => {
     event.preventDefault();
     const username = localStorage.getItem("username");
@@ -27,7 +28,7 @@ class CreateTag extends Component {
       .then(res => {
         this.setState({ submitting: false });
         console.log(res);
-        const { status, message } = res.data;
+        const { status } = res.data;
         if (status == "success") {
           alert("Tag Created Successfully!");
           this.setState({ tag: "" });

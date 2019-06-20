@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import config from "react-global-configuration";
 import Header from "./Header";
-import { Form, Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
 
 class Signup extends Component {
   state = {
@@ -14,9 +13,10 @@ class Signup extends Component {
   };
 
   componentDidMount() {
-    localStorage.removeItem("username");
-    localStorage.removeItem("type");
-    localStorage.removeItem("name");
+    const username = localStorage.getItem("username");
+    if (username != null) {
+      this.props.history.push(`/`);
+    }
   }
 
   handleChange = event => {

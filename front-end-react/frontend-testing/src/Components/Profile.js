@@ -13,13 +13,14 @@ class Profile extends Component {
   }
 
   render() {
-    var type = localStorage.getItem(`type`);
+    var type, profile;
+    type = localStorage.getItem(`type`);
     if (type == "Student") {
-      var profile = <StudentProfile />;
+      profile = <StudentProfile />;
     } else if (type == "Official Source") {
-      var profile = <OfficialProfile />;
+      profile = <OfficialProfile />;
     } else if (type == "Admin") {
-      var profile = <AdminProfile />;
+      profile = <AdminProfile />;
     }
     return (
       <Fragment>

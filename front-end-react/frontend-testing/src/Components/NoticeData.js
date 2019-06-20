@@ -1,8 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./Stylesheets/NoticeData-stylesheet.css";
 import axios from "axios";
 import config from "react-global-configuration";
-import { Modal, Button, ButtonToolbar } from "react-bootstrap";
 import ModalNotice from "./ModalNotice";
 import ModalPoster from "./ModalPoster";
 
@@ -107,18 +106,18 @@ class NoticeData extends Component {
             />
           </div>
 
-          <div className="col col-md-6 ">
+          <div className="col col-md-6 row-sm-2">
             <div className="card-block px-2 description">
               <h4 className="card-title">
                 <b>{title} </b>
               </h4>
 
               <hr />
-
-              <pre className="card-text">
-                {body.slice(0, 400) + (body.length > 400 ? "..." : "")}
-              </pre>
-
+              <div>
+                <pre className="card-text">
+                  {body.slice(0, 400) + (body.length > 400 ? "..." : "")}
+                </pre>
+              </div>
               <hr />
             </div>
 

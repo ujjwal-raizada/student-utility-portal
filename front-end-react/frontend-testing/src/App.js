@@ -19,15 +19,15 @@ class App extends React.Component {
 					<Route exact path="/admin/login" component={AdminLogin} />
 					<Route exact path="/signup" component={Signup} />
 					<Route exact path="/login" component={Login} />
+					<Route exact path="/profile" component={Profile} />
+					<Route exact path="/notice" component={Homepage} />
+					<Route exact path="/contactus" component={ContactUs} />
+					<Route exact path="/postnotice" component={PostNotice} />
 					<Route
 						exact
 						path="/forgotpassword"
 						component={ForgotPassword}
 					/>
-					<Route exact path="/profile" component={Profile} />
-					<Route exact path="/notice" component={Homepage} />
-					<Route exact path="/contactus" component={ContactUs} />
-					<Route exact path="/postnotice" component={PostNotice} />
 					<Route component={NotFound} />
 				</Switch>
 			</BrowserRouter>
