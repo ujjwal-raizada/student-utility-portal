@@ -4,6 +4,7 @@ import axios from "axios";
 import config from "react-global-configuration";
 import ModalNotice from "./ModalNotice";
 import ModalPoster from "./ModalPoster";
+import { Card, CardHeader, CardImg, CardBody, CardFooter, Button, ButtonGroup } from "shards-react";
 
 class NoticeData extends Component {
   state = {
@@ -22,7 +23,9 @@ class NoticeData extends Component {
   handleClick = event => {
     event.preventDefault();
     var tar;
-    if (event.target.name === "star_status") {
+    if(event.target.name === "read_more") {
+      this.setState({ modalShow: true });
+    } else if (event.target.name === "star_status") {
       tar = !this.state.star_status;
       this.handleStar(event);
     } else {
@@ -82,90 +85,49 @@ class NoticeData extends Component {
       "https://i.ibb.co/Tb9B0Tt/2.png",
       "https://i.ibb.co/PQzBcx3/1.png"
     ];
+
     const img_url = images[this.props.index % 4];
+
     return (
-      <div className="card cont">
-        <div className="row no-gutters">
-          <div className="col col-md-6 customDiv">
-            <a href="#">
-              <img
-                src={img_url}
-                className="img-fluid NoticeImg"
-                alt="Poster"
-                onClick={event => {
-                  event.preventDefault();
-                  this.setState({ posterShow: true });
-                }}
-              />
-            </a>
-
-            <ModalPoster
-              show={this.state.posterShow}
-              onHide={() => this.setState({ posterShow: false })}
-              url={img_url}
-            />
-          </div>
-
-          <div className="col col-md-6 row-sm-2">
-            <div className="card-block px-2 description">
-              <h4 className="card-title">
-                <b>{title} </b>
-              </h4>
-
-              <hr />
-              <div>
-                <pre className="card-text">
-                  {body.slice(0, 400) + (body.length > 400 ? "..." : "")}
-                </pre>
-              </div>
-              <hr />
-            </div>
-
-            <button
-              className="btn btn-info aligned-right"
-              onClick={event => {
-                event.preventDefault();
-                this.setState({ modalShow: true });
-              }}
-            >
-              Read More &rarr;
-            </button>
-          </div>
+      <Card style={{ maxWidth: "900px" }}>
+        <CardHeader> {title} </CardHeader>
+        <CardImg src={img_url} alt="Poster" onClick={event => {event.preventDefault();
+            this.setState({ posterShow: true });
+            }}
+        />
+        <ModalPoster show={this.state.posterShow} url={img_url} 
+          onHide={() => this.setState({ posterShow: false })}          
+        />                
+        <CardBody>
+          <pre>
+              {body.slice(0, 400) + (body.length > 400 ? "..." : "")}
+          </pre>
           <ModalNotice
-            show={this.state.modalShow}
-            onHide={() => this.setState({ modalShow: false })}
-            body={body}
-            title={title}
-            source={source}
-            tags={tags}
+          show={this.state.modalShow}
+          onHide={() => this.setState({ modalShow: false })}
+          body={body}
+          title={title}
+          source={source}
+          tags={tags}
           />
-        </div>
-        <div />
-        <div className="card-footer w-100 text-muted">
-          <div className="row">
-            <div className=" col col-sm-4 text-left">Posted by - {source}</div>
-            {this.props.is_user && (
-              <div className="col col-sm-8 text-right">
-                <button
-                  className="footerButtons btn-md"
-                  name="star_status"
-                  onClick={this.handleClick}
-                >
-                  {this.state.star_status ? "starred" : "star"}
-                </button>
-                &nbsp; &nbsp;
-                <button
-                  className="footerButtons btn-md"
-                  name="subscribe_status"
-                  onClick={this.handleClick}
-                >
-                  {this.state.subscribe_status ? "subscribed" : "subscribe"}
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+        <ButtonGroup>
+          <Button name="read_more"onClick={this.handleClick}>
+            Read More &rarr;
+          </Button>
+          &nbsp; &nbsp;          
+          <Button name="star_status" onClick={this.handleClick}>
+              {this.state.star_status ? "starred" : "star"}
+          </Button>
+          &nbsp; &nbsp;
+          <Button name="subscribe_status" onClick={this.handleClick}>
+              {this.state.subscribe_status ? "subscribed" : "subscribe"}
+          </Button>
+        </ButtonGroup>
+        </CardBody>
+        <CardFooter>
+          Posted by - {source} 
+        </CardFooter>        
+    </Card>
     );
   }
 }
