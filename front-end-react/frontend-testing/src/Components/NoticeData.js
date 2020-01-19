@@ -58,7 +58,7 @@ class NoticeData extends Component {
       axios
         .post(path, { username: username, source: source })
         .then(res => {
-          if (res.data.status == "success") {
+          if (res.data.status === "success") {
             this.props.addSource(source);
           }
         })
@@ -68,7 +68,7 @@ class NoticeData extends Component {
       axios
         .post(path, { username: username, source: source })
         .then(res => {
-          if (res.data.status == "success") {
+          if (res.data.status === "success") {
             this.props.removeSource(source);
           }
         })

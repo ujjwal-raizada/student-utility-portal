@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu,
+   DropdownItem, InputGroup, InputGroupAddon, InputGroupText, FormInput, Collapse
+} from "shards-react";
 
 class Header extends Component {
   state = {
@@ -11,7 +13,8 @@ class Header extends Component {
     Login: false,
     Signup: false,
     logged_in: false,
-    page: " "
+    page: " ",
+    collapseOpen: false
   };
 
   componentDidMount() {
@@ -36,44 +39,71 @@ class Header extends Component {
     localStorage.removeItem("name");
   };
 
+  toggleNavbar = () => {
+    this.setState({
+      collapseOpen: !this.state.collapseOpen
+    })
+  }
+
   render() {
     const { logged_in, page } = this.state;
     const name = localStorage.getItem("name");
     const type = localStorage.getItem("type");
 
-    const brand = <Navbar.Brand href="/">Student Utility Portal</Navbar.Brand>;
+    const brand = <NavbarBrand href="/">Student Utility Portal</NavbarBrand>
 
-    const login = <Nav.Link href={`/login`}>Login</Nav.Link>;
+    const login = ( 
+      <NavItem>
+        <NavLink active = {this.state.page === "Login"} href={`/login`}>Login</NavLink>
+      </NavItem>
+    )
 
-    const signup = <Nav.Link href={`/signup`}>Sign Up</Nav.Link>;
+    const signup = ( 
+      <NavItem>
+        <NavLink active = {this.state.page === "Signup"} href={`/signup`}>Sign Up</NavLink>
+      </NavItem>
+    )
 
-    const contact_us = <Nav.Link href={`/contactus`}>Contact Us</Nav.Link>;
+    const contact_us = ( 
+      <NavItem>
+        <NavLink active = {this.state.page === "ContactUs"} href={`/contactus`}>Contact Us</NavLink>
+      </NavItem>
+    )
 
-    const profile = <Nav.Link href={`/profile`}>{name}</Nav.Link>;
+    const profile = ( 
+      <NavItem>
+        <NavLink active = {this.state.page === "Profile"} href={`/profile`}>{name}</NavLink>
+      </NavItem>
+    )
 
-    const post_notice = <Nav.Link href={`/postnotice`}>Post Notice</Nav.Link>;
+    const post_notice = ( 
+      <NavItem>
+        <NavLink active = {this.state.page === "PostNotice"}  href={`/postnotice`}>Post Notice</NavLink>
+      </NavItem>
+    )
 
-    const signout = (
-      <Nav.Link href={`/login`} onClick={this.handleSignout}>
-        Sign Out
-      </Nav.Link>
-    );
+    const signout = ( 
+      <NavItem>
+        <NavLink href={`/login`} onClick={this.handleSignout}>Sign Out</NavLink>
+      </NavItem>
+    )
 
     return (
-        <Navbar sticky="top" bg="info" variant="dark" collapse="sm">
-          {brand}
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+        <Navbar type="dark" theme="primary" expand="md">
+          { brand }
+          <NavbarToggler onClick={this.toggleNavbar} />
+          <Collapse open={this.state.collapseOpen} navbar>
+          <Nav navbar>
             {type === `Official Source` && post_notice}
           </Nav>
-          <Nav className="ml-auto">
+            
+          <Nav navbar className="ml-auto">
             {logged_in === false && login}
             {logged_in === true && profile}
             {logged_in === false && signup}
             {logged_in === true && signout}
           </Nav>
-          </Navbar.Collapse>
+          </Collapse>
         </Navbar>
     );
   }
